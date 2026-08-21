@@ -33,6 +33,10 @@ function saveGameState(state) {
   sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
+function clearGameState() {
+  sessionStorage.removeItem(STORAGE_KEY);
+}
+
 function loadGameState() {
   const stored = sessionStorage.getItem(STORAGE_KEY);
 

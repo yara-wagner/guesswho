@@ -46,6 +46,8 @@ button:not(.mode-tile):hover {
 ========================= */
 
 .game-header {
+  position: relative;
+
   text-align: center;
 
   padding: 30px 20px;
@@ -59,6 +61,41 @@ button:not(.mode-tile):hover {
   margin: 0;
 
   color: #666;
+}
+
+/* Abbrechen-Button oben rechts im Header */
+
+.cancel-game-button {
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+}
+
+button.cancel-game-button {
+  background-color: transparent;
+
+  border: 2px solid #222;
+
+  color: #222;
+
+  font-size: 14px;
+}
+
+button.cancel-game-button:hover {
+  background-color: #222;
+
+  color: white;
+}
+
+/* Auf schmalen Bildschirmen unter dem Titel statt daneben */
+
+@media (max-width: 500px) {
+  .cancel-game-button {
+    position: static;
+
+    margin-top: 12px;
+  }
 }
 
 /* =========================
