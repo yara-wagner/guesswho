@@ -60,7 +60,7 @@ if (gameState === null) {
 } else if (gameState.phase === "pass") {
   window.location.replace("pass.html");
 } else if (gameState.player2Secret !== null) {
-  // Beide Charaktere sind gewählt – das Spiel läuft bereits
+  // Beide Charaktere sind gewählt (das Spiel läuft bereits)
   window.location.replace("game.html");
 } else {
   showSelectionScreen();

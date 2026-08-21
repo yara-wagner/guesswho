@@ -128,7 +128,7 @@ if (gameState === null) {
   gameState.player1Secret === null ||
   gameState.player2Secret === null
 ) {
-  // Es fehlt noch ein geheimer Charakter
+  // Es fehlt noch ein Charakter
   window.location.replace("character_selection.html");
 } else {
   resetButton.addEventListener("click", resetGame);

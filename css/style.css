@@ -17,6 +17,31 @@ body {
 }
 
 /* =========================
+   BUTTONS
+========================= */
+
+/* Basis-Stil für alle Buttons ausser den Modus-Kacheln auf der Startseite */
+
+button:not(.mode-tile) {
+  padding: 10px 18px;
+
+  border: none;
+  border-radius: 6px;
+
+  background-color: #222;
+  color: white;
+
+  font-family: inherit;
+  font-size: inherit;
+
+  cursor: pointer;
+}
+
+button:not(.mode-tile):hover {
+  background-color: #444;
+}
+
+/* =========================
    HEADER
 ========================= */
 
@@ -200,22 +225,6 @@ body {
 
 #remaining-counter {
   font-weight: bold;
-}
-
-#reset-button {
-  padding: 10px 18px;
-
-  border: none;
-  border-radius: 6px;
-
-  background-color: #222;
-  color: white;
-
-  cursor: pointer;
-}
-
-#reset-button:hover {
-  background-color: #444;
 }
 
 /* =========================

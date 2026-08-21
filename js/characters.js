@@ -6,109 +6,109 @@ const characters = [
   {
     id: 1,
     name: "Aladdin",
-    image: "src/aladdin.avif",
+    image: "src/disney/aladdin.avif",
   },
 
   {
     id: 2,
     name: "Ariel",
-    image: "src/ariel.avif",
+    image: "src/disney/ariel.avif",
   },
 
   {
     id: 3,
     name: "Bambi",
-    image: "src/bambi.avif",
+    image: "src/disney/bambi.avif",
   },
 
   {
     id: 4,
     name: "Cinderella",
-    image: "src/cinderella.avif",
+    image: "src/disney/cinderella.avif",
   },
 
   {
     id: 5,
     name: "Donald Duck",
-    image: "src/donald_duck.avif",
+    image: "src/disney/donald_duck.avif",
   },
 
   {
     id: 6,
     name: "Dumbo",
-    image: "src/dumbo.avif",
+    image: "src/disney/dumbo.avif",
   },
 
   {
     id: 7,
     name: "Goofy",
-    image: "src/goofy.avif",
+    image: "src/disney/goofy.avif",
   },
 
-    {
+  {
     id: 8,
     name: "Hercules",
-    image: "src/hercules.avif",
+    image: "src/disney/hercules.avif",
   },
 
   {
     id: 9,
     name: "Lightning McQueen",
-    image: "src/lightning_mcqueen.avif",
+    image: "src/disney/lightning_mcqueen.avif",
   },
 
   {
     id: 10,
     name: "Merida",
-    image: "src/merida.avif",
+    image: "src/disney/merida.avif",
   },
-  
+
   {
     id: 11,
     name: "Mickey Mouse",
-    image: "src/mickey_mouse.avif",
+    image: "src/disney/mickey_mouse.avif",
   },
 
   {
     id: 12,
     name: "Mike",
-    image: "src/mike.avif",
+    image: "src/disney/mike.avif",
   },
 
   {
     id: 13,
     name: "Moana",
-    image: "src/moana.avif",
+    image: "src/disney/moana.avif",
   },
 
   {
     id: 14,
     name: "Olaf",
-    image: "src/olaf.avif",
+    image: "src/disney/olaf.avif",
   },
 
   {
     id: 15,
     name: "Pinocchio",
-    image: "src/pinocchio.avif",
+    image: "src/disney/pinocchio.avif",
   },
 
   {
     id: 16,
     name: "Stitch",
-    image: "src/stitch.avif",
+    image: "src/disney/stitch.avif",
   },
 
   {
     id: 17,
     name: "Tinker Bell",
-    image: "src/tinker_bell.avif",
+    image: "src/disney/tinker_bell.avif",
   },
 
   {
     id: 18,
     name: "Winnie The Pooh",
-    image: "src/winnie_the_pooh.avif",
+    image: "src/disney/winnie_the_pooh.avif",
   },
 ];
 
