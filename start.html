@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess Who?</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header class="game-header">
+      <h1>Guess Who?</h1>
+    </header>
+
+    <main>
+      <section class="mode-selection">
+        <h2 class="mode-selection-title">Spiel-Modus wählen</h2>
+
+        <div class="mode-grid">
+          <article class="mode-card">
+            <button class="mode-tile" type="button" data-mode="single-player">
+              <span class="mode-tile-icon">👤</span>
+              <span class="mode-tile-name">Single-Player</span>
+            </button>
+
+            <p class="mode-description">
+              You play on your own against the computer. The computer chooses a
+              secret character and you try to work out who it is by asking as
+              few questions as possible.
+            </p>
+            <ul>
+              <li>choose a predefined character set</li>
+              <li>collect coins to unlock new character sets</li>
+            </ul>
+          </article>
+
+          <article class="mode-card">
+            <button class="mode-tile" type="button" data-mode="multi-player">
+              <span class="mode-tile-icon">👥</span>
+              <span class="mode-tile-name">Multi-Player</span>
+            </button>
+
+            <p class="mode-description">
+              Two players play against each other offline and on the same
+              device. Each player is given a secret character and takes turns
+              asking questions until one of them guesses the other’s character.
+            </p>
+            <ul>
+              <li>
+                choose a predefined character set or upload your own characters
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/game.js"></script>
+  </body>
+</html>

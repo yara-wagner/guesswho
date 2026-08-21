@@ -39,6 +39,109 @@ body {
 
 
 /* =========================
+   MODE SELECTION
+========================= */
+
+.mode-selection {
+    width: min(800px, 95%);
+
+    margin: 0 auto 50px;
+}
+
+.mode-selection-title {
+    margin-top: 0;
+
+    text-align: center;
+}
+
+.mode-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(260px, 1fr));
+
+    gap: 24px;
+}
+
+
+/* Karte (Kachel + Beschreibung) */
+
+.mode-card {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+/* Kachel */
+
+.mode-tile {
+    width: 100%;
+
+    padding: 40px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    gap: 12px;
+
+    border: 2px solid transparent;
+    border-radius: 10px;
+
+    background-color: white;
+    color: inherit;
+
+    font-family: inherit;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.15);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        border-color 0.2s;
+}
+
+.mode-tile:hover {
+    transform: translateY(-4px);
+
+    border-color: #222;
+}
+
+.mode-tile-icon {
+    font-size: 48px;
+
+    line-height: 1;
+}
+
+.mode-tile-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* Beschreibungstext */
+
+.mode-description {
+    margin: 0;
+
+    padding: 0 4px;
+
+    text-align: center;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    color: #666;
+}
+
+
+/* =========================
    CONTROLS
 ========================= */
 
