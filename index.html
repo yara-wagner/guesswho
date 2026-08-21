@@ -17,7 +17,7 @@
 
     <main>
       <!-- START SCREEN -->
-       <section id="start-screen" class="screen mode-selection">
+      <section id="start-screen" class="screen mode-selection">
         <h2 class="mode-selection-title">Choose game mode</h2>
 
         <div class="mode-grid">
@@ -45,7 +45,12 @@
           </article>
 
           <article class="mode-card">
-            <button id="start-game-button" class="mode-tile" type="button" data-mode="multi-player">
+            <button
+              id="start-game-button"
+              class="mode-tile"
+              type="button"
+              data-mode="multi-player"
+            >
               <span class="mode-tile-icon">👥</span>
               <span class="mode-tile-name">Multi-Player</span>
             </button>
@@ -63,41 +68,9 @@
           </article>
         </div>
       </section>
-
-      <!-- CHARACTER SELECTION -->
-      <section id="selection-screen" class="screen hidden">
-        <h2 id="selection-title">Player 1: Choose your character</h2>
-
-        <p>Wähle deinen geheimen Charakter.</p>
-
-        <div id="selection-grid" class="character-grid"></div>
-      </section>
-
-      <!-- PASS SCREEN -->
-      <section id="pass-screen" class="screen hidden">
-        <h2 id="pass-title">Pass the device</h2>
-
-        <p>Übergib das Gerät an den nächsten Spieler.</p>
-
-        <button id="continue-button">Continue</button>
-      </section>
-
-      <!-- GAME SCREEN -->
-      <section id="game-screen" class="screen hidden">
-        <h2 id="current-player-title">Player 1</h2>
-
-        <section class="game-controls">
-          <span id="remaining-counter"> Remaining: 0 </span>
-
-          <button id="reset-button">Reset Board</button>
-
-          <button id="end-turn-button">End Turn</button>
-        </section>
-
-        <section id="character-grid" class="character-grid"></section>
-      </section>
     </main>
 
-    <script src="js/game.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/start.js"></script>
   </body>
 </html>

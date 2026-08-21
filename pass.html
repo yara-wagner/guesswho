@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Guess Who?</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header class="game-header">
+      <h1>Guess Who?</h1>
+    </header>
+
+    <main>
+      <!-- PASS SCREEN -->
+      <section id="pass-screen" class="screen">
+        <h2>Pass the device</h2>
+
+        <p>Pass the device to <span id="pass-player-name"></span>.</p>
+
+        <!-- Nur einer der beiden Buttons wird angezeigt -->
+        <button id="continue-button" class="hidden">Continue</button>
+
+        <button id="continue-to-board-button" class="hidden">
+          Continue to board
+        </button>
+      </section>
+    </main>
+
+    <script src="js/state.js"></script>
+    <script src="js/pass.js"></script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Guess Who?</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header class="game-header">
+      <h1>Guess Who?</h1>
+    </header>
+
+    <main>
+      <!-- CHARACTER SELECTION -->
+      <section id="selection-screen" class="screen">
+        <h2 id="selection-title">Player 1: Choose your character</h2>
+
+        <p>Wähle deinen geheimen Charakter.</p>
+
+        <div id="selection-grid" class="character-grid"></div>
+      </section>
+    </main>
+
+    <script src="js/characters.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/selection.js"></script>
+  </body>
+</html>
