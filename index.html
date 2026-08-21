@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Guess Who?</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="game-header">
+        <h1>Guess Who?</h1>
+
+        <p>
+            Schliesse Charaktere aus, indem du auf ihre Karte klickst.
+        </p>
+    </header>
+
+
+    <main>
+
+        <section class="game-controls">
+
+            <span id="remaining-counter">
+                Remaining: 0
+            </span>
+
+            <button id="reset-button">
+                Reset Board
+            </button>
+
+        </section>
+
+
+        <section
+            id="character-grid"
+            class="character-grid"
+        >
+            <!--
+                Die Charakterkarten werden später
+                automatisch mit JavaScript erzeugt.
+            -->
+        </section>
+
+    </main>
+
+
+    <script src="js/game.js"></script>
+
+</body>
+
+</html>
