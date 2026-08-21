@@ -3,40 +3,38 @@
 ========================= */
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
+  margin: 0;
 
-    font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 
-    background-color: #f4f4f4;
+  background-color: #f4f4f4;
 
-    color: #222;
+  color: #222;
 }
-
 
 /* =========================
    HEADER
 ========================= */
 
 .game-header {
-    text-align: center;
+  text-align: center;
 
-    padding: 30px 20px;
+  padding: 30px 20px;
 }
 
 .game-header h1 {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .game-header p {
-    margin: 0;
+  margin: 0;
 
-    color: #666;
+  color: #666;
 }
-
 
 /* =========================
    MODE SELECTION
@@ -146,133 +144,131 @@ body {
 ========================= */
 
 .game-controls {
-    max-width: 1000px;
+  max-width: 1000px;
 
-    margin: 0 auto 20px;
+  margin: 0 auto 20px;
 
-    padding: 0 20px;
+  padding: 0 20px;
 
-    display: flex;
+  display: flex;
 
-    justify-content: space-between;
-    align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #remaining-counter {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 #reset-button {
-    padding: 10px 18px;
+  padding: 10px 18px;
 
-    border: none;
-    border-radius: 6px;
+  border: none;
+  border-radius: 6px;
 
-    background-color: #222;
-    color: white;
+  background-color: #222;
+  color: white;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #reset-button:hover {
-    background-color: #444;
+  background-color: #444;
 }
-
 
 /* =========================
    CHARACTER GRID
 ========================= */
 
 .character-grid {
-    width: min(1000px, 95%);
+  width: min(1000px, 95%);
 
-    margin: 0 auto 50px;
+  margin: 0 auto 50px;
 
-    display: grid;
+  display: grid;
 
-    grid-template-columns:
-        repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
 
-    gap: 18px;
+  gap: 18px;
 }
-
 
 /* =========================
    CHARACTER CARD
 ========================= */
 
 .character-card {
-    position: relative;
+  position: relative;
 
-    background-color: white;
+  background-color: white;
 
-    border-radius: 10px;
+  border-radius: 10px;
 
-    overflow: hidden;
+  overflow: hidden;
 
-    box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 
-    cursor: pointer;
+  cursor: pointer;
 
-    transition:
-        transform 0.2s,
-        opacity 0.2s;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
 }
 
 .character-card:hover {
-    transform: translateY(-4px);
+  transform: translateY(-4px);
 }
-
 
 /* Bild */
 
 .character-card img {
-    display: block;
+  display: block;
 
-    width: 100%;
+  width: 100%;
 
-    aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 1;
 
-    object-fit: cover;
+  object-fit: cover;
 }
-
 
 /* Name */
 
 .character-name {
-    padding: 12px;
+  padding: 12px;
 
-    text-align: center;
+  text-align: center;
 
-    font-weight: bold;
+  font-weight: bold;
 }
-
 
 /* =========================
    ELIMINATED CHARACTER
 ========================= */
 
 .character-card.eliminated {
-    opacity: 0.25;
-
-    filter: grayscale(100%);
-
-    transform: scale(0.95);
+  opacity: 0.25;
+  transform: scale(0.95);
 }
 
 .character-card.eliminated::after {
-    content: "✕";
+  content: "✕";
 
-    position: absolute;
+  position: absolute;
 
-    top: 50%;
-    left: 50%;
+  top: 50%;
+  left: 50%;
 
-    transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 
-    font-size: 70px;
-    font-weight: bold;
+  font-size: 70px;
+  font-weight: bold;
 
-    color: #c62828;
+  color: #fa0000;
+}
+
+.hidden {
+  display: none;
+}
+
+.screen {
+  text-align: center;
 }
