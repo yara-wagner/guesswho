@@ -78,12 +78,15 @@ body {
 .mode-tile {
     width: 100%;
 
+    min-height: 220px;
+
     padding: 40px 20px;
 
     display: flex;
 
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
     gap: 12px;
 
@@ -105,7 +108,7 @@ body {
         border-color 0.2s;
 }
 
-.mode-tile:hover {
+.mode-tile:not(:disabled):hover {
     transform: translateY(-4px);
 
     border-color: #222;
@@ -122,10 +125,49 @@ body {
     font-weight: bold;
 }
 
+.mode-tile-badge {
+    padding: 4px 10px;
+
+    border-radius: 999px;
+
+    background-color: #e0e0e0;
+
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    color: #666;
+}
+
+
+/* Deaktivierter Modus */
+
+.mode-tile:disabled {
+    box-shadow: none;
+
+    background-color: #ececec;
+
+    cursor: not-allowed;
+}
+
+.mode-card-disabled .mode-tile-icon,
+.mode-card-disabled .mode-tile-name {
+    opacity: 0.5;
+}
+
+.mode-card-disabled .mode-description,
+.mode-card-disabled ul {
+    opacity: 0.6;
+}
+
 
 /* Beschreibungstext */
 
 .mode-description {
+    /* füllt die Resthöhe, damit die Listen beider Karten
+       auf derselben Höhe beginnen */
+    flex: 1;
+
     margin: 0;
 
     padding: 0 4px;

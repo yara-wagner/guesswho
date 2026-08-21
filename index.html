@@ -13,18 +13,55 @@
   <body>
     <header class="game-header">
       <h1>Guess Who?</h1>
-
-      <p>Schliesse Charaktere aus, indem du auf ihre Karte klickst.</p>
     </header>
 
     <main>
       <!-- START SCREEN -->
-      <section id="start-screen" class="screen">
-        <h2>Pass & Play</h2>
+       <section id="start-screen" class="screen mode-selection">
+        <h2 class="mode-selection-title">Choose game mode</h2>
 
-        <p>Zwei Spieler spielen gemeinsam an einem Gerät.</p>
+        <div class="mode-grid">
+          <article class="mode-card mode-card-disabled">
+            <button
+              class="mode-tile"
+              type="button"
+              data-mode="single-player"
+              disabled
+            >
+              <span class="mode-tile-icon">👤</span>
+              <span class="mode-tile-name">Single-Player</span>
+              <span class="mode-tile-badge">Coming soon</span>
+            </button>
 
-        <button id="start-game-button">Start Game</button>
+            <p class="mode-description">
+              You play on your own against the computer. The computer chooses a
+              secret character and you try to work out who it is by asking as
+              few questions as possible.
+            </p>
+            <ul>
+              <li>choose a predefined character set</li>
+              <li>collect coins to unlock new character sets</li>
+            </ul>
+          </article>
+
+          <article class="mode-card">
+            <button id="start-game-button" class="mode-tile" type="button" data-mode="multi-player">
+              <span class="mode-tile-icon">👥</span>
+              <span class="mode-tile-name">Multi-Player</span>
+            </button>
+
+            <p class="mode-description">
+              Two players play against each other offline and on the same
+              device. Each player can choose a secret character and takes turns
+              asking questions until one of them guesses the other’s character.
+            </p>
+            <ul>
+              <li>
+                choose a predefined character set or upload your own characters
+              </li>
+            </ul>
+          </article>
+        </div>
       </section>
 
       <!-- CHARACTER SELECTION -->
