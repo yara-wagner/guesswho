@@ -5,74 +5,110 @@
 const characters = [
   {
     id: 1,
-    name: "Alex",
-    image: "https://i.pravatar.cc/300?img=11",
+    name: "Aladdin",
+    image: "src/aladdin.avif",
   },
 
   {
     id: 2,
-    name: "Anna",
-    image: "https://i.pravatar.cc/300?img=32",
+    name: "Ariel",
+    image: "src/ariel.avif",
   },
 
   {
     id: 3,
-    name: "Ben",
-    image: "https://i.pravatar.cc/300?img=12",
+    name: "Bambi",
+    image: "src/bambi.avif",
   },
 
   {
     id: 4,
-    name: "Clara",
-    image: "https://i.pravatar.cc/300?img=47",
+    name: "Cinderella",
+    image: "src/cinderella.avif",
   },
 
   {
     id: 5,
-    name: "David",
-    image: "https://i.pravatar.cc/300?img=13",
+    name: "Donald Duck",
+    image: "src/donald_duck.avif",
   },
 
   {
     id: 6,
-    name: "Emma",
-    image: "https://i.pravatar.cc/300?img=45",
+    name: "Dumbo",
+    image: "src/dumbo.avif",
   },
 
   {
     id: 7,
-    name: "Felix",
-    image: "https://i.pravatar.cc/300?img=15",
+    name: "Goofy",
+    image: "src/goofy.avif",
   },
 
-  {
+    {
     id: 8,
-    name: "Grace",
-    image: "https://i.pravatar.cc/300?img=44",
+    name: "Hercules",
+    image: "src/hercules.avif",
   },
 
   {
     id: 9,
-    name: "Henry",
-    image: "https://i.pravatar.cc/300?img=14",
+    name: "Lightning McQueen",
+    image: "src/lightning_mcqueen.avif",
   },
 
   {
     id: 10,
-    name: "Isabella",
-    image: "https://i.pravatar.cc/300?img=49",
+    name: "Merida",
+    image: "src/merida.avif",
   },
-
+  
   {
     id: 11,
-    name: "Jack",
-    image: "https://i.pravatar.cc/300?img=16",
+    name: "Mickey Mouse",
+    image: "src/mickey_mouse.avif",
   },
 
   {
     id: 12,
-    name: "Julia",
-    image: "https://i.pravatar.cc/300?img=48",
+    name: "Mike",
+    image: "src/mike.avif",
+  },
+
+  {
+    id: 13,
+    name: "Moana",
+    image: "src/moana.avif",
+  },
+
+  {
+    id: 14,
+    name: "Olaf",
+    image: "src/olaf.avif",
+  },
+
+  {
+    id: 15,
+    name: "Pinocchio",
+    image: "src/pinocchio.avif",
+  },
+
+  {
+    id: 16,
+    name: "Stitch",
+    image: "src/stitch.avif",
+  },
+
+  {
+    id: 17,
+    name: "Tinker Bell",
+    image: "src/tinker_bell.avif",
+  },
+
+  {
+    id: 18,
+    name: "Winnie The Pooh",
+    image: "src/winnie_the_pooh.avif",
   },
 ];
 
