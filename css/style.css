@@ -66,32 +66,40 @@ game-header {
   display: block;
 }
 
+/* Schmale Leiste: Logo links, "Back to start" rechts. So bleibt oben
+   möglichst wenig Platz belegt und der Inhalt ist auch auf kleinen
+   Bildschirmen gut sichtbar. */
+
 .game-header {
-  position: relative;
+  display: flex;
 
-  text-align: center;
+  align-items: center;
+  justify-content: space-between;
 
-  padding: 30px 20px;
+  gap: 12px;
+
+  padding: 12px 20px;
 }
 
-.game-header h1 {
-  margin-bottom: 8px;
-}
+/* Der Titel als Logo – kleine dunkle Kachel oben links */
 
-.game-header p {
+.game-logo {
   margin: 0;
 
-  color: #666;
+  padding: 6px 12px;
+
+  border-radius: 8px;
+
+  background-color: #222;
+  color: white;
+
+  font-size: 18px;
+  letter-spacing: 0.5px;
+
+  white-space: nowrap;
 }
 
 /* Abbrechen-Button oben rechts im Header */
-
-.cancel-game-button {
-  position: absolute;
-
-  top: 20px;
-  right: 20px;
-}
 
 button.cancel-game-button {
   background-color: transparent;
@@ -109,13 +117,22 @@ button.cancel-game-button:hover {
   color: white;
 }
 
-/* Auf schmalen Bildschirmen unter dem Titel statt daneben */
+/* Auf schmalen Bildschirmen etwas kompakter, damit Logo und Button
+   in einer Zeile nebeneinander Platz haben */
 
 @media (max-width: 500px) {
-  .cancel-game-button {
-    position: static;
+  .game-header {
+    padding: 10px 12px;
+  }
 
-    margin-top: 12px;
+  .game-logo {
+    font-size: 15px;
+  }
+
+  button.cancel-game-button {
+    padding: 8px 12px;
+
+    font-size: 13px;
   }
 }
 

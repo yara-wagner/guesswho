@@ -3,9 +3,12 @@
 // =============================
 
 // Der Header ist auf allen Seiten gleich und steht deshalb nur hier.
+// Der Titel wird als kleines Logo oben links angezeigt (siehe .game-logo
+// im CSS), damit für den restlichen Inhalt mehr Platz bleibt.
+//
 // Verwendung in der Seite:
 //
-//   <game-header></game-header>          nur Titel (Startseite)
+//   <game-header></game-header>          nur Logo (Startseite)
 //   <game-header cancel></game-header>   mit "Back to start" (Spielseiten)
 //
 // Das Attribut "cancel" setzt voraus, dass js/cancel.js geladen ist.
@@ -16,7 +19,7 @@ class GameHeader extends HTMLElement {
 
     this.innerHTML = `
       <header class="game-header">
-        <h1>Guess Who?</h1>
+        <h1 class="game-logo">Guess Who?</h1>
         ${
           showCancelButton
             ? '<button class="cancel-game-button" type="button">Back to start</button>'
