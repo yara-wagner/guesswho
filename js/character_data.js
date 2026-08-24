@@ -223,3 +223,96 @@ const animalsCharacters = [
     image: "src/animals/seal.jpg",
   },
 ];
+
+const marioCharacters = [
+  {
+    id: 1,
+    name: "Mario",
+    image: "src/mario/mario.png",
+  },
+  {
+    id: 2,
+    name: "Bowser",
+    image: "src/mario/bowser.png",
+  },
+  {
+    id: 3,
+    name: "Daisy",
+    image: "src/mario/daisy.png",
+  },
+  {
+    id: 4,
+    name: "Diddy Kong",
+    image: "src/mario/diddy_kong.png",
+  },
+  {
+    id: 5,
+    name: "Rosalina",
+    image: "src/mario/rosalina.png",
+  },
+  {
+    id: 6,
+    name: "Bowser Junior",
+    image: "src/mario/bowser_junior.png",
+  },
+  {
+    id: 7,
+    name: "Donkey Kong",
+    image: "src/mario/donkey_kong.png",
+  },
+  {
+    id: 8,
+    name: "Luigi",
+    image: "src/mario/luigi.png",
+  },
+  {
+    id: 9,
+    name: "Princess Peach",
+    image: "src/mario/princess_peach.png",
+  },
+  {
+    id: 10,
+    name: "Wario",
+    image: "src/mario/wario.png",
+  },
+  {
+    id: 11,
+    name: "Yoshi",
+    image: "src/mario/yoshi.png",
+  },
+  {
+    id: 12,
+    name: "Toad",
+    image: "src/mario/Toad.png",
+  },
+  {
+    id: 13,
+    name: "Waluigi",
+    image: "src/mario/waluigi.png",
+  },
+  {
+    id: 14,
+    name: "Birdo",
+    image: "src/mario/birdo.png",
+  },
+  {
+    id: 15,
+    name: "Boo",
+    image: "src/mario/boo.png",
+  },
+  {
+    id: 16,
+    name: "Koopa Troopa",
+    image: "src/mario/koopa_troopa.png",
+  },
+  {
+    id: 17,
+    name: "Shy Guy",
+    image: "src/mario/shy_guy.png",
+  },
+  {
+    id: 17,
+    name: "Goomba",
+    image: "src/mario/goomba.png",
+  },
+];

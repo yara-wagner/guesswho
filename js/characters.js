@@ -23,7 +23,7 @@ const characterSets = [
   },
 
   {
-    id: "coming-soon-1",
+    id: "animals",
     name: "Animals",
     icon: "🐾",
     available: true,
@@ -43,11 +43,11 @@ const characterSets = [
   },
 
   {
-    id: "coming-soon-2",
-    name: "Marvel",
-    icon: "🔒",
-    available: false,
-    characters: [],
+    id: "mario",
+    name: "Mario",
+    icon: "🍄",
+    available: true,
+    characters: marioCharacters,
   },
 
   {
