@@ -11,6 +11,8 @@ const STORAGE_KEY = "guessWhoGameState";
 function createGameState() {
   return {
     currentPlayer: 1,
+    player1Name: "Player 1",
+    player2Name: "Player 2",
 
     // id des gewählten Charakter-Sets (siehe characters.js)
     characterSetId: null,
@@ -35,9 +37,18 @@ function createGameState() {
   };
 }
 
-// Aktuell haben die Spieler keine eigenen Namen
 function getPlayerName(playerNumber) {
-  return `Player ${playerNumber}`;
+  const state = loadGameState();
+
+  if (state === null) {
+    return `Player ${playerNumber}`;
+  }
+
+  if (playerNumber === 1) {
+    return state.player1Name || "Player 1";
+  }
+
+  return state.player2Name || "Player 2";
 }
 
 function saveGameState(state) {
