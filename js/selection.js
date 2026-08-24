@@ -12,6 +12,10 @@ const confirmSelectionButton = document.getElementById(
   "confirm-selection-button",
 );
 
+const randomSelectionButton = document.getElementById(
+  "random-selection-button",
+);
+
 // =============================
 // GAME STATE
 // =============================
@@ -54,6 +58,34 @@ function selectCharacter(character) {
   renderSelectionCharacters();
 
   updateConfirmButton();
+}
+
+// Würfelt einen Charakter aus. Die Auswahl landet wie ein Antippen nur in
+// selectedCharacter und muss noch bestätigt werden.
+function selectRandomCharacter() {
+  const characters = getSetCharacters(gameState);
+
+  if (characters.length === 0) {
+    return;
+  }
+
+  const randomIndex = Math.floor(Math.random() * characters.length);
+
+  selectCharacter(characters[randomIndex]);
+
+  scrollToSelectedCard();
+}
+
+// Der ausgewürfelte Charakter kann ausserhalb des sichtbaren Bereichs
+// liegen, darum scrollen wir ihn in die Mitte
+function scrollToSelectedCard() {
+  const card = selectionGrid.querySelector(".character-card.selected");
+
+  if (card === null) {
+    return;
+  }
+
+  card.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 function updateConfirmButton() {
@@ -108,6 +140,8 @@ if (gameState === null) {
   // Beide Charaktere sind gewählt (das Spiel läuft bereits)
   window.location.replace("game.html");
 } else {
+  randomSelectionButton.addEventListener("click", selectRandomCharacter);
+
   confirmSelectionButton.addEventListener("click", confirmSelection);
 
   showSelectionScreen();

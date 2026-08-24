@@ -561,6 +561,26 @@ button.cancel-game-button:hover {
     color: #666;
 }
 
+/* Der Zufalls-Button ist die Nebenaktion – der Bestätigen-Button daneben
+   bleibt der auffällige. Das kleinere Padding gleicht den Rahmen aus,
+   damit beide Buttons gleich hoch sind. */
+
+button.random-selection-button {
+    padding: 8px 16px;
+
+    border: 2px solid #222;
+
+    background-color: transparent;
+
+    color: #222;
+}
+
+button.random-selection-button:hover {
+    background-color: #222;
+
+    color: white;
+}
+
 
 /* =========================
    CUSTOM CHARACTER SET
