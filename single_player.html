@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Guess Who?</title>
 
@@ -22,22 +19,55 @@
       <section id="single-player-screen" class="screen">
         <h2>Disney</h2>
 
-        <p id="question-counter">
-          Questions left: 8
-        </p>
+        <p id="question-counter">Questions left: 8</p>
 
-        <section
-          id="single-player-grid"
-          class="character-grid"
-        ></section>
+        <section class="question-section">
+          <h3>Ask a question</h3>
+
+          <div class="question-buttons">
+            <button class="question-button" type="button" data-property="human">
+              Is your character human?
+            </button>
+
+            <button
+              class="question-button"
+              type="button"
+              data-property="female"
+            >
+              Is your character female?
+            </button>
+
+            <button
+              class="question-button"
+              type="button"
+              data-property="animal"
+            >
+              Is your character an animal?
+            </button>
+
+            <button
+              class="question-button"
+              type="button"
+              data-property="hasHair"
+            >
+              Does your character have hair?
+            </button>
+
+            <button
+              class="question-button"
+              type="button"
+              data-property="canFly"
+            >
+              Can your character fly?
+            </button>
+          </div>
+
+          <p id="computer-answer" class="computer-answer"></p>
+        </section>
+        <section id="single-player-grid" class="character-grid"></section>
 
         <section class="game-controls">
-          <button
-            id="single-reset-button"
-            type="button"
-          >
-            Reset Board
-          </button>
+          <button id="single-reset-button" type="button">Reset Board</button>
         </section>
       </section>
     </main>

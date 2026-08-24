@@ -1178,3 +1178,62 @@ button.back-button:hover {
 
   color: white;
 }
+
+/* =========================
+   SINGLE PLAYER QUESTIONS
+========================= */
+
+.question-section {
+  width: min(800px, 95%);
+
+  margin: 0 auto 30px;
+
+  padding: 20px;
+
+  border-radius: 10px;
+
+  background-color: white;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.question-section h3 {
+  margin-top: 0;
+
+  text-align: center;
+}
+
+.question-buttons {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 10px;
+}
+
+button.question-button {
+  background-color: white;
+
+  border: 2px solid #222;
+
+  color: #222;
+}
+
+button.question-button:hover {
+  background-color: #222;
+
+  color: white;
+}
+
+.computer-answer {
+  min-height: 30px;
+
+  margin-bottom: 0;
+
+  text-align: center;
+
+  font-size: 24px;
+  font-weight: bold;
+}

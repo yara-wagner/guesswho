@@ -16,6 +16,13 @@ const singleResetButton = document.getElementById(
 
 const gameState = loadGameState();
 
+const questionButtons = document.querySelectorAll(
+  ".question-button"
+);
+
+const computerAnswer = document.getElementById(
+  "computer-answer"
+);
 
 // =============================
 // RENDER CHARACTERS
@@ -46,6 +53,34 @@ function renderSinglePlayerCharacters() {
   updateQuestionCounter();
 }
 
+// =============================
+// ASK QUESTION
+// =============================
+
+function askQuestion(property) {
+  const secretCharacter = gameState.player2Secret;
+
+  if (secretCharacter === null) {
+    return;
+  }
+
+  const answer = secretCharacter[property];
+
+  if (answer === true) {
+    computerAnswer.textContent = "YES";
+
+    // Bei YES wird keine Frage abgezogen
+  } else {
+    computerAnswer.textContent = "NO";
+
+    // Bei NO wird eine Frage abgezogen
+    gameState.questionsLeft -= 1;
+
+    saveGameState(gameState);
+
+    updateQuestionCounter();
+  }
+}
 
 // =============================
 // ELIMINATE CHARACTER
@@ -106,5 +141,21 @@ if (
     resetBoard
   );
 
+  questionButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const property = button.dataset.property;
+
+      askQuestion(property);
+    });
+  });
+
   renderSinglePlayerCharacters();
 }
+
+questionButtons.forEach(function (button) {
+  button.addEventListener("click", function () {
+    const property = button.dataset.property;
+
+    askQuestion(property);
+  });
+});

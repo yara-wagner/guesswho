@@ -84,6 +84,10 @@ playerNameForm.addEventListener("submit", function (event) {
 // SINGLE PLAYER
 // =============================
 
+// =============================
+// SINGLE PLAYER
+// =============================
+
 function startSinglePlayer() {
   const gameState = createGameState();
 
@@ -91,11 +95,36 @@ function startSinglePlayer() {
   gameState.player1Name = "Player";
   gameState.characterSetId = "disney";
   gameState.questionsLeft = 8;
+
+  // Disney-Set holen
+  const disneySet = getCharacterSet("disney");
+
+  // Sicherheitscheck
+  if (disneySet === null || disneySet.characters.length === 0) {
+    console.error("Disney character set could not be loaded.");
+    return;
+  }
+
+  // Zufälligen Disney-Charakter auswählen
+  const randomIndex = Math.floor(
+    Math.random() * disneySet.characters.length
+  );
+
+  const computerCharacter = disneySet.characters[randomIndex];
+
+  // Geheime Figur des Computers speichern
+  gameState.player2Secret = computerCharacter;
+
   gameState.phase = "game";
 
   saveGameState(gameState);
 
   window.location.href = "single_player.html";
 }
+
+singlePlayerButton.addEventListener(
+  "click",
+  startSinglePlayer
+);
 
 singlePlayerButton.addEventListener("click", startSinglePlayer);
