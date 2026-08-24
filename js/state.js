@@ -21,9 +21,12 @@ function createGameState() {
     player1Eliminated: [],
     player2Eliminated: [],
 
-    // "set-selection" | "selection" | "pass" | "game" – bestimmt,
+    // "set-selection" | "selection" | "pass" | "game" | "finished" – bestimmt,
     // welcher Screen beim Laden einer Seite angezeigt wird
     phase: "set-selection",
+
+    // Nummer des Spielers, der das Spiel gewonnen hat (null = noch offen)
+    winner: null,
   };
 }
 
@@ -52,6 +55,20 @@ function loadGameState() {
   } catch (error) {
     return null;
   }
+}
+
+// =============================
+// SECRET CHARACTERS
+// =============================
+
+// Der geheime Charakter des Gegenspielers – also der Charakter,
+// den der aktuelle Spieler erraten muss
+function getOpponentSecret(state) {
+  if (state.currentPlayer === 1) {
+    return state.player2Secret;
+  }
+
+  return state.player1Secret;
 }
 
 // =============================

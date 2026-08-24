@@ -12,6 +12,18 @@ const resetButton = document.getElementById("reset-button");
 
 const endTurnButton = document.getElementById("end-turn-button");
 
+const winOverlay = document.getElementById("win-overlay");
+
+const winTitle = document.getElementById("win-title");
+
+const winText = document.getElementById("win-text");
+
+const winCharacterImage = document.getElementById("win-character-image");
+
+const newGameButton = document.getElementById("new-game-button");
+
+const homeButton = document.getElementById("home-button");
+
 // =============================
 // GAME STATE
 // =============================
@@ -47,6 +59,11 @@ function renderCharacters() {
 // =============================
 
 function toggleCharacter(characterId) {
+  if (gameState.phase === "finished") {
+    // Das Spiel ist vorbei, das Board ist nur noch Anzeige
+    return;
+  }
+
   const eliminatedCharacters = getEliminatedCharacters(gameState);
 
   const index = eliminatedCharacters.indexOf(characterId);
@@ -60,6 +77,92 @@ function toggleCharacter(characterId) {
   saveGameState(gameState);
 
   renderCharacters();
+
+  checkForWin();
+}
+
+// =============================
+// WIN CONDITION
+// =============================
+
+// Die Charaktere, die der aktuelle Spieler noch nicht ausgeschlossen hat
+function getRemainingCharacters() {
+  const eliminatedCharacters = getEliminatedCharacters(gameState);
+
+  return getSetCharacters(gameState.characterSetId).filter(
+    (character) => eliminatedCharacters.includes(character.id) === false,
+  );
+}
+
+// Gewonnen hat, wer alle Charaktere ausser dem geheimen Charakter
+// des Gegenspielers ausgeschlossen hat
+function hasCurrentPlayerWon() {
+  const remaining = getRemainingCharacters();
+
+  if (remaining.length !== 1) {
+    return false;
+  }
+
+  const secret = getOpponentSecret(gameState);
+
+  if (secret === null) {
+    return false;
+  }
+
+  return remaining[0].id === secret.id;
+}
+
+function checkForWin() {
+  if (hasCurrentPlayerWon() === false) {
+    return;
+  }
+
+  gameState.winner = gameState.currentPlayer;
+
+  gameState.phase = "finished";
+
+  saveGameState(gameState);
+
+  showWinDialog();
+}
+
+function showWinDialog() {
+  const winner = gameState.winner;
+
+  let loser = 1;
+
+  let secret = gameState.player1Secret;
+
+  if (winner === 1) {
+    loser = 2;
+
+    secret = gameState.player2Secret;
+  }
+
+  winTitle.textContent = `${getPlayerName(winner)} wins!`;
+
+  winText.textContent = `Congratulations! You found the character of ${getPlayerName(loser)}: ${secret.name}`;
+
+  winCharacterImage.src = secret.image;
+  winCharacterImage.alt = secret.name;
+
+  winOverlay.classList.remove("hidden");
+}
+
+// =============================
+// NEW GAME / BACK TO START
+// =============================
+
+function startNewGame() {
+  saveGameState(createGameState());
+
+  window.location.href = "character_sets.html";
+}
+
+function goToStart() {
+  clearGameState();
+
+  window.location.href = "index.html";
 }
 
 // =============================
@@ -126,6 +229,15 @@ if (gameState === null) {
 } else if (getCharacterSet(gameState.characterSetId) === null) {
   // Es fehlt noch ein Charakter-Set
   window.location.replace("character_sets.html");
+} else if (gameState.phase === "finished") {
+  // Das Spiel ist entschieden – Board anzeigen und gratulieren
+  newGameButton.addEventListener("click", startNewGame);
+
+  homeButton.addEventListener("click", goToStart);
+
+  startTurn();
+
+  showWinDialog();
 } else if (gameState.phase === "pass") {
   // Das Gerät wird gerade übergeben
   window.location.replace("pass.html");
@@ -139,6 +251,10 @@ if (gameState === null) {
   resetButton.addEventListener("click", resetGame);
 
   endTurnButton.addEventListener("click", endTurn);
+
+  newGameButton.addEventListener("click", startNewGame);
+
+  homeButton.addEventListener("click", goToStart);
 
   startTurn();
 }

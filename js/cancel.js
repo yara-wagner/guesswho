@@ -2,10 +2,8 @@
 // CANCEL GAME
 // =============================
 
-// Der Button steckt im Header jeder Spielseite und bringt die
-// Spieler zurück zur Modus-Auswahl (index.html).
-
-const cancelGameButton = document.getElementById("cancel-game-button");
+// Der Button steckt im Header jeder Spielseite (siehe js/header.js) und
+// bringt die Spieler zurück zur Modus-Auswahl (index.html).
 
 function cancelGame() {
   const confirmed = window.confirm(
@@ -20,5 +18,3 @@ function cancelGame() {
 
   window.location.href = "index.html";
 }
-
-cancelGameButton.addEventListener("click", cancelGame);

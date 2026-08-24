@@ -45,6 +45,12 @@ button:not(.tile):not(.mode-tile):hover {
    HEADER
 ========================= */
 
+/* Custom Elements sind von sich aus inline (siehe js/header.js) */
+
+game-header {
+  display: block;
+}
+
 .game-header {
   position: relative;
 
@@ -475,6 +481,86 @@ button.cancel-game-button:hover {
   font-weight: bold;
 
   color: #fa0000;
+}
+
+/* =========================
+   WIN POP-UP
+========================= */
+
+/* Abdunkelnde Ebene über dem Board */
+
+.overlay {
+  position: fixed;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.win-dialog {
+  width: min(400px, 100%);
+
+  padding: 30px 24px;
+
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+
+  gap: 12px;
+
+  border-radius: 10px;
+
+  background-color: white;
+
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+
+  text-align: center;
+}
+
+.win-dialog h2 {
+  margin: 0;
+}
+
+.win-dialog p {
+  margin: 0;
+
+  color: #666;
+}
+
+.win-dialog-icon {
+  font-size: 48px;
+
+  line-height: 1;
+}
+
+.win-character-image {
+  width: 140px;
+
+  aspect-ratio: 1 / 1;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+}
+
+.win-dialog-buttons {
+  margin-top: 8px;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 12px;
 }
 
 .hidden {
