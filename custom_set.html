@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Guess Who?</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="js/header.js"></script>
+  </head>
+
+  <body>
+    <game-header cancel></game-header>
+
+    <main>
+      <!-- CUSTOM CHARACTER SET -->
+      <section id="custom-set-screen" class="screen">
+        <h2 class="custom-set-title">Upload a photo for every character and give it a name.</h2>
+
+        <!-- Die Karten werden vor der Plus-Kachel eingefügt
+             (siehe js/custom_set.js) -->
+        <div id="custom-grid" class="character-grid">
+          <button
+            id="add-card-button"
+            class="custom-add-card card-button"
+            type="button"
+          >
+            <span class="custom-add-card-icon">+</span>
+            <span class="custom-add-card-text">Add character</span>
+          </button>
+        </div>
+
+        <!-- Hinweis und Start-Button bleiben am unteren Rand kleben, damit
+             sie auch auf kleinen Bildschirmen sichtbar sind -->
+        <div class="custom-set-actions">
+          <p id="custom-set-hint" class="custom-set-hint"></p>
+
+          <button id="start-custom-game-button" type="button" disabled>
+            Start game
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/character_data.js"></script>
+    <script src="js/characters.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/cancel.js"></script>
+    <script src="js/custom_set.js"></script>
+  </body>
+</html>

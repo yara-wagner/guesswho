@@ -19,7 +19,7 @@ const gameState = loadGameState();
 function renderSelectionCharacters() {
   selectionGrid.innerHTML = "";
 
-  getSetCharacters(gameState.characterSetId).forEach((character) => {
+  getSetCharacters(gameState).forEach((character) => {
     selectionGrid.appendChild(
       createCharacterCard(character, selectSecretCharacter),
     );

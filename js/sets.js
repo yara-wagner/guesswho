@@ -45,6 +45,15 @@ function createSetTile(characterSet) {
     badge.textContent = "Coming soon";
 
     tile.appendChild(badge);
+  } else if (characterSet.custom === true) {
+    const hint = document.createElement("span");
+
+    hint.classList.add("set-tile-count");
+    hint.textContent = "your own photos";
+
+    tile.appendChild(hint);
+
+    tile.addEventListener("click", createCustomSet);
   } else {
     const count = document.createElement("span");
 
@@ -77,6 +86,16 @@ function selectCharacterSet(characterSet) {
   saveGameState(gameState);
 
   window.location.href = "character_selection.html";
+}
+
+// Beim Custom-Set fehlen die Charaktere noch – das Set wird erst auf
+// custom_set.html zusammengestellt und dort gesetzt
+function createCustomSet() {
+  gameState.phase = "custom-set";
+
+  saveGameState(gameState);
+
+  window.location.href = "custom_set.html";
 }
 
 // =============================

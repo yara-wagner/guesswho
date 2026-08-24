@@ -7,6 +7,11 @@
 // Die Charakter-Listen selber stehen in character_data.js.
 
 // available: false -> die Kachel wird ausgegraut und ist nicht anklickbar
+// custom: true     -> die Spieler stellen das Set selber zusammen
+//                     (custom_set.html)
+
+// Das Custom-Set hat keine feste Charakter-Liste
+const CUSTOM_SET_ID = "custom";
 
 const characterSets = [
   {
@@ -23,6 +28,18 @@ const characterSets = [
     icon: "🐾",
     available: true,
     characters: animalsCharacters,
+  },
+
+  {
+    id: CUSTOM_SET_ID,
+    name: "Custom",
+    icon: "📷",
+    available: true,
+    custom: true,
+
+    // Die Charaktere werden erst im Spiel erstellt und stehen dann im
+    // Spielstand (siehe state.js)
+    characters: [],
   },
 
   {
@@ -52,9 +69,14 @@ function getCharacterSet(setId) {
   return set;
 }
 
-// Die Charaktere des gewählten Sets (leer, wenn das Set unbekannt ist)
-function getSetCharacters(setId) {
-  const set = getCharacterSet(setId);
+// Die Charaktere des gewählten Sets (leer, wenn das Set unbekannt ist).
+// Beim Custom-Set kommen sie aus dem Spielstand, sonst aus der Liste oben.
+function getSetCharacters(state) {
+  if (state.characterSetId === CUSTOM_SET_ID) {
+    return state.customCharacters;
+  }
+
+  const set = getCharacterSet(state.characterSetId);
 
   if (set === null) {
     return [];

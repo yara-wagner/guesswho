@@ -39,7 +39,7 @@ function renderCharacters() {
 
   const eliminatedCharacters = getEliminatedCharacters(gameState);
 
-  getSetCharacters(gameState.characterSetId).forEach((character) => {
+  getSetCharacters(gameState).forEach((character) => {
     const card = createCharacterCard(character, () => {
       toggleCharacter(character.id);
     });
@@ -89,7 +89,7 @@ function toggleCharacter(characterId) {
 function getRemainingCharacters() {
   const eliminatedCharacters = getEliminatedCharacters(gameState);
 
-  return getSetCharacters(gameState.characterSetId).filter(
+  return getSetCharacters(gameState).filter(
     (character) => eliminatedCharacters.includes(character.id) === false,
   );
 }
@@ -173,8 +173,7 @@ function updateCounter() {
   const eliminatedCharacters = getEliminatedCharacters(gameState);
 
   const remaining =
-    getSetCharacters(gameState.characterSetId).length -
-    eliminatedCharacters.length;
+    getSetCharacters(gameState).length - eliminatedCharacters.length;
 
   remainingCounter.textContent = `Remaining: ${remaining}`;
 }

@@ -15,14 +15,19 @@ function createGameState() {
     // id des gewählten Charakter-Sets (siehe characters.js)
     characterSetId: null,
 
+    // Die selber erstellten Charaktere des Custom-Sets. Sie stehen hier und
+    // nicht in characters.js, weil sie zum Spiel gehören und nicht zur App.
+    customCharacters: [],
+
     player1Secret: null,
     player2Secret: null,
 
     player1Eliminated: [],
     player2Eliminated: [],
 
-    // "set-selection" | "selection" | "pass" | "game" | "finished" – bestimmt,
-    // welcher Screen beim Laden einer Seite angezeigt wird
+    // "set-selection" | "custom-set" | "selection" | "pass" | "game" |
+    // "finished" – bestimmt, welcher Screen beim Laden einer Seite angezeigt
+    // wird
     phase: "set-selection",
 
     // Nummer des Spielers, der das Spiel gewonnen hat (null = noch offen)

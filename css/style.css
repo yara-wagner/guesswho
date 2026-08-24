@@ -20,9 +20,15 @@ body {
    BUTTONS
 ========================= */
 
-/* Basis-Stil für alle Buttons ausser den Kacheln (.tile, .mode-tile) */
+/* Basis-Stil für alle Buttons ausser den Kacheln (.tile, .mode-tile) und
+   den Buttons in den Custom-Karten (.card-button), die ihre eigenen
+   Stile mitbringen.
 
-button:not(.tile):not(.mode-tile) {
+   Die Ausnahmen stehen in :where(), damit sie die Spezifität nicht
+   erhöhen – so können einzelne Buttons (z. B. .cancel-game-button)
+   weiter unten einfach über ihre Klasse angepasst werden. */
+
+button:where(:not(.tile, .mode-tile, .card-button)) {
   padding: 10px 18px;
 
   border: none;
@@ -37,8 +43,17 @@ button:not(.tile):not(.mode-tile) {
   cursor: pointer;
 }
 
-button:not(.tile):not(.mode-tile):hover {
+button:where(:not(.tile, .mode-tile, .card-button)):hover {
   background-color: #444;
+}
+
+/* Deaktivierter Button – z. B. "Start game", solange das Custom-Set
+   noch nicht fertig ist */
+
+button:where(:not(.tile, .mode-tile, .card-button)):disabled {
+  background-color: #bbb;
+
+  cursor: not-allowed;
 }
 
 /* =========================
@@ -377,17 +392,31 @@ button.cancel-game-button:hover {
    CONTROLS
 ========================= */
 
+/* Zähler und Buttons unter dem Board. Sie bleiben beim Scrollen am
+   unteren Rand stehen, damit sie auch auf kleinen Bildschirmen immer
+   sichtbar sind. */
+
 .game-controls {
-  max-width: 1000px;
+  position: sticky;
 
-  margin: 0 auto 20px;
+  bottom: 0;
 
-  padding: 0 20px;
+  z-index: 1;
+
+  padding: 12px 20px;
 
   display: flex;
 
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
+
+  gap: 20px;
+
+  background-color: #f4f4f4;
+
+  /* hebt die Leiste von den Karten ab, die darunter durchscrollen */
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.08);
 }
 
 #remaining-counter {
@@ -484,6 +513,226 @@ button.cancel-game-button:hover {
 }
 
 /* =========================
+   CUSTOM CHARACTER SET
+========================= */
+
+.custom-set-title {
+    margin-top: 0;
+}
+
+/* Hinweis und Start-Button unter dem Board. Sie bleiben beim Scrollen
+   am unteren Rand stehen, damit der Start-Button auch auf kleinen
+   Bildschirmen immer sichtbar ist. */
+
+.custom-set-actions {
+    position: sticky;
+
+    bottom: 0;
+
+    z-index: 1;
+
+    padding: 12px 20px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    background-color: #f4f4f4;
+
+    /* hebt die Leiste von den Karten ab, die darunter durchscrollen */
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.custom-set-hint {
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #666;
+}
+
+
+/* Leere Karte: Bildfläche + Namensfeld.
+   Sieht aus wie eine Board-Karte (.character-card), ist aber nicht
+   anklickbar – die Karte selber macht nichts, nur ihre Felder. */
+
+.custom-card {
+    position: relative;
+
+    background-color: white;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Bildfläche – öffnet die Dateiauswahl */
+
+.custom-card-image {
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    padding: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    background-color: #ececec;
+    color: #666;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+.custom-card-image:hover {
+    background-color: #e0e0e0;
+
+    color: #222;
+}
+
+.custom-card-placeholder {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.custom-card-preview {
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+}
+
+
+/* Namensfeld */
+
+.custom-card-name {
+    width: 100%;
+
+    padding: 12px;
+
+    border: none;
+    border-top: 1px solid #ececec;
+
+    background-color: white;
+    color: inherit;
+
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: bold;
+
+    text-align: center;
+}
+
+.custom-card-name:focus {
+    outline: 2px solid #222;
+
+    outline-offset: -2px;
+}
+
+
+/* Karte entfernen */
+
+.custom-card-remove {
+    position: absolute;
+
+    top: 8px;
+    right: 8px;
+
+    width: 28px;
+    height: 28px;
+
+    padding: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 999px;
+
+    background-color: rgba(0, 0, 0, 0.55);
+    color: white;
+
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.custom-card-remove:hover {
+    background-color: #fa0000;
+}
+
+
+/* Fläche zum Hinzufügen einer weiteren Karte */
+
+.custom-add-card {
+    width: 100%;
+    height: 100%;
+
+    min-height: 180px;
+
+    padding: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border: 2px dashed #bbb;
+    border-radius: 10px;
+
+    background-color: transparent;
+    color: #666;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s,
+        color 0.2s;
+}
+
+.custom-add-card:hover {
+    border-color: #222;
+
+    color: #222;
+}
+
+.custom-add-card-icon {
+    font-size: 40px;
+    line-height: 1;
+}
+
+.custom-add-card-text {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+/* =========================
    WIN POP-UP
 ========================= */
 
@@ -493,6 +742,9 @@ button.cancel-game-button:hover {
   position: fixed;
 
   inset: 0;
+
+  /* liegt über der angehefteten Leiste (.game-controls) */
+  z-index: 10;
 
   display: flex;
 
