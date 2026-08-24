@@ -15,6 +15,18 @@ const CUSTOM_SET_ID = "custom";
 
 const characterSets = [
   {
+    id: CUSTOM_SET_ID,
+    name: "Custom",
+    icon: "📷",
+    available: true,
+    custom: true,
+
+    // Die Charaktere werden erst im Spiel erstellt und stehen dann im
+    // Spielstand (siehe state.js)
+    characters: [],
+  },
+
+  {
     id: "disney",
     name: "Disney",
     icon: "🏰",
@@ -28,18 +40,6 @@ const characterSets = [
     icon: "🐾",
     available: true,
     characters: animalsCharacters,
-  },
-
-  {
-    id: CUSTOM_SET_ID,
-    name: "Custom",
-    icon: "📷",
-    available: true,
-    custom: true,
-
-    // Die Charaktere werden erst im Spiel erstellt und stehen dann im
-    // Spielstand (siehe state.js)
-    characters: [],
   },
 
   {

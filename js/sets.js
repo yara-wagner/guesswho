@@ -49,7 +49,7 @@ function createSetTile(characterSet) {
     const hint = document.createElement("span");
 
     hint.classList.add("set-tile-count");
-    hint.textContent = "your own photos";
+    hint.textContent = "your own characters";
 
     tile.appendChild(hint);
 

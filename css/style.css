@@ -513,6 +513,56 @@ button.cancel-game-button:hover {
 }
 
 /* =========================
+   SECRET CHARACTER SELECTION
+========================= */
+
+/* Angetippte Karte auf der Charakter-Wahl. Der Rahmen liegt innen
+   (outline-offset), damit die Karte gleich gross bleibt. */
+
+.character-card.selected {
+    transform: translateY(-4px);
+
+    outline: 3px solid #222;
+    outline-offset: -3px;
+}
+
+/* Hinweis und Bestätigen-Button unter dem Board. Sie bleiben beim
+   Scrollen am unteren Rand stehen, damit der Button auch auf kleinen
+   Bildschirmen immer sichtbar ist. */
+
+.selection-actions {
+    position: sticky;
+
+    bottom: 0;
+
+    z-index: 1;
+
+    padding: 12px 20px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    background-color: #f4f4f4;
+
+    /* hebt die Leiste von den Karten ab, die darunter durchscrollen */
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.selection-hint {
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #666;
+}
+
+
+/* =========================
    CUSTOM CHARACTER SET
 ========================= */
 

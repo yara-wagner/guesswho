@@ -6,6 +6,12 @@ const selectionGrid = document.getElementById("selection-grid");
 
 const selectionTitle = document.getElementById("selection-title");
 
+const selectionHint = document.getElementById("selection-hint");
+
+const confirmSelectionButton = document.getElementById(
+  "confirm-selection-button",
+);
+
 // =============================
 // GAME STATE
 // =============================
@@ -16,13 +22,21 @@ const gameState = loadGameState();
 // SECRET CHARACTER SELECTION
 // =============================
 
+// Der angetippte Charakter. Er wird erst mit dem Bestätigen-Button
+// übernommen, vorher kann die Auswahl beliebig geändert werden.
+let selectedCharacter = null;
+
 function renderSelectionCharacters() {
   selectionGrid.innerHTML = "";
 
   getSetCharacters(gameState).forEach((character) => {
-    selectionGrid.appendChild(
-      createCharacterCard(character, selectSecretCharacter),
-    );
+    const card = createCharacterCard(character, selectCharacter);
+
+    if (selectedCharacter !== null && selectedCharacter.id === character.id) {
+      card.classList.add("selected");
+    }
+
+    selectionGrid.appendChild(card);
   });
 }
 
@@ -30,15 +44,43 @@ function showSelectionScreen() {
   selectionTitle.textContent = `${getPlayerName(gameState.currentPlayer)}: Choose your character`;
 
   renderSelectionCharacters();
+
+  updateConfirmButton();
 }
 
-function selectSecretCharacter(character) {
+function selectCharacter(character) {
+  selectedCharacter = character;
+
+  renderSelectionCharacters();
+
+  updateConfirmButton();
+}
+
+function updateConfirmButton() {
+  if (selectedCharacter === null) {
+    selectionHint.textContent = "Tap a character to choose it.";
+  } else {
+    selectionHint.textContent = `Selected: ${selectedCharacter.name}`;
+  }
+
+  confirmSelectionButton.disabled = selectedCharacter === null;
+}
+
+// =============================
+// CONFIRM SELECTION
+// =============================
+
+function confirmSelection() {
+  if (selectedCharacter === null) {
+    return;
+  }
+
   if (gameState.currentPlayer === 1) {
-    gameState.player1Secret = character;
+    gameState.player1Secret = selectedCharacter;
 
     gameState.currentPlayer = 2;
   } else {
-    gameState.player2Secret = character;
+    gameState.player2Secret = selectedCharacter;
 
     gameState.currentPlayer = 1;
   }
@@ -66,5 +108,7 @@ if (gameState === null) {
   // Beide Charaktere sind gewählt (das Spiel läuft bereits)
   window.location.replace("game.html");
 } else {
+  confirmSelectionButton.addEventListener("click", confirmSelection);
+
   showSelectionScreen();
 }
