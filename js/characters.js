@@ -132,7 +132,7 @@ const characterSets = [
 
   {
     id: "coming-soon-1",
-    name: "Coming soon",
+    name: "Animals",
     icon: "🔒",
     available: false,
     characters: [],
@@ -140,7 +140,7 @@ const characterSets = [
 
   {
     id: "coming-soon-2",
-    name: "Coming soon",
+    name: "Marvel",
     icon: "🔒",
     available: false,
     characters: [],
@@ -148,7 +148,7 @@ const characterSets = [
 
   {
     id: "coming-soon-3",
-    name: "Coming soon",
+    name: "Friends",
     icon: "🔒",
     available: false,
     characters: [],
