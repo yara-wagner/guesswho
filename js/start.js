@@ -9,7 +9,7 @@ function startGame() {
 
   saveGameState(gameState);
 
-  window.location.href = "character_selection.html";
+  window.location.href = "character_sets.html";
 }
 
 startGameButton.addEventListener("click", startGame);

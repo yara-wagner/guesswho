@@ -3,8 +3,8 @@
 // =============================
 
 // Der Spielstand muss die Seitenwechsel zwischen index.html,
-// character_selection.html und game.html überleben und wird deshalb
-// in der sessionStorage abgelegt.
+// character_sets.html, character_selection.html und game.html überleben
+// und wird deshalb in der sessionStorage abgelegt.
 
 const STORAGE_KEY = "guessWhoGameState";
 
@@ -12,15 +12,18 @@ function createGameState() {
   return {
     currentPlayer: 1,
 
+    // id des gewählten Charakter-Sets (siehe characters.js)
+    characterSetId: null,
+
     player1Secret: null,
     player2Secret: null,
 
     player1Eliminated: [],
     player2Eliminated: [],
 
-    // "selection" | "pass" | "game" – bestimmt, welcher Screen
-    // beim Laden einer Seite angezeigt wird
-    phase: "selection",
+    // "set-selection" | "selection" | "pass" | "game" – bestimmt,
+    // welcher Screen beim Laden einer Seite angezeigt wird
+    phase: "set-selection",
   };
 }
 

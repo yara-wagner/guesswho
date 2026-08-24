@@ -2,7 +2,10 @@
 // CHARACTER DATA
 // =============================
 
-const characters = [
+// Die Charaktere sind in Sets gruppiert. Pro Spiel wird genau ein Set
+// gespielt, die Auswahl passiert auf character_sets.html.
+
+const disneyCharacters = [
   {
     id: 1,
     name: "Aladdin",
@@ -111,6 +114,67 @@ const characters = [
     image: "src/disney/winnie_the_pooh.avif",
   },
 ];
+
+// =============================
+// CHARACTER SETS
+// =============================
+
+// available: false -> die Kachel wird ausgegraut und ist nicht anklickbar
+
+const characterSets = [
+  {
+    id: "disney",
+    name: "Disney",
+    icon: "🏰",
+    available: true,
+    characters: disneyCharacters,
+  },
+
+  {
+    id: "coming-soon-1",
+    name: "Coming soon",
+    icon: "🔒",
+    available: false,
+    characters: [],
+  },
+
+  {
+    id: "coming-soon-2",
+    name: "Coming soon",
+    icon: "🔒",
+    available: false,
+    characters: [],
+  },
+
+  {
+    id: "coming-soon-3",
+    name: "Coming soon",
+    icon: "🔒",
+    available: false,
+    characters: [],
+  },
+];
+
+function getCharacterSet(setId) {
+  const set = characterSets.find((entry) => entry.id === setId);
+
+  if (set === undefined) {
+    return null;
+  }
+
+  return set;
+}
+
+// Die Charaktere des gewählten Sets (leer, wenn das Set unbekannt ist)
+function getSetCharacters(setId) {
+  const set = getCharacterSet(setId);
+
+  if (set === null) {
+    return [];
+  }
+
+  return set.characters;
+}
 
 // =============================
 // CREATE CHARACTER CARD

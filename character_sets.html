@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Guess Who?</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header class="game-header">
+      <h1>Guess Who?</h1>
+
+      <button id="cancel-game-button" class="cancel-game-button" type="button">
+        Cancel game
+      </button>
+    </header>
+
+    <main>
+      <!-- CHARACTER SET SELECTION -->
+      <section id="set-screen" class="screen set-selection">
+        <h2 class="set-selection-title">Choose a character set</h2>
+
+        <div id="set-grid" class="set-grid"></div>
+      </section>
+    </main>
+
+    <script src="js/characters.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/cancel.js"></script>
+    <script src="js/sets.js"></script>
+  </body>
+</html>

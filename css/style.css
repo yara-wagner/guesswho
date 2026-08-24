@@ -20,9 +20,9 @@ body {
    BUTTONS
 ========================= */
 
-/* Basis-Stil für alle Buttons ausser den Modus-Kacheln auf der Startseite */
+/* Basis-Stil für alle Buttons ausser den Kacheln (.tile) */
 
-button:not(.mode-tile) {
+button:not(.tile) {
   padding: 10px 18px;
 
   border: none;
@@ -37,7 +37,7 @@ button:not(.mode-tile) {
   cursor: pointer;
 }
 
-button:not(.mode-tile):hover {
+button:not(.tile):hover {
   background-color: #444;
 }
 
@@ -99,8 +99,93 @@ button.cancel-game-button:hover {
 }
 
 /* =========================
+   TILES
+========================= */
+
+/* Grosse anklickbare Kachel – für die Modus-Auswahl (Startseite)
+   und die Charakter-Set-Auswahl */
+
+.tile {
+    width: 100%;
+
+    padding: 40px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    border: 2px solid transparent;
+    border-radius: 10px;
+
+    background-color: white;
+    color: inherit;
+
+    font-family: inherit;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.15);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        border-color 0.2s;
+}
+
+.tile:not(:disabled):hover {
+    transform: translateY(-4px);
+
+    border-color: #222;
+}
+
+.tile-icon {
+    font-size: 48px;
+
+    line-height: 1;
+}
+
+.tile-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.tile-badge {
+    padding: 4px 10px;
+
+    border-radius: 999px;
+
+    background-color: #e0e0e0;
+
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    color: #666;
+}
+
+
+/* Deaktivierte Kachel */
+
+.tile:disabled {
+    box-shadow: none;
+
+    background-color: #ececec;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================
    MODE SELECTION
 ========================= */
+
+.mode-tile {
+    min-height: 220px;
+}
 
 .mode-selection {
     width: min(800px, 95%);
@@ -135,85 +220,8 @@ button.cancel-game-button:hover {
 }
 
 
-/* Kachel */
-
-.mode-tile {
-    width: 100%;
-
-    min-height: 220px;
-
-    padding: 40px 20px;
-
-    display: flex;
-
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 12px;
-
-    border: 2px solid transparent;
-    border-radius: 10px;
-
-    background-color: white;
-    color: inherit;
-
-    font-family: inherit;
-
-    box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.15);
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s,
-        border-color 0.2s;
-}
-
-.mode-tile:not(:disabled):hover {
-    transform: translateY(-4px);
-
-    border-color: #222;
-}
-
-.mode-tile-icon {
-    font-size: 48px;
-
-    line-height: 1;
-}
-
-.mode-tile-name {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.mode-tile-badge {
-    padding: 4px 10px;
-
-    border-radius: 999px;
-
-    background-color: #e0e0e0;
-
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-
-    color: #666;
-}
-
-
-/* Deaktivierter Modus */
-
-.mode-tile:disabled {
-    box-shadow: none;
-
-    background-color: #ececec;
-
-    cursor: not-allowed;
-}
-
-.mode-card-disabled .mode-tile-icon,
-.mode-card-disabled .mode-tile-name {
+.mode-card-disabled .tile-icon,
+.mode-card-disabled .tile-name {
     opacity: 0.5;
 }
 
@@ -240,6 +248,47 @@ button.cancel-game-button:hover {
     line-height: 1.5;
 
     color: #666;
+}
+
+
+/* =========================
+   CHARACTER SET SELECTION
+========================= */
+
+.set-selection {
+    width: min(800px, 95%);
+
+    margin: 0 auto 50px;
+}
+
+.set-selection-title {
+    margin-top: 0;
+}
+
+.set-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(200px, 1fr));
+
+    gap: 24px;
+}
+
+.set-tile {
+    min-height: 180px;
+}
+
+/* Anzahl Charaktere im Set */
+
+.set-tile-count {
+    font-size: 13px;
+
+    color: #666;
+}
+
+.set-tile:disabled .tile-icon,
+.set-tile:disabled .tile-name {
+    opacity: 0.5;
 }
 
 

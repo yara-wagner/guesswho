@@ -27,7 +27,7 @@ function renderCharacters() {
 
   const eliminatedCharacters = getEliminatedCharacters(gameState);
 
-  characters.forEach((character) => {
+  getSetCharacters(gameState.characterSetId).forEach((character) => {
     const card = createCharacterCard(character, () => {
       toggleCharacter(character.id);
     });
@@ -69,7 +69,9 @@ function toggleCharacter(characterId) {
 function updateCounter() {
   const eliminatedCharacters = getEliminatedCharacters(gameState);
 
-  const remaining = characters.length - eliminatedCharacters.length;
+  const remaining =
+    getSetCharacters(gameState.characterSetId).length -
+    eliminatedCharacters.length;
 
   remainingCounter.textContent = `Remaining: ${remaining}`;
 }
@@ -121,6 +123,9 @@ function endTurn() {
 if (gameState === null) {
   // Ohne laufendes Spiel zurück zur Modus-Auswahl
   window.location.replace("index.html");
+} else if (getCharacterSet(gameState.characterSetId) === null) {
+  // Es fehlt noch ein Charakter-Set
+  window.location.replace("character_sets.html");
 } else if (gameState.phase === "pass") {
   // Das Gerät wird gerade übergeben
   window.location.replace("pass.html");

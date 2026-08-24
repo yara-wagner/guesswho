@@ -19,7 +19,7 @@ const gameState = loadGameState();
 function renderSelectionCharacters() {
   selectionGrid.innerHTML = "";
 
-  characters.forEach((character) => {
+  getSetCharacters(gameState.characterSetId).forEach((character) => {
     selectionGrid.appendChild(
       createCharacterCard(character, selectSecretCharacter),
     );
@@ -57,6 +57,9 @@ function selectSecretCharacter(character) {
 if (gameState === null) {
   // Ohne laufendes Spiel zurück zur Modus-Auswahl
   window.location.replace("index.html");
+} else if (getCharacterSet(gameState.characterSetId) === null) {
+  // Es fehlt noch ein Charakter-Set
+  window.location.replace("character_sets.html");
 } else if (gameState.phase === "pass") {
   window.location.replace("pass.html");
 } else if (gameState.player2Secret !== null) {
