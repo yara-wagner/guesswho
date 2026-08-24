@@ -21,17 +21,16 @@
         <h2 class="mode-selection-title">Choose game mode</h2>
 
         <div class="mode-grid">
-          <article class="mode-card mode-card-disabled">
+          <article class="mode-card">
             <div class="mode-tile-wrapper">
               <button
+                id="single-player-button"
                 class="mode-tile"
                 type="button"
                 data-mode="single-player"
-                disabled
               >
                 <span class="mode-tile-icon">👤</span>
                 <span class="mode-tile-name">Single-Player</span>
-                <span class="mode-tile-badge">Coming soon</span>
               </button>
 
               <button
@@ -151,13 +150,13 @@
             />
           </div>
 
-          <button class="continue-button" type="submit">
-            Continue
-          </button>
+          <button class="continue-button" type="submit">Continue</button>
         </form>
       </div>
     </div>
 
+    <script src="js/character_data.js"></script>
+    <script src="js/characters.js"></script>
     <script src="js/state.js"></script>
     <script src="js/start.js"></script>
     <script src="js/rules.js"></script>

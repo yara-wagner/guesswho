@@ -4,6 +4,10 @@
 
 const startGameButton = document.getElementById("start-game-button");
 
+const singlePlayerButton = document.getElementById(
+  "single-player-button"
+);
+
 const playerNameModal = document.getElementById("player-name-modal");
 
 const closePlayerNameButton = document.getElementById(
@@ -75,3 +79,23 @@ playerNameForm.addEventListener("submit", function (event) {
 
   window.location.href = "character_sets.html";
 });
+
+// =============================
+// SINGLE PLAYER
+// =============================
+
+function startSinglePlayer() {
+  const gameState = createGameState();
+
+  gameState.gameMode = "single-player";
+  gameState.player1Name = "Player";
+  gameState.characterSetId = "disney";
+  gameState.questionsLeft = 8;
+  gameState.phase = "game";
+
+  saveGameState(gameState);
+
+  window.location.href = "single_player.html";
+}
+
+singlePlayerButton.addEventListener("click", startSinglePlayer);
