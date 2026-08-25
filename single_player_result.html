@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Guess Who?</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="js/header.js"></script>
+  </head>
+
+  <body>
+    <game-header></game-header>
+
+    <main>
+      <section class="single-result-screen">
+        <div class="single-result-card">
+
+          <h2>Oh no!</h2>
+
+          <p class="single-result-message">
+            You ran out of questions.
+          </p>
+
+          <p>
+            The secret character was:
+          </p>
+
+          <img
+            id="result-character-image"
+            class="result-character-image"
+            src=""
+            alt=""
+          />
+
+          <h3 id="result-character-name"></h3>
+
+          <p class="single-result-sorry">
+            Better luck next time!
+          </p>
+
+          <button
+            id="play-again-button"
+            type="button"
+          >
+            Play again
+          </button>
+
+        </div>
+      </section>
+    </main>
+
+    <script src="js/state.js"></script>
+    <script src="js/single_player_result.js"></script>
+  </body>
+</html>
