@@ -15,6 +15,8 @@
 
     <link rel="stylesheet" href="css/style.css" />
 
+    <script src="js/icons.js"></script>
+
     <script src="js/header.js"></script>
   </head>
 
@@ -23,17 +25,28 @@
 
     <main>
       <!-- PASS SCREEN -->
-      <section id="pass-screen" class="screen">
-        <h2>Pass the device</h2>
+      <section id="pass-screen" class="screen pass-screen">
+        <div class="pass-card">
+          <span class="pass-icon">🤝</span>
 
-        <p>Pass the device to <span id="pass-player-name"></span>.</p>
+          <h2>Pass the device</h2>
 
-        <!-- Nur einer der beiden Buttons wird angezeigt -->
-        <button id="continue-button" class="hidden">Continue</button>
+          <p class="pass-text">
+            Pass the device to
+            <span id="pass-player-name" class="pass-player-name"></span>.
+          </p>
 
-        <button id="continue-to-board-button" class="hidden">
-          Continue to board
-        </button>
+          <!-- Nur einer der beiden Buttons wird angezeigt -->
+          <button id="continue-button" class="hidden" type="button">
+            Continue
+            <span data-icon="arrow-right"></span>
+          </button>
+
+          <button id="continue-to-board-button" class="hidden" type="button">
+            Continue to board
+            <span data-icon="arrow-right"></span>
+          </button>
+        </div>
       </section>
     </main>
 

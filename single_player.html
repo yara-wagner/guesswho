@@ -15,6 +15,8 @@
 
     <link rel="stylesheet" href="css/style.css" />
 
+    <script src="js/icons.js"></script>
+
     <script src="js/header.js"></script>
   </head>
 
@@ -23,18 +25,30 @@
 
     <main>
       <section id="single-player-screen" class="screen">
-        <h2 id="single-player-set-title"></h2>
+        <h2 id="single-player-set-title" class="page-title"></h2>
 
         <p id="question-counter">Questions left: 8</p>
 
         <!-- QUESTION AREA -->
         <section class="question-section">
           <div class="question-row">
-            <select id="question-select">
-              <option value="">Select a question...</option>
-            </select>
+            <!-- Der Wrapper trägt den Pfeil, das native Dropdown-Dreieck
+                 ist ausgeschaltet (siehe css/style.css) -->
+            <div class="question-select-wrapper">
+              <select id="question-select">
+                <option value="">Select a question...</option>
+              </select>
 
-            <button id="ask-question-button" type="button">Ask</button>
+              <span
+                class="question-select-icon"
+                data-icon="chevron-down"
+              ></span>
+            </div>
+
+            <button id="ask-question-button" type="button">
+              <span data-icon="ask"></span>
+              Ask
+            </button>
           </div>
 
           <p id="computer-answer" class="computer-answer"></p>
@@ -43,11 +57,20 @@
         <!-- CHARACTER BOARD -->
         <section id="single-player-grid" class="character-grid"></section>
 
-        <!-- CONTROLS -->
+        <!-- CONTROLS: erst die Nebenaktion, dann die Hauptaktion -->
         <section class="game-controls">
-          <button id="final-guess-button" type="button">Final Guess</button>
+          <button id="single-reset-button" class="secondary" type="button">
+            <span data-icon="refresh"></span>
+            Reset board
+          </button>
 
-          <button id="single-reset-button" type="button">Reset Board</button>
+          <!-- Die Beschriftung wechselt zwischen "Final Guess" und
+               "Cancel guess" (siehe js/single_player.js). Sie steckt in
+               einem eigenen Span, damit das Icon daneben stehen bleibt. -->
+          <button id="final-guess-button" class="accent-2" type="button">
+            <span data-icon="target"></span>
+            <span class="button-label">Final Guess</span>
+          </button>
         </section>
       </section>
     </main>

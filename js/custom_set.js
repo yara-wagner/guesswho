@@ -313,7 +313,11 @@ function createEditorCard(card) {
   removeButton.type = "button";
   removeButton.classList.add("custom-card-remove", "card-button");
   removeButton.title = "Remove character";
-  removeButton.textContent = "✕";
+  removeButton.setAttribute("aria-label", "Remove character");
+  removeButton.innerHTML = `<span data-icon="close"></span>`;
+
+  // Platzhalter durch das SVG ersetzen (js/icons.js)
+  renderIcons(removeButton);
 
   element.appendChild(imageButton);
   element.appendChild(fileInput);

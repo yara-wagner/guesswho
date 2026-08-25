@@ -16,8 +16,8 @@ function createGameState() {
 
     questionsLeft: 8,
 
-    player1Name: "Player 1",
-    player2Name: "Player 2",
+    player1Name: "Player One",
+    player2Name: "Player Two",
 
     characterSetId: null,
 
@@ -43,10 +43,10 @@ function getPlayerName(playerNumber) {
   }
 
   if (playerNumber === 1) {
-    return state.player1Name || "Player 1";
+    return state.player1Name || "Player One";
   }
 
-  return state.player2Name || "Player 2";
+  return state.player2Name || "Player Two";
 }
 
 function saveGameState(state) {

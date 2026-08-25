@@ -15,6 +15,8 @@
 
     <link rel="stylesheet" href="css/style.css" />
 
+    <script src="js/icons.js"></script>
+
     <script src="js/header.js"></script>
 
     <!-- Web-Component für die Lottie-Konfetti-Animation im Gewinner-Pop-up -->
@@ -30,24 +32,35 @@
     <main>
       <!-- GAME SCREEN -->
       <section id="game-screen" class="screen">
-        <h2 id="current-player-title">Player 1</h2>
+        <h2 id="current-player-title" class="page-title">Player One</h2>
 
         <section id="character-grid" class="character-grid"></section>
 
         <!-- Zähler und Buttons bleiben am unteren Rand kleben, damit sie
-             auch auf kleinen Bildschirmen sichtbar sind -->
+             auch auf kleinen Bildschirmen sichtbar sind.
+
+             Reihenfolge von links nach rechts: erst die Nebenaktion, dann
+             die Sonderaktion, zuletzt die Hauptaktion. -->
         <section class="game-controls">
           <span id="remaining-counter"> Remaining characters: 0 </span>
 
-          <button id="reset-button">Reset Board</button>
+          <button id="reset-button" class="secondary" type="button">
+            <span data-icon="refresh"></span>
+            Reset board
+          </button>
 
-          <button id="end-turn-button">End Turn</button>
+          <!-- Die Beschriftung wechselt zwischen "Final Guess" und
+               "Cancel guess" (siehe js/game.js). Sie steckt in einem
+               eigenen Span, damit das Icon daneben stehen bleibt. -->
+          <button id="final-guess-button" class="accent-2" type="button">
+            <span data-icon="target"></span>
+            <span class="button-label">Final Guess</span>
+          </button>
 
-          <section class="game-controls">
-            <button id="final-guess-button" type="button">Final Guess</button>
-
-            <!-- deine bestehenden Buttons -->
-          </section>
+          <button id="end-turn-button" type="button">
+            End turn
+            <span data-icon="arrow-right"></span>
+          </button>
         </section>
       </section>
 
@@ -71,9 +84,15 @@
           <img id="win-character-image" class="win-character-image" alt="" />
 
           <div class="win-dialog-buttons">
-            <button id="new-game-button" type="button">New game</button>
+            <button id="home-button" class="secondary" type="button">
+              <span data-icon="home"></span>
+              Back to start
+            </button>
 
-            <button id="home-button" type="button">Back to start</button>
+            <button id="new-game-button" type="button">
+              <span data-icon="refresh"></span>
+              New game
+            </button>
           </div>
         </article>
       </section>

@@ -33,6 +33,11 @@ const finalGuessButton =
 
 let finalGuessMode = false;
 
+// Die zuletzt angeklickte Karte. Nur sie animiert ihr Kreuz ein – das
+// Board wird bei jedem Klick komplett neu gezeichnet, sonst würden alle
+// bereits ausgeschlossenen Karten jedes Mal mitwackeln.
+let lastToggledId = null;
+
 // =============================
 // GAME STATE
 // =============================
@@ -64,6 +69,10 @@ function renderCharacters() {
 
     if (eliminatedCharacters.includes(character.id)) {
       card.classList.add("eliminated");
+
+      if (character.id === lastToggledId) {
+        card.classList.add("just-eliminated");
+      }
     }
 
     characterGrid.appendChild(card);
@@ -91,6 +100,8 @@ function toggleCharacter(characterId) {
   } else {
     eliminatedCharacters.splice(index, 1);
   }
+
+  lastToggledId = characterId;
 
   saveGameState(gameState);
 
@@ -215,7 +226,26 @@ function updateCounter() {
   const remaining =
     getSetCharacters(gameState).length - eliminatedCharacters.length;
 
-  remainingCounter.textContent = `Remaining: ${remaining}`;
+  const text = `Remaining: ${remaining}`;
+
+  // Beim ersten Zeichnen steht die Zahl einfach da, danach hüpft sie bei
+  // jeder Änderung kurz – so sieht man, dass sich etwas getan hat
+  if (remainingCounter.textContent !== text) {
+    remainingCounter.textContent = text;
+
+    popCounter(remainingCounter);
+  }
+}
+
+// Startet die Hüpf-Animation neu. Die Klasse muss zuerst weg und ein
+// Layout-Schritt dazwischen liegen, sonst spielt der Browser dieselbe
+// Animation beim zweiten Mal nicht noch einmal ab.
+function popCounter(element) {
+  element.classList.remove("counter-pop");
+
+  void element.offsetWidth;
+
+  element.classList.add("counter-pop");
 }
 
 // =============================
@@ -328,17 +358,34 @@ function makeFinalGuess(character) {
 }
 
 
+// Nur die Beschriftung wechseln, nicht den ganzen Button-Inhalt – daneben
+// steht das Icon (siehe game.html)
+const finalGuessLabel =
+  finalGuessButton.querySelector(
+    ".button-label"
+  );
+
 finalGuessButton.addEventListener(
   "click",
   function () {
     finalGuessMode = !finalGuessMode;
 
     if (finalGuessMode === true) {
-      finalGuessButton.textContent =
-        "Cancel Guess";
+      finalGuessLabel.textContent =
+        "Cancel guess";
+
+      // Im Rate-Modus wird der Button zur Hauptaktion und wechselt
+      // dafür von Petrol auf Coral
+      finalGuessButton.classList.remove(
+        "accent-2"
+      );
     } else {
-      finalGuessButton.textContent =
+      finalGuessLabel.textContent =
         "Final Guess";
+
+      finalGuessButton.classList.add(
+        "accent-2"
+      );
     }
   }
 );

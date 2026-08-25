@@ -15,6 +15,8 @@
 
     <link rel="stylesheet" href="css/style.css" />
 
+    <script src="js/icons.js"></script>
+
     <script src="js/header.js"></script>
   </head>
 
@@ -24,6 +26,8 @@
     <main>
       <section class="single-result-screen">
         <div class="single-result-card">
+          <span class="single-result-icon">🙈</span>
+
           <h2>Oh no!</h2>
 
           <p class="single-result-message">You ran out of questions.</p>
@@ -41,7 +45,10 @@
 
           <p class="single-result-sorry">Better luck next time!</p>
 
-          <button id="play-again-button" type="button">Play again</button>
+          <button id="play-again-button" type="button">
+            <span data-icon="refresh"></span>
+            Play again
+          </button>
         </div>
       </section>
     </main>

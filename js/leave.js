@@ -26,11 +26,11 @@ function createLeaveModal() {
   modal.innerHTML = `
     <div class="leave-content">
       <button
-        class="close-leave-button"
+        class="close-leave-button icon-button"
         type="button"
         aria-label="Keep playing"
       >
-        X
+        <span data-icon="close"></span>
       </button>
 
       <h2>Leave the game?</h2>
@@ -40,12 +40,18 @@ function createLeaveModal() {
       <div class="leave-buttons">
         <button class="keep-playing-button" type="button">Keep playing</button>
 
-        <button class="confirm-leave-button" type="button">Leave game</button>
+        <button class="confirm-leave-button secondary" type="button">
+          <span data-icon="home"></span>
+          Leave game
+        </button>
       </div>
     </div>
   `;
 
   document.body.appendChild(modal);
+
+  // Platzhalter durch die SVGs ersetzen (js/icons.js)
+  renderIcons(modal);
 
   const closeButton = modal.querySelector(".close-leave-button");
 

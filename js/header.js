@@ -51,10 +51,12 @@ class GameHeader extends HTMLElement {
               ? ""
               : `
                 <button
-                  class="back-button"
+                  class="back-button secondary"
                   type="button"
+                  aria-label="Back"
                 >
-                  ← Back
+                  <span data-icon="arrow-left"></span>
+                  <span class="back-button-text">Back</span>
                 </button>
               `
           }
@@ -65,9 +67,10 @@ class GameHeader extends HTMLElement {
           showLeaveButton
             ? `
               <button
-                class="leave-game-button"
+                class="leave-game-button secondary"
                 type="button"
               >
+                <span data-icon="home"></span>
                 Back to start
               </button>
             `
@@ -76,6 +79,11 @@ class GameHeader extends HTMLElement {
 
       </header>
     `;
+
+    // Die Platzhalter im Markup oben durch ihre SVGs ersetzen (js/icons.js).
+    // Der Header steht schon, bevor DOMContentLoaded feuert, deshalb macht
+    // er das hier selber.
+    renderIcons(this);
 
     const backButton = this.querySelector(".back-button");
 

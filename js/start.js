@@ -70,10 +70,10 @@ playerNameForm.addEventListener("submit", function (event) {
   const player2Name = player2NameInput.value.trim();
 
   gameState.player1Name =
-    player1Name === "" ? "Player 1" : player1Name;
+    player1Name === "" ? "Player One" : player1Name;
 
   gameState.player2Name =
-    player2Name === "" ? "Player 2" : player2Name;
+    player2Name === "" ? "Player Two" : player2Name;
 
   saveGameState(gameState);
 

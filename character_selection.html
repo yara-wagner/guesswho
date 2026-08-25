@@ -15,17 +15,21 @@
 
     <link rel="stylesheet" href="css/style.css" />
 
+    <script src="js/icons.js"></script>
+
     <script src="js/header.js"></script>
   </head>
 
   <body>
+    <!-- Der "← Back"-Button steckt im Header (siehe js/header.js) -->
     <game-header leave></game-header>
-    <button id="back-button" class="back-button" type="button">← Back</button>
 
     <main>
       <!-- CHARACTER SELECTION -->
       <section id="selection-screen" class="screen">
-        <h2 id="selection-title">Player 1: Choose your character</h2>
+        <h2 id="selection-title" class="page-title">
+          Player One: Choose your character
+        </h2>
 
         <div id="selection-grid" class="character-grid"></div>
 
@@ -36,13 +40,15 @@
 
           <button
             id="random-selection-button"
-            class="random-selection-button"
+            class="random-selection-button secondary"
             type="button"
           >
-            🎲 Random character
+            <span data-icon="dice"></span>
+            Random character
           </button>
 
           <button id="confirm-selection-button" type="button" disabled>
+            <span data-icon="check"></span>
             Confirm character
           </button>
         </div>

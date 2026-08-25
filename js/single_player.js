@@ -20,7 +20,39 @@ const gameState = loadGameState();
 
 const finalGuessButton = document.getElementById("final-guess-button");
 
+// Nur die Beschriftung wechselt, nicht der ganze Button-Inhalt – daneben
+// steht das Icon (siehe single_player.html)
+const finalGuessLabel = finalGuessButton.querySelector(".button-label");
+
 let finalGuessMode = false;
+
+// Die zuletzt angeklickte Karte. Nur sie animiert ihr Kreuz ein – das
+// Board wird bei jedem Klick komplett neu gezeichnet, sonst würden alle
+// bereits ausgeschlossenen Karten jedes Mal mitwackeln.
+let lastToggledId = null;
+
+// =============================
+// COMPUTER ANSWER
+// =============================
+
+// Setzt die Antwort des Computers. YES und NO stehen in der normalen
+// Textfarbe und werden nur kurz hervorgehoben (siehe css/style.css),
+// Hinweistexte ("Select a question first.") bleiben ganz ruhig.
+function showAnswer(text, tone) {
+  computerAnswer.textContent = text;
+
+  computerAnswer.classList.remove("answer-yes", "answer-no");
+
+  if (tone === undefined) {
+    return;
+  }
+
+  // Erzwingt einen Layout-Schritt, damit die Animation auch bei zwei
+  // gleichen Antworten hintereinander neu startet
+  void computerAnswer.offsetWidth;
+
+  computerAnswer.classList.add(tone);
+}
 
 // =============================
 // SET TITLE
@@ -90,6 +122,10 @@ function renderSinglePlayerCharacters() {
 
     if (gameState.player1Eliminated.includes(character.id)) {
       card.classList.add("eliminated");
+
+      if (character.id === lastToggledId) {
+        card.classList.add("just-eliminated");
+      }
     }
 
     singlePlayerGrid.appendChild(card);
@@ -260,7 +296,7 @@ function askQuestion(property) {
   }
 
   if (gameState.questionsLeft <= 0) {
-    computerAnswer.textContent = "No questions left.";
+    showAnswer("No questions left.");
 
     return;
   }
@@ -268,9 +304,9 @@ function askQuestion(property) {
   const answer = secretCharacter[property];
 
   if (answer === true) {
-    computerAnswer.textContent = "YES";
+    showAnswer("YES", "answer-yes");
   } else {
-    computerAnswer.textContent = "NO";
+    showAnswer("NO", "answer-no");
 
     gameState.questionsLeft = Math.max(0, gameState.questionsLeft - 1);
 
@@ -308,6 +344,8 @@ function toggleSinglePlayerCharacter(characterId) {
     eliminated.splice(index, 1);
   }
 
+  lastToggledId = characterId;
+
   saveGameState(gameState);
 
   renderSinglePlayerCharacters();
@@ -318,7 +356,22 @@ function toggleSinglePlayerCharacter(characterId) {
 // =============================
 
 function updateQuestionCounter() {
-  questionCounter.textContent = `Questions left: ${gameState.questionsLeft}`;
+  const text = `Questions left: ${gameState.questionsLeft}`;
+
+  if (questionCounter.textContent === text) {
+    return;
+  }
+
+  questionCounter.textContent = text;
+
+  // Der Zähler hüpft kurz, wenn eine Frage verbraucht ist. Die Klasse muss
+  // zuerst weg und ein Layout-Schritt dazwischen liegen, sonst spielt der
+  // Browser dieselbe Animation beim zweiten Mal nicht noch einmal ab.
+  questionCounter.classList.remove("counter-pop");
+
+  void questionCounter.offsetWidth;
+
+  questionCounter.classList.add("counter-pop");
 }
 
 // =============================
@@ -348,29 +401,40 @@ if (gameState === null || gameState.gameMode !== "single-player") {
     finalGuessMode = !finalGuessMode;
 
     if (finalGuessMode === true) {
-      finalGuessButton.textContent =
-        "Cancel Guess";
+      finalGuessLabel.textContent =
+        "Cancel guess";
 
-      computerAnswer.textContent =
-        "Click the character you want to guess.";
+      // Im Rate-Modus wird der Button zur Hauptaktion und wechselt
+      // dafür von Petrol auf Coral
+      finalGuessButton.classList.remove(
+        "accent-2"
+      );
+
+      showAnswer(
+        "Click the character you want to guess."
+      );
     } else {
-      finalGuessButton.textContent =
+      finalGuessLabel.textContent =
         "Final Guess";
 
-      computerAnswer.textContent = "";
+      finalGuessButton.classList.add(
+        "accent-2"
+      );
+
+      showAnswer("");
     }
   }
 );
 
   questionSelect.addEventListener("change", function () {
-    computerAnswer.textContent = "";
+    showAnswer("");
   });
 
   askQuestionButton.addEventListener("click", function () {
     const property = questionSelect.value;
 
     if (property === "") {
-      computerAnswer.textContent = "Select a question first.";
+      showAnswer("Select a question first.");
 
       return;
     }

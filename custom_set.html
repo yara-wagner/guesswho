@@ -15,6 +15,8 @@
 
     <link rel="stylesheet" href="css/style.css" />
 
+    <script src="js/icons.js"></script>
+
     <script src="js/header.js"></script>
   </head>
 
@@ -24,9 +26,9 @@
     <main>
       <!-- CUSTOM CHARACTER SET -->
       <section id="custom-set-screen" class="screen">
-        <h2 class="custom-set-title">
-          Upload a photo for every character and give it a name.
-        </h2>
+        <h2 class="page-title">Build your own set</h2>
+
+        <p>Upload a photo for every character and give it a name.</p>
         <p>
           You can pick several photos at once – they are spread over the cards.
         </p>
@@ -39,7 +41,7 @@
             class="custom-add-card card-button"
             type="button"
           >
-            <span class="custom-add-card-icon">+</span>
+            <span class="custom-add-card-icon" data-icon="plus"></span>
             <span class="custom-add-card-text">Add character</span>
           </button>
         </div>
@@ -51,6 +53,7 @@
 
           <button id="start-custom-game-button" type="button" disabled>
             Start game
+            <span data-icon="arrow-right"></span>
           </button>
         </div>
       </section>

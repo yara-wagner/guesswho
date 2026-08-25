@@ -2,8 +2,7 @@
    FONT
 ========================= */
 
-/* Lato für den Fliesstext. Regular und Bold jeweils normal und kursiv –
-   das sind die Schnitte, die das Spiel verwendet. */
+/* Lato für den Fliesstext. */
 
 @font-face {
   font-family: "Lato";
@@ -48,6 +47,77 @@
 }
 
 /* =========================
+   DESIGN TOKENS
+========================= */
+
+/* Alle Farben, Rundungen und Schatten stehen hier an einer Stelle. Wer das
+   Spiel umfärben will, ändert nur diesen Block. Im restlichen Stylesheet
+   steht kein einziger Farbwert mehr.
+
+   Grundregel des Designs: Farbe gehört in die Hülle (Hintergrund, Buttons,
+   Header, Popups, Kacheln), nicht auf das Board. Die Charakterkarten
+   bleiben weiss und neutral, damit die Bilder die Aufmerksamkeit kriegen. */
+
+:root {
+  /* --- Flächen und Text --- */
+
+  --bg: #fff6ec;
+
+  /* Header-Band */
+  --bg-soft: #fdeadb;
+
+  /* für die angehefteten Leisten, die Karten durchscheinen lassen */
+  --bg-translucent: rgba(255, 246, 236, 0.9);
+
+  /* Karten, Popups, Eingabefelder */
+  --surface: #ffffff;
+
+  --ink: #2b2118;
+
+  /* Nebentexte, Hinweise, Zähler */
+  --ink-soft: #6e5f53;
+
+  /* feine Trennlinien */
+  --line: #f0e2d5;
+
+  /* deaktivierte Flächen */
+  --muted: #efe6dd;
+
+  /* --- Akzente --- */
+
+  /* Hauptaktionen. Wird mit --ink beschriftet */
+  --accent: #ff7a5c;
+  --accent-hover: #ff6647;
+  --accent-soft: #ffe4dc;
+
+  /* Die zweite Stimme (Final Guess, Fokus-Ringe, "YES") */
+  --accent-2: #2bb3a3;
+  --accent-2-hover: #23a091;
+  --accent-2-soft: #d8f2ee;
+
+  /* Badges und Zähler */
+  --sun: #ffc94d;
+  --sun-soft: #fff0cc;
+
+  /* Ausgeschlossene Charaktere */
+  --danger: #e4533a;
+
+  /* --- Formen --- */
+
+  --radius: 18px;
+  --radius-sm: 12px;
+  --radius-pill: 999px;
+
+  /* --- Schatten --- */
+
+  --shadow-sm: 0 2px 8px rgba(120, 70, 45, 0.1);
+  --shadow: 0 6px 18px rgba(120, 70, 45, 0.13);
+  --shadow-lg: 0 14px 40px rgba(120, 70, 45, 0.25);
+  --shadow-accent: 0 5px 14px rgba(255, 122, 92, 0.4);
+  --shadow-accent-2: 0 5px 14px rgba(43, 179, 163, 0.35);
+}
+
+/* =========================
    GENERAL
 ========================= */
 
@@ -57,9 +127,16 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
   font-family: "Lato", sans-serif;
-  background-color: #f4f4f4;
-  color: #222;
+  color: var(--ink);
+
+  /* Zwei sehr weiche Farbschleier in den oberen Ecken. */
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 10% -10%, var(--accent-soft) 0%, transparent 45%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /* Überschriften und Titel in BellaFont */
@@ -80,55 +157,181 @@ textarea {
   font-family: inherit;
 }
 
+/* Sichtbarer Fokus-Ring für die Tastaturbedienung. */
+:focus-visible {
+  outline: 3px solid var(--accent-2);
+  outline-offset: 3px;
+}
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.page-title {
+  position: relative;
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 34px;
+  padding: 0 4px;
+  font-size: 34px;
+  line-height: 1.2;
+}
+
+.page-title::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -14px;
+  left: 0;
+  height: 9px;
+
+}
+
+@media (max-width: 500px) {
+  .page-title {
+    font-size: 27px;
+  }
+}
+
+/* =========================
+   ICONS
+========================= */
+
+/* Die Icons der funktionalen Bedienelemente (Zurück, Schliessen, Würfel,
+   Reset …) sind Inline-SVGs aus js/icons.js. Sie erben über currentColor
+   die Textfarbe des Buttons und färben sich beim Hover automatisch mit.
+
+   Die Emojis auf den Kacheln (🏰 🐾 🍄 👤 👥) bleiben Emojis – die sind
+   Inhalt, nicht Bedienung. */
+
+.icon {
+  display: block;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
 /* =========================
    BUTTONS
 ========================= */
 
-/* Basis-Stil für alle Buttons ausser den Kacheln (.tile, .mode-tile) und
-   den Buttons in den Custom-Karten (.card-button), die ihre eigenen
-   Stile mitbringen.
+/* Es gibt drei Stufen:
+
+   1. ohne Klasse          Hauptaktion – gefüllt
+   2. .secondary           Nebenaktion – Umriss, füllt sich beim Hover
+   3. .accent-2            Sonderaktion (Final Guess) – gefüllt
+
+   Ausgenommen sind die Kacheln (.tile, .mode-tile), die Buttons in den
+   Custom-Karten (.card-button), das Logo (.logo-button) und die runden
+   Icon-Buttons (.icon-button) – die bringen ihre eigenen Stile mit.
 
    Die Ausnahmen stehen in :where(), damit sie die Spezifität nicht
-   erhöhen. So können einzelne Buttons (z. B. .leave-game-button)
-   weiter unten einfach über ihre Klasse angepasst werden. */
-button:where(:not(.tile, .mode-tile, .card-button, .logo-button)) {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 6px;
-  background-color: #222;
-  color: white;
-  font-size: inherit;
+   erhöhen. So können einzelne Buttons weiter unten einfach über ihre
+   Klasse angepasst werden. */
+
+button {
   cursor: pointer;
 }
 
-button:where(:not(.tile, .mode-tile, .card-button, .logo-button)):hover {
-  background-color: #444;
+button:where(
+    :not(.tile, .mode-tile, .card-button, .logo-button, .icon-button)
+  ) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 2px solid transparent;
+
+  border-radius: var(--radius-pill);
+  background-color: var(--accent);
+  color: var(--ink);
+  font-size: inherit;
+  font-weight: bold;
+  box-shadow: var(--shadow-accent);
+  transition:
+    background-color 0.15s,
+    box-shadow 0.15s,
+    color 0.15s,
+    transform 0.1s;
 }
 
-/* Deaktivierter Button (z. B. "Start game"), solange das Custom-Set
-   noch nicht fertig ist */
-button:where(:not(.tile, .mode-tile, .card-button, .logo-button)):disabled {
-  background-color: #bbb;
+button:where(
+    :not(.tile, .mode-tile, .card-button, .logo-button, .icon-button)
+  ):hover {
+  background-color: var(--accent-hover);
+}
+
+/* Der Druckpunkt: der Button gibt kurz nach. Gilt für alle Buttons und
+   Kacheln. */
+button:active {
+  transform: scale(0.96);
+}
+
+/* Deaktivierter Button (z. B. "Start game", solange das Custom-Set
+   noch nicht fertig ist) */
+button:where(
+    :not(.tile, .mode-tile, .card-button, .logo-button, .icon-button)
+  ):disabled {
+  background-color: var(--muted);
+  color: var(--ink-soft);
+  box-shadow: none;
   cursor: not-allowed;
 }
 
-/* Umriss-Variante für die Nebenaktionen: heller Button mit dunklem
-   Rahmen, der beim Hover invertiert. Was die einzelnen Buttons darüber
-   hinaus brauchen (Padding, Schriftgrösse, Abstände), steht jeweils
-   beim Button selber weiter unten. */
-button.leave-game-button,
-button.random-selection-button,
-button.back-button {
-  border: 2px solid #222;
-  background-color: transparent;
-  color: #222;
+button:disabled:active {
+  transform: none;
 }
 
-button.leave-game-button:hover,
-button.random-selection-button:hover,
-button.back-button:hover {
-  background-color: #222;
-  color: white;
+/* --- Nebenaktion: heller Button mit Rahmen, der beim Hover invertiert --- */
+
+button.secondary {
+  border-color: var(--ink);
+  background-color: transparent;
+  color: var(--ink);
+  box-shadow: none;
+}
+
+button.secondary:hover {
+  background-color: var(--ink);
+  color: var(--surface);
+}
+
+/* --- Sonderaktion: der Final Guess ist der grosse Moment im Spiel und
+       kriegt deshalb eine eigene Farbe --- */
+
+button.accent-2 {
+  background-color: var(--accent-2);
+  color: var(--surface);
+  box-shadow: var(--shadow-accent-2);
+}
+
+button.accent-2:hover {
+  background-color: var(--accent-2-hover);
+  color: var(--surface);
+}
+
+/* --- Runde Icon-Buttons: Schliessen-Kreuz und Info --- */
+
+button.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--ink);
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+
+button.icon-button:hover {
+  background-color: var(--accent-soft);
 }
 
 /* =========================
@@ -142,13 +345,18 @@ game-header {
 
 /* Schmale Leiste: Logo links, "Back to start" rechts. So bleibt oben
    möglichst wenig Platz belegt und der Inhalt ist auch auf kleinen
-   Bildschirmen gut sichtbar. */
+   Bildschirmen gut sichtbar.
+
+   Das farbige Band schliesst die Seite nach oben ab. */
 .game-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  margin-bottom: 28px;
   padding: 12px 20px;
+  border-bottom: 2px solid var(--accent-soft);
+  background-color: var(--bg-soft);
 }
 
 /* Linke Gruppe: Logo und "← Back" nebeneinander (siehe js/header.js) */
@@ -190,6 +398,7 @@ button.leave-game-button {
    in einer Zeile nebeneinander Platz haben */
 @media (max-width: 500px) {
   .game-header {
+    margin-bottom: 20px;
     padding: 10px 12px;
   }
 
@@ -201,6 +410,11 @@ button.leave-game-button {
     padding: 8px 12px;
     font-size: 13px;
   }
+
+  /* Auf dem Handy reicht der Pfeil – die Beschriftung nimmt nur Platz weg */
+  button.back-button .back-button-text {
+    display: none;
+  }
 }
 
 /* =========================
@@ -210,65 +424,99 @@ button.leave-game-button {
 /* Grosse anklickbare Kachel für die Charakter-Set-Auswahl (.tile) und
    für die Modus-Auswahl (.mode-tile). Beide sehen gleich aus, deshalb
    teilen sie sich die Stile. Die Klassen bleiben getrennt, damit eine
-   von beiden bei Bedarf wieder eigene Regeln bekommen kann. */
+   von beiden bei Bedarf wieder eigene Regeln bekommen kann.
+
+   Die Farbe kommt pro Kachel über --tile-tint und --tile-edge herein
+   (siehe MODE SELECTION und CHARACTER SET SELECTION weiter unten). Ohne
+   gesetzte Farbe ist die Kachel weiss. */
 .tile,
 .mode-tile {
   width: 100%;
-  padding: 40px 20px;
+  padding: 36px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  border: 2px solid transparent;
-  border-radius: 10px;
-  background-color: white;
+  border: 3px solid transparent;
+  border-radius: var(--radius);
+  background-color: var(--tile-tint, var(--surface));
   color: inherit;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow);
   cursor: pointer;
   transition:
     transform 0.2s,
-    border-color 0.2s;
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .tile:not(:disabled):hover,
 .mode-tile:not(:disabled):hover {
-  transform: translateY(-4px);
-  border-color: #222;
+  transform: translateY(-5px);
+  border-color: var(--tile-edge, var(--accent));
+  box-shadow: var(--shadow-lg);
 }
 
 /* Icon der Kachel – dieselbe Grösse wie das Icon im Gewinn-Popup */
 .tile-icon,
 .mode-tile-icon,
 .win-dialog-icon {
-  font-size: 48px;
+  font-size: 52px;
   line-height: 1;
+}
+
+/* Die Kachel wippt beim Hover kurz an – das lädt zum Antippen ein */
+.tile:not(:disabled):hover .tile-icon,
+.mode-tile:not(:disabled):hover .mode-tile-icon {
+  animation: tile-icon-wiggle 0.5s ease-in-out;
+}
+
+@keyframes tile-icon-wiggle {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+
+  30% {
+    transform: rotate(-9deg) scale(1.1);
+  }
+
+  65% {
+    transform: rotate(7deg) scale(1.1);
+  }
 }
 
 /* Der Set- bzw. Modus-Name ist der Titel der Kachel, deshalb BellaFont */
 .tile-name,
 .mode-tile-name {
   font-family: "BellaFont", sans-serif;
-  font-size: 20px;
+  font-size: 23px;
   font-weight: bold;
 }
 
 .tile-badge {
-  padding: 4px 10px;
-  border-radius: 999px;
-  background-color: #e0e0e0;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--sun);
   font-size: 12px;
+  font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #666;
+  color: var(--ink);
 }
 
 /* Deaktivierte Kachel */
 .tile:disabled,
 .mode-tile:disabled {
   box-shadow: none;
-  background-color: #ececec;
+  background-color: var(--muted);
   cursor: not-allowed;
+}
+
+.tile:disabled .tile-badge,
+.mode-tile:disabled .tile-badge {
+  background-color: var(--sun-soft);
+  color: var(--ink-soft);
 }
 
 /* =========================
@@ -283,17 +531,24 @@ button.leave-game-button {
   height: 100%;
 }
 
+/* Jeder Modus hat seine eigene Farbe. Die Attribute stehen schon im HTML
+   (data-mode), es braucht dafür also kein zusätzliches Markup. */
+.mode-tile[data-mode="single-player"] {
+  --tile-tint: var(--sun-soft);
+  --tile-edge: var(--sun);
+}
+
+.mode-tile[data-mode="multi-player"] {
+  --tile-tint: var(--accent-2-soft);
+  --tile-edge: var(--accent-2);
+}
+
 /* Breite und Abstand des Auswahl-Bereichs – gilt für die Modus- und
    die Set-Auswahl */
 .mode-selection,
 .set-selection {
   width: min(800px, 95%);
   margin: 0 auto 50px;
-}
-
-.mode-selection-title {
-  margin-top: 0;
-  text-align: center;
 }
 
 .mode-grid {
@@ -332,7 +587,7 @@ button.leave-game-button {
   text-align: left;
   font-size: 14px;
   line-height: 1.5;
-  color: #666;
+  color: var(--ink-soft);
 }
 
 /* =========================
@@ -340,9 +595,6 @@ button.leave-game-button {
 ========================= */
 
 /* Breite und Abstand: siehe .mode-selection weiter oben */
-.set-selection-title {
-  margin-top: 0;
-}
 
 .set-grid {
   display: grid;
@@ -354,11 +606,32 @@ button.leave-game-button {
   min-height: 180px;
 }
 
+/* Jedes Set kriegt einen eigenen Pastellton. Die Attribute stehen schon im HTML (data-set-id). */
+.set-tile[data-set-id="disney"] {
+  --tile-tint: #ede4ff;
+  --tile-edge: #9c7cf5;
+}
+
+.set-tile[data-set-id="animals"] {
+  --tile-tint: #dcf5e4;
+  --tile-edge: #4fae72;
+}
+
+.set-tile[data-set-id="mario"] {
+  --tile-tint: #dceeff;
+  --tile-edge: #4d9fe0;
+}
+
+.set-tile[data-set-id="custom"] {
+  --tile-tint: #ffe8f2;
+  --tile-edge: #f06fa5;
+}
+
 /* Anzahl Charaktere im Set */
 
 .set-tile-count {
   font-size: 13px;
-  color: #666;
+  color: var(--ink-soft);
 }
 
 .set-tile:disabled .tile-icon,
@@ -374,7 +647,11 @@ button.leave-game-button {
    unter dem Board (.game-controls), für die Charakter-Wahl
    (.selection-actions) und für das Custom-Set (.custom-set-actions).
    Sie bleiben beim Scrollen unten stehen, damit sie auch auf kleinen
-   Bildschirmen immer sichtbar sind. */
+   Bildschirmen immer sichtbar sind.
+
+   Der Hintergrund ist leicht durchsichtig und weichgezeichnet: die Karten
+   scheinen beim Scrollen durch, statt an einer harten Kante zu
+   verschwinden. */
 
 .game-controls,
 .selection-actions,
@@ -382,16 +659,15 @@ button.leave-game-button {
   position: sticky;
   bottom: 0;
   z-index: 1;
-  padding: 12px 20px;
+  padding: 14px 20px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background-color: #f4f4f4;
-
-  /* hebt die Leiste von den Karten ab, die darunter durchscrollen */
-  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.08);
+  background-color: var(--bg-translucent);
+  backdrop-filter: blur(10px);
+  border-top: 2px solid var(--accent-soft);
 }
 
 /* Zähler und Buttons brauchen etwas mehr Luft zueinander */
@@ -400,8 +676,32 @@ button.leave-game-button {
   gap: 20px;
 }
 
+/* Zähler als Pille */
 #remaining-counter {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background-color: var(--sun);
   font-weight: bold;
+}
+
+/* Hüpft kurz, wenn sich die Zahl ändert. Die Klasse setzt und entfernt
+   js/game.js bzw. js/single_player.js. */
+.counter-pop {
+  animation: counter-pop 0.35s ease-out;
+}
+
+@keyframes counter-pop {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.18);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* =========================
@@ -421,14 +721,17 @@ button.leave-game-button {
 ========================= */
 
 /* Aussehen der Karte – gilt auch für die leere Karte im Custom-Set
-   (.custom-card), die genauso aussehen soll */
+   (.custom-card), die genauso aussehen soll.
+
+   Die Karten bleiben bewusst weiss und ohne Akzentfarbe: sie sind das
+   Spiel, alles andere ist Rahmen. */
 .character-card,
 .custom-card {
   position: relative;
-  background-color: white;
-  border-radius: 10px;
+  background-color: var(--surface);
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow);
 }
 
 /* Nur die Karte auf dem Board ist anklickbar */
@@ -436,11 +739,16 @@ button.leave-game-button {
   cursor: pointer;
   transition:
     transform 0.2s,
-    opacity 0.2s;
+    box-shadow 0.2s;
 }
 
 .character-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.character-card:active {
+  transform: translateY(-5px) scale(0.97);
 }
 
 /* Bild – im Custom-Set die Vorschau des hochgeladenen Bildes */
@@ -450,6 +758,9 @@ button.leave-game-button {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+  transition:
+    filter 0.25s,
+    opacity 0.25s;
 }
 
 /* Name */
@@ -463,20 +774,62 @@ button.leave-game-button {
    ELIMINATED CHARACTER
 ========================= */
 
+/* Ausgeschlossen heisst: das Bild wird blass und grau, die Karte rückt
+   ein Stück zurück. */
+
 .character-card.eliminated {
-  opacity: 0.25;
   transform: scale(0.95);
+  box-shadow: var(--shadow-sm);
 }
 
+.character-card.eliminated:hover {
+  transform: scale(0.95) translateY(-4px);
+}
+
+.character-card.eliminated img {
+  filter: grayscale(1);
+  opacity: 0.3;
+}
+
+.character-card.eliminated .character-name {
+  color: var(--ink-soft);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+/* Kreuz */
 .character-card.eliminated::after {
   content: "✕";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 70px;
+  top: 0;
+  right: 0;
+  left: 0;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 72px;
   font-weight: bold;
-  color: #fa0000;
+
+  color: var(--danger);
+}
+
+/* Nur die gerade angeklickte Karte animiert das Kreuz ein. */
+.character-card.just-eliminated::after {
+  animation: cross-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Animation für das X und Haken bei Character Selection */
+@keyframes cross-pop {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* =========================
@@ -486,9 +839,31 @@ button.leave-game-button {
 /* Angetippte Karte auf der Charakter-Wahl. Der Rahmen liegt innen
    (outline-offset), damit die Karte gleich gross bleibt. */
 .character-card.selected {
-  transform: translateY(-4px);
-  outline: 3px solid #222;
-  outline-offset: -3px;
+  transform: translateY(-5px);
+  outline: 4px solid var(--accent);
+  outline-offset: -4px;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Kleines Häkchen in der Ecke – so ist auch ohne Farbsehen klar,
+   welche Karte gewählt ist */
+.character-card.selected::after {
+  content: "✓";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: var(--shadow-sm);
+  animation: cross-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Die angeheftete Leiste unter dem Board: siehe CONTROLS weiter oben.
@@ -497,24 +872,12 @@ button.leave-game-button {
 .custom-set-hint {
   margin: 0;
   font-size: 14px;
-  color: #666;
-}
-
-/* Der Zufalls-Button ist die Nebenaktion – der Bestätigen-Button daneben
-   bleibt der auffällige (Umriss-Stil, siehe BUTTONS). Das kleinere
-   Padding gleicht den Rahmen aus, damit beide Buttons gleich hoch sind. */
-
-button.random-selection-button {
-  padding: 8px 16px;
+  color: var(--ink-soft);
 }
 
 /* =========================
    CUSTOM CHARACTER SET
 ========================= */
-
-.custom-set-title {
-  margin-top: 0;
-}
 
 /* Leere Karte: Bildfläche + Namensfeld.
    Sieht aus wie eine Board-Karte (.character-card) – die gemeinsamen
@@ -530,14 +893,17 @@ button.random-selection-button {
   align-items: center;
   justify-content: center;
   border: none;
-  background-color: #ececec;
-  color: #666;
+  background-color: var(--accent-soft);
+  color: var(--ink-soft);
   cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
 }
 
 .custom-card-image:hover {
-  background-color: #e0e0e0;
-  color: #222;
+  background-color: var(--accent);
+  color: var(--ink);
 }
 
 /* Beschriftung der leeren Bildfläche und der "Karte hinzufügen"-Fläche */
@@ -552,8 +918,8 @@ button.random-selection-button {
   width: 100%;
   padding: 12px;
   border: none;
-  border-top: 1px solid #ececec;
-  background-color: white;
+  border-top: 2px solid var(--line);
+  background-color: var(--surface);
   color: inherit;
   font-size: inherit;
   font-weight: bold;
@@ -561,37 +927,40 @@ button.random-selection-button {
 }
 
 .custom-card-name:focus {
-  outline: 2px solid #222;
-  outline-offset: -2px;
+  outline: 3px solid var(--accent-2);
+  outline-offset: -3px;
 }
 
 /* Karte entfernen */
 
 .custom-card-remove {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 28px;
-  height: 28px;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
-  border-radius: 999px;
-  background-color: rgba(0, 0, 0, 0.55);
-  color: white;
-  font-size: 14px;
-  line-height: 1;
+  border-radius: 50%;
+  background-color: rgba(43, 33, 24, 0.55);
+  color: var(--surface);
   cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.custom-card-remove .icon {
+  width: 16px;
+  height: 16px;
 }
 
 .custom-card-remove:hover {
-  background-color: #fa0000;
+  background-color: var(--danger);
 }
 
 /* Fläche zum Hinzufügen einer weiteren Karte */
-
 .custom-add-card {
   width: 100%;
   height: 100%;
@@ -602,24 +971,25 @@ button.random-selection-button {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border: 2px dashed #bbb;
-  border-radius: 10px;
+  border: 3px dashed var(--accent);
+  border-radius: var(--radius);
   background-color: transparent;
-  color: #666;
+  color: var(--ink-soft);
   cursor: pointer;
   transition:
     border-color 0.2s,
+    background-color 0.2s,
     color 0.2s;
 }
 
 .custom-add-card:hover {
-  border-color: #222;
-  color: #222;
+  background-color: var(--accent-soft);
+  color: var(--ink);
 }
 
-.custom-add-card-icon {
-  font-size: 40px;
-  line-height: 1;
+.custom-add-card-icon .icon {
+  width: 40px;
+  height: 40px;
 }
 
 /* =========================
@@ -627,7 +997,6 @@ button.random-selection-button {
 ========================= */
 
 /* Abdunkelnde Ebene über dem Board */
-
 .overlay {
   position: fixed;
   inset: 0;
@@ -638,7 +1007,7 @@ button.random-selection-button {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(43, 33, 24, 0.6);
 }
 
 /* Konfetti-Animation: füllt das ganze Overlay und liegt über dem Dialog,
@@ -661,19 +1030,35 @@ button.random-selection-button {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  border-radius: 10px;
-  background-color: white;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-lg);
   text-align: center;
+
+  /* der Dialog springt herein, statt einfach da zu sein */
+  animation: dialog-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes dialog-in {
+  0% {
+    transform: scale(0.85) translateY(20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
 }
 
 .win-dialog h2 {
   margin: 0;
+  font-size: 32px;
 }
 
 .win-dialog p {
   margin: 0;
-  color: #666;
+  color: var(--ink-soft);
 }
 
 /* Das Icon (.win-dialog-icon) hat dieselbe Grösse wie die Kachel-Icons,
@@ -683,7 +1068,8 @@ button.random-selection-button {
   width: 140px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
 }
 
 .win-dialog-buttons {
@@ -717,25 +1103,14 @@ button.info-button {
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #222;
-  border-radius: 50%;
-  background-color: white;
-  color: #222;
-  font-size: 17px;
-  font-weight: bold;
-  line-height: 1;
   z-index: 10;
+  border-color: var(--ink);
+  background-color: var(--surface);
 }
 
 button.info-button:hover {
-  background-color: #222;
-  color: white;
+  background-color: var(--ink);
+  color: var(--surface);
 }
 
 /* =========================
@@ -754,7 +1129,7 @@ button.info-button:hover {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(43, 33, 24, 0.5);
   z-index: 1000;
 }
 
@@ -773,9 +1148,12 @@ button.info-button:hover {
 .leave-content {
   position: relative;
   padding: 32px;
-  border-radius: 10px;
-  background-color: white;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-lg);
+
+  /* dieselbe Bewegung wie beim Gewinn-Dialog */
+  animation: dialog-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .rules-content h2,
@@ -783,37 +1161,20 @@ button.info-button:hover {
 .leave-content h2 {
   margin-top: 0;
   margin-bottom: 24px;
+  font-size: 28px;
   text-align: center;
 }
 
-/* Schliessen-Kreuz oben rechts */
-
+/* Schliessen-Kreuz oben rechts (Grundform siehe .icon-button in BUTTONS) */
 button.close-rules-button,
 button.close-player-name-button,
 button.close-leave-button {
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  color: #222;
-  font-weight: bold;
-}
-
-button.close-rules-button:hover,
-button.close-player-name-button:hover,
-button.close-leave-button:hover {
-  background-color: #e0e0e0;
-  color: #222;
 }
 
 /* --- Nur das Regeln-Popup --- */
-
 .rules-content {
   width: min(500px, 100%);
   max-height: 85vh;
@@ -822,7 +1183,6 @@ button.close-leave-button:hover {
 }
 
 /* Platz für das Schliessen-Kreuz neben dem Titel */
-
 .rules-content h2 {
   padding-right: 30px;
 }
@@ -837,8 +1197,13 @@ button.close-leave-button:hover {
   line-height: 1.5;
 }
 
-/* --- Nur das Namens-Popup --- */
+/* Die Nummern der Regeln */
+.rules-content li::marker {
+  color: var(--accent);
+  font-weight: bold;
+}
 
+/* --- Nur das Namens-Popup --- */
 .player-name-content {
   width: min(420px, 100%);
 }
@@ -856,15 +1221,15 @@ button.close-leave-button:hover {
 .player-name-field input {
   width: 100%;
   padding: 12px 14px;
-  border: 2px solid #ccc;
-  border-radius: 6px;
-  background-color: white;
-  color: #222;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface);
+  color: var(--ink);
   font-size: 16px;
 }
 
 .player-name-field input:focus {
-  border-color: #222;
+  border-color: var(--accent-2);
   outline: none;
 }
 
@@ -874,14 +1239,12 @@ button.continue-button {
 }
 
 /* --- Nur das Verlassen-Popup (siehe js/leave.js) --- */
-
 .leave-content {
   width: min(420px, 100%);
   text-align: center;
 }
 
 /* Platz für das Schliessen-Kreuz neben dem Titel */
-
 .leave-content h2 {
   padding-right: 30px;
   margin-bottom: 12px;
@@ -890,7 +1253,7 @@ button.continue-button {
 .leave-text {
   margin-top: 0;
   margin-bottom: 24px;
-  color: #666;
+  color: var(--ink-soft);
 }
 
 .leave-buttons {
@@ -900,80 +1263,185 @@ button.continue-button {
   gap: 12px;
 }
 
-/* Umriss-Stil für die Nebenaktion, siehe BUTTONS */
-
-button.keep-playing-button {
-  border: 2px solid #222;
-  background-color: transparent;
-  color: #222;
-}
-
-button.keep-playing-button:hover {
-  background-color: #222;
-  color: white;
-}
-
 /* =========================
    BACK BUTTON
 ========================= */
 
-/* Umriss-Stil, siehe BUTTONS */
-
+/* Umriss-Stil, siehe .secondary in BUTTONS */
 button.back-button {
-  padding: 8px 12px;
-
-  border: 2px solid #222;
-
-  background-color: transparent;
-
-  color: #222;
-
+  padding: 8px 14px;
   font-size: 14px;
 }
 
-button.back-button:hover {
-  background-color: #222;
+/* =========================
+   PASS SCREEN
+========================= */
 
-  color: white;
+/* Die Übergabe-Seite ist nur ein Zwischenschritt, kriegt aber dieselbe
+   Karte wie die Ergebnis-Seiten. */
+
+.pass-screen {
+  width: min(460px, 95%);
+  margin: 0 auto 50px;
+}
+
+.pass-card {
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.pass-icon {
+  font-size: 56px;
+  line-height: 1;
+
+  /* schiebt sich sanft hin und her – "gib das Gerät weiter" */
+  animation: pass-slide 1.8s ease-in-out infinite;
+}
+
+@keyframes pass-slide {
+  0%,
+  100% {
+    transform: translateX(-8px);
+  }
+
+  50% {
+    transform: translateX(8px);
+  }
+}
+
+.pass-card h2 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.pass-text {
+  margin: 0 0 20px;
+  color: var(--ink-soft);
+}
+
+/* Der Name der Person, die dran ist */
+.pass-player-name {
+  font-weight: bold;
+  color: var(--ink);
 }
 
 /* =========================
    SINGLE PLAYER QUESTIONS
 ========================= */
 
-.question-section {
-  width: min(600px, 95%);
+/* Der Fragen-Zähler als gelbe Pille, gleich wie der Zähler auf dem
+   Multiplayer-Board */
+/* Die Pille steht auf einer eigenen Zeile unter dem Titel: Der Titel ist
+   inline-block (siehe .page-title), ein inline-block dahinter würde sich
+   danebenstellen. width: fit-content hält die Pille trotzdem so schmal
+   wie ihr Text, margin: auto zentriert sie. */
+#question-counter {
+  display: block;
+  width: fit-content;
   margin: 0 auto 20px;
-  padding: 16px;
-  border-radius: 10px;
-  background-color: white;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background-color: var(--sun);
+  font-weight: bold;
 }
 
-/* Frage aussuchen: Dropdown und "Ask"-Button nebeneinander in einer Zeile */
+.question-section {
+  width: min(600px, 95%);
+  margin: 0 auto 24px;
+  padding: 18px;
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  box-shadow: var(--shadow);
+}
 
+/* Frage aussuchen: Dropdown und "Ask"-Button nebeneinander in einer Zeile.
+   Auf sehr schmalen Bildschirmen rutscht der Button unter das Dropdown,
+   statt es zusammenzuquetschen. */
 .question-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
 }
 
 /* Das Dropdown nimmt den freien Platz ein, der Button bleibt so breit,
    wie seine Beschriftung es braucht */
-
-#question-select {
-  flex: 1;
+.question-select-wrapper {
+  position: relative;
+  flex: 1 1 200px;
   min-width: 0;
-  padding: 10px 12px;
-  border: 2px solid #ccc;
-  border-radius: 6px;
-  background-color: white;
-  color: #222;
-  font-size: 14px;
+  display: flex;
 }
 
+/* Das Dropdown ist eine Pille wie die Buttons daneben: gleiche Höhe,
+   gleiche Rundung, gleicher weicher Schatten.
+
+   appearance: none schaltet das native Dropdown-Dreieck ab – das sieht
+   in jedem Browser anders aus. Den Pfeil zeichnet stattdessen das Icon
+   im Wrapper, deshalb bleibt rechts Platz dafür frei.
+
+   16px Schriftgrösse, weil iOS bei kleinerem Text beim Antippen ins
+   Feld hineinzoomt. */
+#question-select {
+  width: 100%;
+  padding: 11px 46px 11px 18px;
+  appearance: none;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-pill);
+  background-color: var(--surface);
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+/* Solange noch keine Frage gewählt ist, steht dort nur der Platzhalter –
+   der ist Hinweis und nicht Inhalt, also in der leiseren Textfarbe. */
+#question-select:has(option[value=""]:checked) {
+  color: var(--ink-soft);
+}
+
+/* Die aufgeklappte Liste erbt die Farben nicht von sich aus */
+#question-select option {
+  background-color: var(--surface);
+  color: var(--ink);
+}
+
+/* Der Pfeil liegt über dem Feld und lässt Klicks durch, damit auch ein
+   Klick auf den Pfeil das Dropdown öffnet. */
+.question-select-icon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  color: var(--ink-soft);
+  pointer-events: none;
+  transition: color 0.15s;
+}
+
+.question-select-wrapper:hover #question-select {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.question-select-wrapper:hover .question-select-icon {
+  color: var(--ink);
+}
+
+/* Gleiche Fokus-Markierung wie beim Namensfeld im Popup */
 #question-select:focus {
-  border-color: #222;
+  border-color: var(--accent-2);
   outline: none;
 }
 
@@ -981,14 +1449,23 @@ button#ask-question-button {
   flex-shrink: 0;
 }
 
+/* Die Höhe bleibt reserviert, auch solange noch keine Antwort da ist. Sonst springt das Board, sobald YES oder NO erscheint */
 .computer-answer {
   min-height: 30px;
+  margin-top: 14px;
   margin-bottom: 0;
   text-align: center;
   font-size: 24px;
   font-weight: bold;
 }
 
+/* YES und NO bleiben in der normalen Textfarbe. Unterschieden werden sie über
+   den kurzen Pop. Die Klassen setzt js/single_player.js. */
+.computer-answer.answer-yes,
+.computer-answer.answer-no {
+  color: var(--ink);
+  animation: counter-pop 0.35s ease-out;
+}
 
 /* =========================
    SINGLE PLAYER RESULT
@@ -996,58 +1473,65 @@ button#ask-question-button {
 
 .single-result-screen {
   width: min(500px, 95%);
-
-  margin: 40px auto;
-
+  margin: 0 auto 50px;
   text-align: center;
 }
 
 .single-result-card {
   padding: 32px;
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  box-shadow: var(--shadow);
+  animation: dialog-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 
-  border-radius: 12px;
-
-  background-color: white;
-
-  box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.15);
+.single-result-icon {
+  display: block;
+  font-size: 52px;
+  line-height: 1;
 }
 
 .single-result-card h2 {
-  margin-top: 0;
-
-  font-size: 30px;
+  margin-top: 8px;
+  font-size: 32px;
 }
 
 .single-result-message {
   font-size: 18px;
-
-  color: #666;
+  color: var(--ink-soft);
 }
 
 .result-character-image {
   width: min(220px, 80%);
-
   aspect-ratio: 1 / 1;
-
   object-fit: cover;
-
   margin-top: 10px;
-
-  border-radius: 12px;
-
-  box-shadow:
-    0 3px 10px rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
 }
 
 .single-result-card h3 {
   margin: 16px 0 8px;
-
-  font-size: 24px;
+  font-size: 26px;
 }
 
 .single-result-sorry {
   margin-bottom: 24px;
+  color: var(--ink-soft);
+}
 
-  color: #666;
+/* =========================
+   MOTION
+========================= */
+
+/* Wer im Betriebssystem weniger Bewegung eingestellt hat, kriegt das
+   Spiel ohne Wackeln, Hüpfen und Hereinspringen. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
