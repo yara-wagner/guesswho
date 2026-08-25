@@ -239,7 +239,7 @@ async function chooseImages(startCard, files) {
       continue;
     }
 
-    // Ein selbst getippter Name ist besser als alles, was im Dateinamen steht
+    // Ein selbst getippter Name ist stärker als alles, was im Dateinamen steht
     if (card.name === "") {
       card.name = nameFromFileName(files[index].name);
     }

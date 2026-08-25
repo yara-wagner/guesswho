@@ -44,7 +44,7 @@ const characterSets = [
 
   {
     id: "mario",
-    name: "Mario",
+    name: "Super Mario",
     icon: "🍄",
     available: true,
     characters: marioCharacters,

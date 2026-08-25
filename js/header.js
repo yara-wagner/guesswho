@@ -1,13 +1,6 @@
 // =============================
 // HEADER
 // =============================
-
-// Der Header ist auf allen Seiten gleich und steht deshalb nur hier.
-//
-// Verwendung in der Seite:
-//
-//   <game-header></game-header>          nur Logo (Startseite)
-//   <game-header cancel></game-header>   mit "Back to start" (Spielseiten)
 //
 // Das Attribut "cancel" setzt voraus, dass js/cancel.js geladen ist.
 // Auf diesen Seiten ist auch das Logo anklickbar und führt – genau wie der
@@ -27,7 +20,7 @@ class GameHeader extends HTMLElement {
 
     const logoImage = `
       <img
-        src="src/guesswho_logo.png"
+        src="src/guesswho_logo_ohne_bg.svg"
         alt="Guess Who?"
       />
     `;
