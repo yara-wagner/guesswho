@@ -7,6 +7,12 @@
 
     <title>Guess Who?</title>
 
+    <!-- Inline, damit der Browser dafür keinen Request macht. Quelle: src/favicon.svg -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cstyle%3E .bg { fill: %230F0E0E; } .fg { fill: %23FFFFFF; } @media (prefers-color-scheme: dark) { .bg { fill: %23FFFFFF; } .fg { fill: %230F0E0E; } } %3C/style%3E%3Crect class='bg' width='32' height='32' rx='7' /%3E%3Cg class='fg' transform='translate(-62.87 -11.19) scale(0.6227)'%3E%3Cpath d='M122.333 49.92L122.493 41.64H125.333C126.933 41.64 128.319 40.8533 129.493 39.28C129.759 38.9067 129.946 38.4267 130.053 37.84L130.093 37.36C130.093 36.9333 129.986 36.4533 129.773 35.92C128.866 34.4267 127.573 33.68 125.893 33.68C124.373 33.68 123.159 34.3067 122.253 35.56L117.133 32.32C118.066 30.8533 119.306 29.7067 120.853 28.88C122.426 28.0533 124.106 27.6267 125.893 27.6C127.919 27.6 129.773 28.12 131.453 29.16C133.133 30.2 134.399 31.6 135.253 33.36C135.866 34.72 136.173 36.0533 136.173 37.36C136.173 39.12 135.653 40.84 134.613 42.52C133.146 44.76 131.066 46.3333 128.373 47.24V49.76L122.333 49.92Z' /%3E%3Cpath d='M125.133 59.72C124.119 59.72 123.253 59.36 122.533 58.64C121.813 57.92 121.453 57.0533 121.453 56.04C121.453 55.0533 121.813 54.2 122.533 53.48C123.253 52.76 124.119 52.4 125.133 52.4C126.119 52.4 126.973 52.76 127.693 53.48C128.413 54.2 128.773 55.0533 128.773 56.04C128.773 57.0533 128.413 57.92 127.693 58.64C126.973 59.36 126.119 59.72 125.133 59.72Z' /%3E%3C/g%3E%3C/svg%3E"
+    />
+
     <link rel="stylesheet" href="css/style.css" />
 
     <script src="js/header.js"></script>
@@ -18,16 +24,11 @@
     <main>
       <section class="single-result-screen">
         <div class="single-result-card">
-
           <h2>Oh no!</h2>
 
-          <p class="single-result-message">
-            You ran out of questions.
-          </p>
+          <p class="single-result-message">You ran out of questions.</p>
 
-          <p>
-            The secret character was:
-          </p>
+          <p>The secret character was:</p>
 
           <img
             id="result-character-image"
@@ -38,17 +39,9 @@
 
           <h3 id="result-character-name"></h3>
 
-          <p class="single-result-sorry">
-            Better luck next time!
-          </p>
+          <p class="single-result-sorry">Better luck next time!</p>
 
-          <button
-            id="play-again-button"
-            type="button"
-          >
-            Play again
-          </button>
-
+          <button id="play-again-button" type="button">Play again</button>
         </div>
       </section>
     </main>
