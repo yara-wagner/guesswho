@@ -16,8 +16,12 @@ const singleResetButton = document.getElementById(
 
 const gameState = loadGameState();
 
-const questionButtons = document.querySelectorAll(
-  ".question-button"
+const questionSelect = document.getElementById(
+  "question-select"
+);
+
+const askQuestionButton = document.getElementById(
+  "ask-question-button"
 );
 
 const computerAnswer = document.getElementById(
@@ -151,15 +155,21 @@ if (
     resetBoard
   );
 
-  
+  askQuestionButton.addEventListener(
+    "click",
+    function () {
+      const property = questionSelect.value;
+
+      if (property === "") {
+        computerAnswer.textContent =
+          "Select a question first.";
+
+        return;
+      }
+
+      askQuestion(property);
+    }
+  );
 
   renderSinglePlayerCharacters();
 }
-
-questionButtons.forEach(function (button) {
-  button.addEventListener("click", function () {
-    const property = button.dataset.property;
-
-    askQuestion(property);
-  });
-});

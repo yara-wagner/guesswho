@@ -22,44 +22,44 @@
         <p id="question-counter">Questions left: 8</p>
 
         <section class="question-section">
-          <h3>Ask a question</h3>
+          <div class="question-row">
+            <select id="question-select">
+              <option value="">Select a question...</option>
 
-          <div class="question-buttons">
-            <button class="question-button" type="button" data-property="human">
-              Is your character human?
-            </button>
+              <option value="human">Is your character human?</option>
 
-            <button
-              class="question-button"
-              type="button"
-              data-property="female"
-            >
-              Is your character female?
-            </button>
+              <option value="female">Is your character female?</option>
 
-            <button
-              class="question-button"
-              type="button"
-              data-property="animal"
-            >
-              Is your character an animal?
-            </button>
+              <option value="male">Is your character male?</option>
 
-            <button
-              class="question-button"
-              type="button"
-              data-property="hasHair"
-            >
-              Does your character have hair?
-            </button>
+              <option value="animal">Is your character an animal?</option>
 
-            <button
-              class="question-button"
-              type="button"
-              data-property="canFly"
-            >
-              Can your character fly?
-            </button>
+              <option value="hasHair">Does your character have hair?</option>
+
+              <option value="canFly">Can your character fly?</option>
+
+              <option value="hasWings">Does your character have wings?</option>
+
+              <option value="hasFur">Does your character have fur?</option>
+
+              <option value="wearsHat">Does your character wear a hat?</option>
+
+              <option value="royal">Is your character royal?</option>
+
+              <option value="pixar">
+                Is your character from a Pixar movie?
+              </option>
+
+              <option value="waterRelated">
+                Is your character strongly connected to water?
+              </option>
+
+              <option value="magicalCreature">
+                Is your character a magical or fantasy creature?
+              </option>
+            </select>
+
+            <button id="ask-question-button" type="button">Ask</button>
           </div>
 
           <p id="computer-answer" class="computer-answer"></p>

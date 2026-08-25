@@ -12,9 +12,17 @@ const disneyCharacters = [
 
     human: true,
     female: false,
+    male: true,
     animal: false,
     hasHair: true,
     canFly: false,
+    pixar: false,
+    royal: false,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: false,
+    waterRelated: false,
+    magicalCreature: false,
   },
 
   {
@@ -24,9 +32,17 @@ const disneyCharacters = [
 
     human: true,
     female: true,
+    male: false,
     animal: false,
     hasHair: true,
     canFly: false,
+    pixar: false,
+    royal: true,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: false,
+    waterRelated: true,
+    magicalCreature: true,
   },
 
   {
@@ -36,9 +52,17 @@ const disneyCharacters = [
 
     human: false,
     female: false,
+    male: true,
     animal: true,
     hasHair: false,
     canFly: false,
+    pixar: false,
+    royal: false,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: true,
+    waterRelated: false,
+    magicalCreature: false,
   },
 
   {
@@ -48,9 +72,17 @@ const disneyCharacters = [
 
     human: true,
     female: true,
+    male: false,
     animal: false,
     hasHair: true,
     canFly: false,
+    pixar: false,
+    royal: true,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: false,
+    waterRelated: false,
+    magicalCreature: false,
   },
 
   {
@@ -60,9 +92,17 @@ const disneyCharacters = [
 
     human: false,
     female: false,
+    male: true,
     animal: true,
     hasHair: false,
     canFly: true,
+    pixar: false,
+    royal: false,
+    hasWings: true,
+    wearsHat: true,
+    hasFur: false,
+    waterRelated: true,
+    magicalCreature: false,
   },
 
   {
@@ -72,9 +112,17 @@ const disneyCharacters = [
 
     human: false,
     female: false,
+    male: true,
     animal: true,
     hasHair: false,
     canFly: true,
+    pixar: false,
+    royal: false,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: false,
+    waterRelated: false,
+    magicalCreature: false,
   },
 
   {
@@ -84,9 +132,17 @@ const disneyCharacters = [
 
     human: false,
     female: false,
+    male: true,
     animal: true,
     hasHair: false,
     canFly: false,
+    pixar: false,
+    royal: false,
+    hasWings: false,
+    wearsHat: true,
+    hasFur: true,
+    waterRelated: false,
+    magicalCreature: false,
   },
 
   {
@@ -96,9 +152,17 @@ const disneyCharacters = [
 
     human: true,
     female: false,
+    male: true,
     animal: false,
     hasHair: true,
     canFly: false,
+    pixar: false,
+    royal: false,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: false,
+    waterRelated: false,
+    magicalCreature: false,
   },
 
   {
@@ -108,9 +172,17 @@ const disneyCharacters = [
 
     human: false,
     female: false,
+    male: true,
     animal: false,
     hasHair: false,
     canFly: false,
+    pixar: true,
+    royal: false,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: false,
+    waterRelated: false,
+    magicalCreature: false,
   },
 
   {
@@ -120,9 +192,17 @@ const disneyCharacters = [
 
     human: true,
     female: true,
+    male: false,
     animal: false,
     hasHair: true,
     canFly: false,
+    pixar: true,
+    royal: true,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: false,
+    waterRelated: false,
+    magicalCreature: false,
   },
 
   {
@@ -132,9 +212,17 @@ const disneyCharacters = [
 
     human: false,
     female: false,
+    male: true,
     animal: true,
     hasHair: false,
     canFly: false,
+    pixar: false,
+    royal: false,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: true,
+    waterRelated: false,
+    magicalCreature: false,
   },
 
   {
@@ -144,9 +232,17 @@ const disneyCharacters = [
 
     human: false,
     female: false,
+    male: true,
     animal: false,
     hasHair: false,
     canFly: false,
+    pixar: true,
+    royal: false,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: false,
+    waterRelated: false,
+    magicalCreature: true,
   },
 
   {
@@ -156,9 +252,17 @@ const disneyCharacters = [
 
     human: true,
     female: true,
+    male: false,
     animal: false,
     hasHair: true,
     canFly: false,
+    pixar: false,
+    royal: false,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: false,
+    waterRelated: true,
+    magicalCreature: false,
   },
 
   {
@@ -168,9 +272,17 @@ const disneyCharacters = [
 
     human: false,
     female: false,
+    male: true,
     animal: false,
     hasHair: false,
     canFly: false,
+    pixar: false,
+    royal: false,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: false,
+    waterRelated: true,
+    magicalCreature: true,
   },
 
   {
@@ -180,9 +292,17 @@ const disneyCharacters = [
 
     human: false,
     female: false,
+    male: true,
     animal: false,
     hasHair: true,
     canFly: false,
+    pixar: false,
+    royal: false,
+    hasWings: false,
+    wearsHat: true,
+    hasFur: false,
+    waterRelated: false,
+    magicalCreature: true,
   },
 
   {
@@ -192,9 +312,17 @@ const disneyCharacters = [
 
     human: false,
     female: false,
+    male: true,
     animal: false,
     hasHair: false,
     canFly: false,
+    pixar: false,
+    royal: false,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: true,
+    waterRelated: false,
+    magicalCreature: true,
   },
 
   {
@@ -204,9 +332,17 @@ const disneyCharacters = [
 
     human: true,
     female: true,
+    male: false,
     animal: false,
     hasHair: true,
     canFly: true,
+    pixar: false,
+    royal: false,
+    hasWings: true,
+    wearsHat: false,
+    hasFur: false,
+    waterRelated: false,
+    magicalCreature: true,
   },
 
   {
@@ -216,9 +352,17 @@ const disneyCharacters = [
 
     human: false,
     female: false,
+    male: true,
     animal: true,
     hasHair: false,
     canFly: false,
+    pixar: false,
+    royal: false,
+    hasWings: false,
+    wearsHat: false,
+    hasFur: true,
+    waterRelated: false,
+    magicalCreature: false,
   },
 ];
 
