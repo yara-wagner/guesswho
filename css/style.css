@@ -89,7 +89,7 @@ textarea {
    Stile mitbringen.
 
    Die Ausnahmen stehen in :where(), damit sie die Spezifität nicht
-   erhöhen – so können einzelne Buttons (z. B. .cancel-game-button)
+   erhöhen – so können einzelne Buttons (z. B. .leave-game-button)
    weiter unten einfach über ihre Klasse angepasst werden. */
 button:where(:not(.tile, .mode-tile, .card-button, .logo-button)) {
   padding: 10px 18px;
@@ -116,7 +116,7 @@ button:where(:not(.tile, .mode-tile, .card-button, .logo-button)):disabled {
    Rahmen, der beim Hover invertiert. Was die einzelnen Buttons darüber
    hinaus brauchen (Padding, Schriftgrösse, Abstände), steht jeweils
    beim Button selber weiter unten. */
-button.cancel-game-button,
+button.leave-game-button,
 button.random-selection-button,
 button.back-button {
   border: 2px solid #222;
@@ -124,7 +124,7 @@ button.back-button {
   color: #222;
 }
 
-button.cancel-game-button:hover,
+button.leave-game-button:hover,
 button.random-selection-button:hover,
 button.back-button:hover {
   background-color: #222;
@@ -181,8 +181,8 @@ button.logo-button {
   width: auto;
 }
 
-/* Abbrechen-Button oben rechts im Header (Umriss-Stil, siehe BUTTONS) */
-button.cancel-game-button {
+/* Verlassen-Button oben rechts im Header (Umriss-Stil, siehe BUTTONS) */
+button.leave-game-button {
   font-size: 14px;
 }
 
@@ -197,7 +197,7 @@ button.cancel-game-button {
     height: 34px;
   }
 
-  button.cancel-game-button {
+  button.leave-game-button {
     padding: 8px 12px;
     font-size: 13px;
   }
@@ -731,14 +731,15 @@ button.info-button:hover {
 }
 
 /* =========================
-   POPUPS (RULES + PLAYER NAME)
+   POPUPS (RULES + PLAYER NAME + LEAVE)
 ========================= */
 
-/* Beide Popups liegen als abdunkelnde Ebene über der Seite und zentrieren
+/* Alle Popups liegen als abdunkelnde Ebene über der Seite und zentrieren
    ihre weisse Box in der Mitte – deshalb teilen sie sich die Stile. */
 
 .rules-modal,
-.player-name-modal {
+.player-name-modal,
+.leave-modal {
   position: fixed;
   inset: 0;
   display: flex;
@@ -752,14 +753,16 @@ button.info-button:hover {
 /* Muss die Klasse mitnennen, sonst gewinnt das display: flex von oben */
 
 .rules-modal.hidden,
-.player-name-modal.hidden {
+.player-name-modal.hidden,
+.leave-modal.hidden {
   display: none;
 }
 
 /* Die weisse Box in der Mitte */
 
 .rules-content,
-.player-name-content {
+.player-name-content,
+.leave-content {
   position: relative;
   padding: 32px;
   border-radius: 10px;
@@ -768,7 +771,8 @@ button.info-button:hover {
 }
 
 .rules-content h2,
-.player-name-content h2 {
+.player-name-content h2,
+.leave-content h2 {
   margin-top: 0;
   margin-bottom: 24px;
   text-align: center;
@@ -777,7 +781,8 @@ button.info-button:hover {
 /* Schliessen-Kreuz oben rechts */
 
 button.close-rules-button,
-button.close-player-name-button {
+button.close-player-name-button,
+button.close-leave-button {
   position: absolute;
   top: 12px;
   right: 12px;
@@ -793,7 +798,8 @@ button.close-player-name-button {
 }
 
 button.close-rules-button:hover,
-button.close-player-name-button:hover {
+button.close-player-name-button:hover,
+button.close-leave-button:hover {
   background-color: #e0e0e0;
   color: #222;
 }
@@ -857,6 +863,46 @@ button.close-player-name-button:hover {
 button.continue-button {
   width: 100%;
   margin-top: 8px;
+}
+
+/* --- Nur das Verlassen-Popup (siehe js/leave.js) --- */
+
+.leave-content {
+  width: min(420px, 100%);
+  text-align: center;
+}
+
+/* Platz für das Schliessen-Kreuz neben dem Titel */
+
+.leave-content h2 {
+  padding-right: 30px;
+  margin-bottom: 12px;
+}
+
+.leave-text {
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: #666;
+}
+
+.leave-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Umriss-Stil für die Nebenaktion, siehe BUTTONS */
+
+button.keep-playing-button {
+  border: 2px solid #222;
+  background-color: transparent;
+  color: #222;
+}
+
+button.keep-playing-button:hover {
+  background-color: #222;
+  color: white;
 }
 
 /* =========================

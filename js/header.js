@@ -2,7 +2,7 @@
 // HEADER
 // =============================
 //
-// Das Attribut "cancel" setzt voraus, dass js/cancel.js geladen ist.
+// Das Attribut "leave" setzt voraus, dass js/leave.js geladen ist.
 // Auf diesen Seiten ist auch das Logo anklickbar und führt – genau wie der
 // Button – zurück zur Startseite. Auf der Startseite selbst ist das Logo
 // nur ein Bild, dort gibt es nichts abzubrechen.
@@ -12,7 +12,7 @@
 
 class GameHeader extends HTMLElement {
   connectedCallback() {
-    const showCancelButton = this.hasAttribute("cancel");
+    const showLeaveButton = this.hasAttribute("leave");
 
     const isStartPage =
       window.location.pathname.endsWith("index.html") ||
@@ -32,7 +32,7 @@ class GameHeader extends HTMLElement {
 
           <h1 class="game-logo">
             ${
-              showCancelButton
+              showLeaveButton
                 ? `
                   <button
                     class="logo-button"
@@ -62,10 +62,10 @@ class GameHeader extends HTMLElement {
         </div>
 
         ${
-          showCancelButton
+          showLeaveButton
             ? `
               <button
-                class="cancel-game-button"
+                class="leave-game-button"
                 type="button"
               >
                 Back to start
@@ -85,21 +85,21 @@ class GameHeader extends HTMLElement {
       });
     }
 
-    if (showCancelButton === false) {
+    if (showLeaveButton === false) {
       return;
     }
 
-    const cancelButton = this.querySelector(".cancel-game-button");
+    const leaveButton = this.querySelector(".leave-game-button");
     const logoButton = this.querySelector(".logo-button");
 
-    // cancelGame() steht in js/cancel.js und ist hier noch nicht geladen.
+    // leaveGame() steht in js/leave.js und ist hier noch nicht geladen.
     // Der Aufruf im Callback wird erst beim Klick aufgelöst, dann ist es da.
-    cancelButton.addEventListener("click", function () {
-      cancelGame();
+    leaveButton.addEventListener("click", function () {
+      leaveGame();
     });
 
     logoButton.addEventListener("click", function () {
-      cancelGame();
+      leaveGame();
     });
   }
 }
