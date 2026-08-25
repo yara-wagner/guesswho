@@ -3,8 +3,6 @@
 // =============================
 
 // Der Header ist auf allen Seiten gleich und steht deshalb nur hier.
-// Der Titel wird als kleines Logo oben links angezeigt (siehe .game-logo
-// im CSS), damit für den restlichen Inhalt mehr Platz bleibt.
 //
 // Verwendung in der Seite:
 //

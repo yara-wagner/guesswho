@@ -32,9 +32,17 @@ const MAXIMUM_CHARACTERS = 18;
 // Kantenlänge, auf die die hochgeladenen Bilder verkleinert werden
 const IMAGE_SIZE = 360;
 
+// Längere Namen passen nicht mehr unter die Karte
+const NAME_LENGTH = 20;
+
 // Die Karten in der Reihenfolge des Grids: { name, image }
 // image ist eine Data-URL oder null, solange kein Bild gewählt wurde
 const cards = [];
+
+// Zu jeder Karte die Funktion, die Bild und Name im Grid nachführt. Beim
+// Mehrfach-Upload werden auch Karten befüllt, die gar nicht angeklickt
+// wurden – die müssen ihre Anzeige ebenfalls aktualisieren.
+const refreshers = new Map();
 
 // =============================
 // IMAGE UPLOAD
@@ -99,6 +107,165 @@ async function chooseImage(file) {
 }
 
 // =============================
+// NAME FROM FILE NAME
+// =============================
+
+// Wörter, die in Dateinamen von Kameras, Chats und Downloads stecken und
+// nichts über die abgebildete Person aussagen
+const FILE_NAME_NOISE = [
+  "img",
+  "image",
+  "images",
+  "photo",
+  "foto",
+  "picture",
+  "pic",
+  "bild",
+  "dsc",
+  "dscn",
+  "dscf",
+  "pxl",
+  "mvimg",
+  "screenshot",
+  "screen",
+  "shot",
+  "whatsapp",
+  "signal",
+  "telegram",
+  "scan",
+  "scanned",
+  "capture",
+  "copy",
+  "kopie",
+  "final",
+  "edit",
+  "edited",
+  "original",
+  "portrait",
+  "selfie",
+  "at",
+  "am",
+  "von",
+  "of",
+  "und",
+  "and",
+];
+
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+// Aus "anna-müller.jpg" wird "Anna Müller", aus "IMG_4213.jpg" nichts:
+// ein falsch geratener Name wäre lästiger als gar keiner
+function nameFromFileName(fileName) {
+  const withoutExtension = fileName.replace(/\.[^.]+$/, "");
+
+  const words = withoutExtension
+    .split(/[\s_.\-–()[\]]+/)
+    // Durchnummerierte Bilder heissen "anna2" – die Nummer gehört nicht zum Namen
+    .map((word) => word.replace(/\d+$/, ""))
+    // Übrig gebliebene Zahlen (Datum, Uhrzeit, Zähler) fliegen raus
+    .filter((word) => word !== "" && !/\d/.test(word))
+    // Genauso die Kürzel der Kameras und Chat-Apps
+    .filter((word) => !FILE_NAME_NOISE.includes(word.toLowerCase()));
+
+  if (words.length === 0) {
+    return "";
+  }
+
+  const name = words.map(capitalize).join(" ");
+
+  // Lange Dateinamen sind meist keine Namen, sondern Beschreibungen
+  if (name.length > NAME_LENGTH) {
+    return "";
+  }
+
+  return name;
+}
+
+// =============================
+// DISTRIBUTE IMAGES
+// =============================
+
+// Die Karten, auf die die gewählten Bilder verteilt werden: zuerst die
+// angeklickte Karte, dann die folgenden Karten ohne Bild und zum Schluss
+// neue Karten – bereits gesetzte Bilder werden nicht überschrieben
+function collectTargetCards(startCard, count) {
+  const targets = [startCard];
+
+  const start = cards.indexOf(startCard);
+
+  for (let index = start + 1; index < cards.length; index++) {
+    if (targets.length === count) {
+      return targets;
+    }
+
+    if (cards[index].image === null) {
+      targets.push(cards[index]);
+    }
+  }
+
+  while (targets.length < count && cards.length < MAXIMUM_CHARACTERS) {
+    addCard();
+
+    targets.push(cards[cards.length - 1]);
+  }
+
+  return targets;
+}
+
+function refreshCard(card) {
+  const refresh = refreshers.get(card);
+
+  if (refresh !== undefined) {
+    refresh();
+  }
+}
+
+// Verteilt die gewählten Bilder ab der angeklickten Karte über das Grid
+async function chooseImages(startCard, files) {
+  const targets = collectTargetCards(startCard, files.length);
+
+  let failed = 0;
+
+  for (let index = 0; index < targets.length; index++) {
+    const card = targets[index];
+
+    try {
+      card.image = await chooseImage(files[index]);
+    } catch (error) {
+      failed++;
+
+      continue;
+    }
+
+    // Ein selbst getippter Name ist besser als alles, was im Dateinamen steht
+    if (card.name === "") {
+      card.name = nameFromFileName(files[index].name);
+    }
+
+    refreshCard(card);
+  }
+
+  updateStartButton();
+
+  if (failed > 0) {
+    window.alert(
+      failed === 1
+        ? "One image could not be loaded. Please try another one."
+        : `${failed} images could not be loaded. Please try other ones.`,
+    );
+  }
+
+  // Es gibt weniger Karten als gewählte Bilder – das Board ist voll
+  if (targets.length < files.length) {
+    window.alert(
+      `There is room for ${MAXIMUM_CHARACTERS} characters, so only the first ${targets.length} photos were used.`,
+    );
+  }
+}
+
+// =============================
 // CREATE EDITOR CARD
 // =============================
 
@@ -112,6 +279,8 @@ function createEditorCard(card) {
 
   fileInput.type = "file";
   fileInput.accept = "image/*";
+  // Es dürfen mehrere Bilder auf einmal gewählt werden
+  fileInput.multiple = true;
   fileInput.classList.add("hidden");
 
   const imageButton = document.createElement("button");
@@ -137,7 +306,7 @@ function createEditorCard(card) {
   nameInput.type = "text";
   nameInput.classList.add("custom-card-name");
   nameInput.placeholder = "Name";
-  nameInput.maxLength = 20;
+  nameInput.maxLength = NAME_LENGTH;
 
   const removeButton = document.createElement("button");
 
@@ -151,35 +320,33 @@ function createEditorCard(card) {
   element.appendChild(nameInput);
   element.appendChild(removeButton);
 
+  refreshers.set(card, () => {
+    if (card.image !== null) {
+      preview.src = card.image;
+
+      preview.classList.remove("hidden");
+      placeholder.classList.add("hidden");
+    }
+
+    nameInput.value = card.name;
+  });
+
   imageButton.addEventListener("click", () => {
     fileInput.click();
   });
 
   fileInput.addEventListener("change", async () => {
-    const file = fileInput.files[0];
+    const files = Array.from(fileInput.files);
+
+    // Damit dieselben Bilder danach wieder gewählt werden können
+    fileInput.value = "";
 
     // Die Dateiauswahl wurde abgebrochen
-    if (file === undefined) {
+    if (files.length === 0) {
       return;
     }
 
-    try {
-      card.image = await chooseImage(file);
-    } catch (error) {
-      window.alert("This image could not be loaded. Please try another one.");
-
-      return;
-    } finally {
-      // Damit dasselbe Bild danach wieder gewählt werden kann
-      fileInput.value = "";
-    }
-
-    preview.src = card.image;
-
-    preview.classList.remove("hidden");
-    placeholder.classList.add("hidden");
-
-    updateStartButton();
+    await chooseImages(card, files);
   });
 
   nameInput.addEventListener("input", () => {
@@ -226,6 +393,8 @@ function removeCard(card, element) {
   }
 
   cards.splice(index, 1);
+
+  refreshers.delete(card);
 
   element.remove();
 
