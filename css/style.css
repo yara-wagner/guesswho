@@ -6,32 +6,32 @@
    das sind die Schnitte, die das Spiel verwendet. */
 
 @font-face {
-  font-family: 'Lato';
-  src: url('../fonts/Lato-Regular.ttf') format('truetype');
+  font-family: "Lato";
+  src: url("../fonts/Lato-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Lato';
-  src: url('../fonts/Lato-Italic.ttf') format('truetype');
+  font-family: "Lato";
+  src: url("../fonts/Lato-Italic.ttf") format("truetype");
   font-weight: normal;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Lato';
-  src: url('../fonts/Lato-Bold.ttf') format('truetype');
+  font-family: "Lato";
+  src: url("../fonts/Lato-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Lato';
-  src: url('../fonts/Lato-BoldItalic.ttf') format('truetype');
+  font-family: "Lato";
+  src: url("../fonts/Lato-BoldItalic.ttf") format("truetype");
   font-weight: bold;
   font-style: italic;
   font-display: swap;
@@ -40,8 +40,8 @@
 /* BellaFont nur für Überschriften und Titel (siehe h1–h6 weiter unten) */
 
 @font-face {
-  font-family: 'BellaFont';
-  src: url('../fonts/Bella-yw64Z.ttf') format('truetype');
+  font-family: "BellaFont";
+  src: url("../fonts/Bella-yw64Z.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap; /* Verhindert unsichtbaren Text während des Ladevorgangs */
@@ -57,27 +57,22 @@
 
 body {
   margin: 0;
-
-  font-family: 'Lato', sans-serif;
-
+  font-family: "Lato", sans-serif;
   background-color: #f4f4f4;
-
   color: #222;
 }
 
 /* Überschriften und Titel in BellaFont */
-
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: 'BellaFont', sans-serif;
+  font-family: "BellaFont", sans-serif;
 }
 
 /* Formular-Elemente erben die Schrift nicht von sich aus */
-
 button,
 input,
 select,
@@ -96,18 +91,13 @@ textarea {
    Die Ausnahmen stehen in :where(), damit sie die Spezifität nicht
    erhöhen – so können einzelne Buttons (z. B. .cancel-game-button)
    weiter unten einfach über ihre Klasse angepasst werden. */
-
 button:where(:not(.tile, .mode-tile, .card-button)) {
   padding: 10px 18px;
-
   border: none;
   border-radius: 6px;
-
   background-color: #222;
   color: white;
-
   font-size: inherit;
-
   cursor: pointer;
 }
 
@@ -117,11 +107,30 @@ button:where(:not(.tile, .mode-tile, .card-button)):hover {
 
 /* Deaktivierter Button – z. B. "Start game", solange das Custom-Set
    noch nicht fertig ist */
-
 button:where(:not(.tile, .mode-tile, .card-button)):disabled {
   background-color: #bbb;
-
   cursor: not-allowed;
+}
+
+/* Umriss-Variante für die Nebenaktionen: heller Button mit dunklem
+   Rahmen, der beim Hover invertiert. Was die einzelnen Buttons darüber
+   hinaus brauchen (Padding, Schriftgrösse, Abstände), steht jeweils
+   beim Button selber weiter unten. */
+button.cancel-game-button,
+button.random-selection-button,
+button.back-button,
+button.question-button {
+  border: 2px solid #222;
+  background-color: transparent;
+  color: #222;
+}
+
+button.cancel-game-button:hover,
+button.random-selection-button:hover,
+button.back-button:hover,
+button.question-button:hover {
+  background-color: #222;
+  color: white;
 }
 
 /* =========================
@@ -129,7 +138,6 @@ button:where(:not(.tile, .mode-tile, .card-button)):disabled {
 ========================= */
 
 /* Custom Elements sind von sich aus inline (siehe js/header.js) */
-
 game-header {
   display: block;
 }
@@ -137,69 +145,45 @@ game-header {
 /* Schmale Leiste: Logo links, "Back to start" rechts. So bleibt oben
    möglichst wenig Platz belegt und der Inhalt ist auch auf kleinen
    Bildschirmen gut sichtbar. */
-
 .game-header {
   display: flex;
-
   align-items: center;
   justify-content: space-between;
-
   gap: 12px;
-
   padding: 12px 20px;
 }
 
-/* Der Titel als Logo – kleine dunkle Kachel oben links */
-
+/* Der Titel als Logo – Bild oben links.
+   Das <h1> bleibt für die Struktur bestehen, sichtbar ist nur das Bild. */
 .game-logo {
   margin: 0;
-
-  padding: 6px 12px;
-
-  border-radius: 8px;
-
-  background-color: #222;
-  color: white;
-
-  font-size: 18px;
-  letter-spacing: 0.5px;
-
-  white-space: nowrap;
+  line-height: 0;
 }
 
-/* Abbrechen-Button oben rechts im Header */
+.game-logo img {
+  display: block;
+  height: 44px;
+  width: auto;
+}
 
+/* Abbrechen-Button oben rechts im Header (Umriss-Stil, siehe BUTTONS) */
 button.cancel-game-button {
-  background-color: transparent;
-
-  border: 2px solid #222;
-
-  color: #222;
-
   font-size: 14px;
-}
-
-button.cancel-game-button:hover {
-  background-color: #222;
-
-  color: white;
 }
 
 /* Auf schmalen Bildschirmen etwas kompakter, damit Logo und Button
    in einer Zeile nebeneinander Platz haben */
-
 @media (max-width: 500px) {
   .game-header {
     padding: 10px 12px;
   }
 
-  .game-logo {
-    font-size: 15px;
+  .game-logo img {
+    height: 34px;
   }
 
   button.cancel-game-button {
     padding: 8px 12px;
-
     font-size: 13px;
   }
 }
@@ -208,302 +192,192 @@ button.cancel-game-button:hover {
    TILES
 ========================= */
 
-/* Grosse anklickbare Kachel – für die Charakter-Set-Auswahl.
-   Die Kacheln der Modus-Auswahl haben ihre eigenen Stile (.mode-tile),
-   damit sie unabhängig davon angepasst werden können. */
-
-.tile {
-    width: 100%;
-
-    padding: 40px 20px;
-
-    display: flex;
-
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 12px;
-
-    border: 2px solid transparent;
-    border-radius: 10px;
-
-    background-color: white;
-    color: inherit;
-
-    box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.15);
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s,
-        border-color 0.2s;
+/* Grosse anklickbare Kachel – für die Charakter-Set-Auswahl (.tile) und
+   für die Modus-Auswahl (.mode-tile). Beide sehen gleich aus, deshalb
+   teilen sie sich die Stile. Die Klassen bleiben getrennt, damit eine
+   von beiden bei Bedarf wieder eigene Regeln bekommen kann. */
+.tile,
+.mode-tile {
+  width: 100%;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background-color: white;
+  color: inherit;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
 }
 
-.tile:not(:disabled):hover {
-    transform: translateY(-4px);
-
-    border-color: #222;
+.tile:not(:disabled):hover,
+.mode-tile:not(:disabled):hover {
+  transform: translateY(-4px);
+  border-color: #222;
 }
 
-.tile-icon {
-    font-size: 48px;
-
-    line-height: 1;
+/* Icon der Kachel – dieselbe Grösse wie das Icon im Gewinn-Popup */
+.tile-icon,
+.mode-tile-icon,
+.win-dialog-icon {
+  font-size: 48px;
+  line-height: 1;
 }
 
-/* Der Set-Name ist der Titel der Kachel – deshalb BellaFont */
-
-.tile-name {
-    font-family: 'BellaFont', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
+/* Der Set- bzw. Modus-Name ist der Titel der Kachel – deshalb BellaFont */
+.tile-name,
+.mode-tile-name {
+  font-family: "BellaFont", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .tile-badge {
-    padding: 4px 10px;
-
-    border-radius: 999px;
-
-    background-color: #e0e0e0;
-
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-
-    color: #666;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: #e0e0e0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #666;
 }
-
 
 /* Deaktivierte Kachel */
-
-.tile:disabled {
-    box-shadow: none;
-
-    background-color: #ececec;
-
-    cursor: not-allowed;
+.tile:disabled,
+.mode-tile:disabled {
+  box-shadow: none;
+  background-color: #ececec;
+  cursor: not-allowed;
 }
-
 
 /* =========================
    MODE SELECTION
 ========================= */
 
-/* Kachel der Modus-Auswahl – bewusst unabhängig von .tile,
-   damit sie frei gestaltet werden kann */
-
+/* Aussehen der Kachel siehe .tile weiter oben – hier nur, was die
+   Modus-Kachel zusätzlich braucht */
 .mode-tile {
-    width: 100%;
-
-    min-height: 220px;
-
-    padding: 40px 20px;
-
-    display: flex;
-
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 12px;
-
-    border: 2px solid transparent;
-    border-radius: 10px;
-
-    background-color: white;
-    color: inherit;
-
-    box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.15);
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s,
-        border-color 0.2s;
+  min-height: 220px;
 }
 
-.mode-tile:not(:disabled):hover {
-    transform: translateY(-4px);
-
-    border-color: #222;
-}
-
-.mode-tile-icon {
-    font-size: 48px;
-
-    line-height: 1;
-}
-
-/* Der Modus-Name ist der Titel der Kachel – deshalb BellaFont */
-
-.mode-tile-name {
-    font-family: 'BellaFont', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.mode-tile-badge {
-    padding: 4px 10px;
-
-    border-radius: 999px;
-
-    background-color: #e0e0e0;
-
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-
-    color: #666;
-}
-
-
-/* Deaktivierte Kachel */
-
-.mode-tile:disabled {
-    box-shadow: none;
-
-    background-color: #ececec;
-
-    cursor: not-allowed;
-}
-
-.mode-selection {
-    width: min(800px, 95%);
-
-    margin: 0 auto 50px;
+/* Breite und Abstand des Auswahl-Bereichs – gilt für die Modus- und
+   die Set-Auswahl */
+.mode-selection,
+.set-selection {
+  width: min(800px, 95%);
+  margin: 0 auto 50px;
 }
 
 .mode-selection-title {
-    margin-top: 0;
-
-    text-align: center;
+  margin-top: 0;
+  text-align: center;
 }
 
 .mode-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(260px, 1fr));
-
-    gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
 }
-
 
 /* Karte (Kachel + Beschreibung) */
-
 .mode-card {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-
 
 .mode-card-disabled .mode-tile-icon,
 .mode-card-disabled .mode-tile-name {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 .mode-card-disabled .mode-description,
 .mode-card-disabled ul {
-    opacity: 0.6;
+  opacity: 0.6;
 }
-
 
 /* Beschreibungstext */
-
 .mode-description {
-    /* füllt die Resthöhe, damit die Listen beider Karten
+  /* füllt die Resthöhe, damit die Listen beider Karten
        auf derselben Höhe beginnen */
-    flex: 1;
-
-    margin: 0;
-
-    padding: 0 4px;
-
-    text-align: center;
-
-    font-size: 14px;
-    line-height: 1.5;
-
-    color: #666;
+  flex: 1;
+  margin: 0;
+  padding: 0 4px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
 }
-
 
 /* =========================
    CHARACTER SET SELECTION
 ========================= */
 
-.set-selection {
-    width: min(800px, 95%);
-
-    margin: 0 auto 50px;
-}
-
+/* Breite und Abstand: siehe .mode-selection weiter oben */
 .set-selection-title {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .set-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(200px, 1fr));
-
-    gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
 }
 
 .set-tile {
-    min-height: 180px;
+  min-height: 180px;
 }
 
 /* Anzahl Charaktere im Set */
 
 .set-tile-count {
-    font-size: 13px;
-
-    color: #666;
+  font-size: 13px;
+  color: #666;
 }
 
 .set-tile:disabled .tile-icon,
 .set-tile:disabled .tile-name {
-    opacity: 0.5;
+  opacity: 0.5;
 }
-
 
 /* =========================
    CONTROLS
 ========================= */
 
-/* Zähler und Buttons unter dem Board. Sie bleiben beim Scrollen am
-   unteren Rand stehen, damit sie auch auf kleinen Bildschirmen immer
-   sichtbar sind. */
+/* Angeheftete Leiste am unteren Rand – für den Zähler und die Buttons
+   unter dem Board (.game-controls), für die Charakter-Wahl
+   (.selection-actions) und für das Custom-Set (.custom-set-actions).
+   Sie bleiben beim Scrollen unten stehen, damit sie auch auf kleinen
+   Bildschirmen immer sichtbar sind. */
 
-.game-controls {
+.game-controls,
+.selection-actions,
+.custom-set-actions {
   position: sticky;
-
   bottom: 0;
-
   z-index: 1;
-
   padding: 12px 20px;
-
   display: flex;
-
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-
-  gap: 20px;
-
+  gap: 12px;
   background-color: #f4f4f4;
 
   /* hebt die Leiste von den Karten ab, die darunter durchscrollen */
   box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Zähler und Buttons brauchen etwas mehr Luft zueinander */
+
+.game-controls {
+  gap: 20px;
 }
 
 #remaining-counter {
@@ -516,13 +390,9 @@ button.cancel-game-button:hover {
 
 .character-grid {
   width: min(1000px, 95%);
-
   margin: 0 auto 50px;
-
   display: grid;
-
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-
   gap: 18px;
 }
 
@@ -530,19 +400,20 @@ button.cancel-game-button:hover {
    CHARACTER CARD
 ========================= */
 
-.character-card {
+/* Aussehen der Karte – gilt auch für die leere Karte im Custom-Set
+   (.custom-card), die genauso aussehen soll */
+.character-card,
+.custom-card {
   position: relative;
-
   background-color: white;
-
   border-radius: 10px;
-
   overflow: hidden;
-
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
 
+/* Nur die Karte auf dem Board ist anklickbar */
+.character-card {
   cursor: pointer;
-
   transition:
     transform 0.2s,
     opacity 0.2s;
@@ -552,25 +423,19 @@ button.cancel-game-button:hover {
   transform: translateY(-4px);
 }
 
-/* Bild */
-
-.character-card img {
+/* Bild – im Custom-Set die Vorschau des hochgeladenen Bildes */
+.character-card img,
+.custom-card-preview {
   display: block;
-
   width: 100%;
-
   aspect-ratio: 1 / 1;
-
   object-fit: cover;
 }
 
 /* Name */
-
 .character-name {
   padding: 12px;
-
   text-align: center;
-
   font-weight: bold;
 }
 
@@ -585,17 +450,12 @@ button.cancel-game-button:hover {
 
 .character-card.eliminated::after {
   content: "✕";
-
   position: absolute;
-
   top: 50%;
   left: 50%;
-
   transform: translate(-50%, -50%);
-
   font-size: 70px;
   font-weight: bold;
-
   color: #fa0000;
 }
 
@@ -605,283 +465,142 @@ button.cancel-game-button:hover {
 
 /* Angetippte Karte auf der Charakter-Wahl. Der Rahmen liegt innen
    (outline-offset), damit die Karte gleich gross bleibt. */
-
 .character-card.selected {
-    transform: translateY(-4px);
-
-    outline: 3px solid #222;
-    outline-offset: -3px;
+  transform: translateY(-4px);
+  outline: 3px solid #222;
+  outline-offset: -3px;
 }
 
-/* Hinweis und Bestätigen-Button unter dem Board. Sie bleiben beim
-   Scrollen am unteren Rand stehen, damit der Button auch auf kleinen
-   Bildschirmen immer sichtbar ist. */
-
-.selection-actions {
-    position: sticky;
-
-    bottom: 0;
-
-    z-index: 1;
-
-    padding: 12px 20px;
-
-    display: flex;
-
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-
-    gap: 12px;
-
-    background-color: #f4f4f4;
-
-    /* hebt die Leiste von den Karten ab, die darunter durchscrollen */
-    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.08);
-}
-
-.selection-hint {
-    margin: 0;
-
-    font-size: 14px;
-
-    color: #666;
+/* Die angeheftete Leiste unter dem Board: siehe CONTROLS weiter oben.
+   Hier nur der Hinweistext – derselbe wie im Custom-Set. */
+.selection-hint,
+.custom-set-hint {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
 }
 
 /* Der Zufalls-Button ist die Nebenaktion – der Bestätigen-Button daneben
-   bleibt der auffällige. Das kleinere Padding gleicht den Rahmen aus,
-   damit beide Buttons gleich hoch sind. */
+   bleibt der auffällige (Umriss-Stil, siehe BUTTONS). Das kleinere
+   Padding gleicht den Rahmen aus, damit beide Buttons gleich hoch sind. */
 
 button.random-selection-button {
-    padding: 8px 16px;
-
-    border: 2px solid #222;
-
-    background-color: transparent;
-
-    color: #222;
+  padding: 8px 16px;
 }
-
-button.random-selection-button:hover {
-    background-color: #222;
-
-    color: white;
-}
-
 
 /* =========================
    CUSTOM CHARACTER SET
 ========================= */
 
 .custom-set-title {
-    margin-top: 0;
+  margin-top: 0;
 }
-
-/* Hinweis und Start-Button unter dem Board. Sie bleiben beim Scrollen
-   am unteren Rand stehen, damit der Start-Button auch auf kleinen
-   Bildschirmen immer sichtbar ist. */
-
-.custom-set-actions {
-    position: sticky;
-
-    bottom: 0;
-
-    z-index: 1;
-
-    padding: 12px 20px;
-
-    display: flex;
-
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-
-    gap: 12px;
-
-    background-color: #f4f4f4;
-
-    /* hebt die Leiste von den Karten ab, die darunter durchscrollen */
-    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.08);
-}
-
-.custom-set-hint {
-    margin: 0;
-
-    font-size: 14px;
-
-    color: #666;
-}
-
 
 /* Leere Karte: Bildfläche + Namensfeld.
-   Sieht aus wie eine Board-Karte (.character-card), ist aber nicht
-   anklickbar – die Karte selber macht nichts, nur ihre Felder. */
-
-.custom-card {
-    position: relative;
-
-    background-color: white;
-
-    border-radius: 10px;
-
-    overflow: hidden;
-
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-}
-
+   Sieht aus wie eine Board-Karte (.character-card) – die gemeinsamen
+   Stile stehen dort. Sie ist aber nicht anklickbar, die Karte selber
+   macht nichts, nur ihre Felder. */
 
 /* Bildfläche – öffnet die Dateiauswahl */
-
 .custom-card-image {
-    width: 100%;
-
-    aspect-ratio: 1 / 1;
-
-    padding: 0;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border: none;
-
-    background-color: #ececec;
-    color: #666;
-
-    cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: #ececec;
+  color: #666;
+  cursor: pointer;
 }
 
 .custom-card-image:hover {
-    background-color: #e0e0e0;
-
-    color: #222;
+  background-color: #e0e0e0;
+  color: #222;
 }
 
-.custom-card-placeholder {
-    font-size: 14px;
-    font-weight: bold;
+/* Beschriftung der leeren Bildfläche und der "Karte hinzufügen"-Fläche */
+.custom-card-placeholder,
+.custom-add-card-text {
+  font-size: 14px;
+  font-weight: bold;
 }
-
-.custom-card-preview {
-    display: block;
-
-    width: 100%;
-
-    aspect-ratio: 1 / 1;
-
-    object-fit: cover;
-}
-
 
 /* Namensfeld */
-
 .custom-card-name {
-    width: 100%;
-
-    padding: 12px;
-
-    border: none;
-    border-top: 1px solid #ececec;
-
-    background-color: white;
-    color: inherit;
-
-    font-size: inherit;
-    font-weight: bold;
-
-    text-align: center;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-top: 1px solid #ececec;
+  background-color: white;
+  color: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  text-align: center;
 }
 
 .custom-card-name:focus {
-    outline: 2px solid #222;
-
-    outline-offset: -2px;
+  outline: 2px solid #222;
+  outline-offset: -2px;
 }
-
 
 /* Karte entfernen */
 
 .custom-card-remove {
-    position: absolute;
-
-    top: 8px;
-    right: 8px;
-
-    width: 28px;
-    height: 28px;
-
-    padding: 0;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border: none;
-    border-radius: 999px;
-
-    background-color: rgba(0, 0, 0, 0.55);
-    color: white;
-
-    font-size: 14px;
-    line-height: 1;
-
-    cursor: pointer;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.55);
+  color: white;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .custom-card-remove:hover {
-    background-color: #fa0000;
+  background-color: #fa0000;
 }
-
 
 /* Fläche zum Hinzufügen einer weiteren Karte */
 
 .custom-add-card {
-    width: 100%;
-    height: 100%;
-
-    min-height: 180px;
-
-    padding: 20px;
-
-    display: flex;
-
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 8px;
-
-    border: 2px dashed #bbb;
-    border-radius: 10px;
-
-    background-color: transparent;
-    color: #666;
-
-    cursor: pointer;
-
-    transition:
-        border-color 0.2s,
-        color 0.2s;
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px dashed #bbb;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #666;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
 }
 
 .custom-add-card:hover {
-    border-color: #222;
-
-    color: #222;
+  border-color: #222;
+  color: #222;
 }
 
 .custom-add-card-icon {
-    font-size: 40px;
-    line-height: 1;
+  font-size: 40px;
+  line-height: 1;
 }
-
-.custom-add-card-text {
-    font-size: 14px;
-    font-weight: bold;
-}
-
 
 /* =========================
    WIN POP-UP
@@ -891,40 +610,27 @@ button.random-selection-button:hover {
 
 .overlay {
   position: fixed;
-
   inset: 0;
 
   /* liegt über der angehefteten Leiste (.game-controls) */
   z-index: 10;
-
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   padding: 20px;
-
   background-color: rgba(0, 0, 0, 0.6);
 }
 
 .win-dialog {
   width: min(400px, 100%);
-
   padding: 30px 24px;
-
   display: flex;
-
   flex-direction: column;
   align-items: center;
-
   gap: 12px;
-
   border-radius: 10px;
-
   background-color: white;
-
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
-
   text-align: center;
 }
 
@@ -934,35 +640,24 @@ button.random-selection-button:hover {
 
 .win-dialog p {
   margin: 0;
-
   color: #666;
 }
 
-.win-dialog-icon {
-  font-size: 48px;
-
-  line-height: 1;
-}
+/* Das Icon (.win-dialog-icon) hat dieselbe Grösse wie die Kachel-Icons,
+   siehe TILES weiter oben */
 
 .win-character-image {
   width: 140px;
-
   aspect-ratio: 1 / 1;
-
   object-fit: cover;
-
   border-radius: 10px;
 }
 
 .win-dialog-buttons {
   margin-top: 8px;
-
   display: flex;
-
   flex-wrap: wrap;
-
   justify-content: center;
-
   gap: 12px;
 }
 
@@ -984,30 +679,21 @@ button.random-selection-button:hover {
 
 button.info-button {
   position: absolute;
-
   top: 12px;
   right: 12px;
-
   width: 32px;
   height: 32px;
-
   padding: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border: 2px solid #222;
   border-radius: 50%;
-
   background-color: white;
   color: #222;
-
   font-size: 17px;
   font-weight: bold;
-
   line-height: 1;
-
   z-index: 10;
 }
 
@@ -1016,53 +702,87 @@ button.info-button:hover {
   color: white;
 }
 
-
 /* =========================
-   RULES POPUP
+   POPUPS (RULES + PLAYER NAME)
 ========================= */
 
-.rules-modal {
+/* Beide Popups liegen als abdunkelnde Ebene über der Seite und zentrieren
+   ihre weisse Box in der Mitte – deshalb teilen sie sich die Stile. */
+
+.rules-modal,
+.player-name-modal {
   position: fixed;
-
   inset: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 20px;
-
   background-color: rgba(0, 0, 0, 0.5);
-
   z-index: 1000;
 }
 
-.rules-content {
+/* Muss die Klasse mitnennen, sonst gewinnt das display: flex von oben */
+
+.rules-modal.hidden,
+.player-name-modal.hidden {
+  display: none;
+}
+
+/* Die weisse Box in der Mitte */
+
+.rules-content,
+.player-name-content {
   position: relative;
-
-  width: min(500px, 100%);
-
-  max-height: 85vh;
-  overflow-y: auto;
-
   padding: 32px;
-
   border-radius: 10px;
-
   background-color: white;
-
-  text-align: left;
-
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
 }
 
-.rules-content h2 {
+.rules-content h2,
+.player-name-content h2 {
   margin-top: 0;
   margin-bottom: 24px;
-
-  padding-right: 30px;
-
   text-align: center;
+}
+
+/* Schliessen-Kreuz oben rechts */
+
+button.close-rules-button,
+button.close-player-name-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #222;
+  font-weight: bold;
+}
+
+button.close-rules-button:hover,
+button.close-player-name-button:hover {
+  background-color: #e0e0e0;
+  color: #222;
+}
+
+/* --- Nur das Regeln-Popup --- */
+
+.rules-content {
+  width: min(500px, 100%);
+  max-height: 85vh;
+  overflow-y: auto;
+  text-align: left;
+}
+
+/* Platz für das Schliessen-Kreuz neben dem Titel */
+
+.rules-content h2 {
+  padding-right: 30px;
 }
 
 .rules-content ol {
@@ -1072,80 +792,13 @@ button.info-button:hover {
 
 .rules-content li {
   margin-bottom: 14px;
-
   line-height: 1.5;
 }
 
-button.close-rules-button {
-  position: absolute;
-
-  top: 12px;
-  right: 12px;
-
-  width: 32px;
-  height: 32px;
-
-  padding: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background-color: transparent;
-  color: #222;
-
-  font-weight: bold;
-}
-
-button.close-rules-button:hover {
-  background-color: #e0e0e0;
-  color: #222;
-}
-
-.rules-modal.hidden {
-  display: none;
-}
-
-
-/* =========================
-   PLAYER NAME POPUP
-========================= */
-
-.player-name-modal {
-  position: fixed;
-
-  inset: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 20px;
-
-  background-color: rgba(0, 0, 0, 0.5);
-
-  z-index: 1000;
-}
+/* --- Nur das Namens-Popup --- */
 
 .player-name-content {
-  position: relative;
-
   width: min(420px, 100%);
-
-  padding: 32px;
-
-  border-radius: 10px;
-
-  background-color: white;
-
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
-}
-
-.player-name-content h2 {
-  margin-top: 0;
-  margin-bottom: 24px;
-
-  text-align: center;
 }
 
 .player-name-field {
@@ -1154,91 +807,40 @@ button.close-rules-button:hover {
 
 .player-name-field label {
   display: block;
-
   margin-bottom: 8px;
-
   font-weight: bold;
 }
 
 .player-name-field input {
   width: 100%;
-
   padding: 12px 14px;
-
   border: 2px solid #ccc;
   border-radius: 6px;
-
   background-color: white;
   color: #222;
-
   font-size: 16px;
 }
 
 .player-name-field input:focus {
   border-color: #222;
-
   outline: none;
 }
 
 button.continue-button {
   width: 100%;
-
   margin-top: 8px;
 }
-
-button.close-player-name-button {
-  position: absolute;
-
-  top: 12px;
-  right: 12px;
-
-  width: 32px;
-  height: 32px;
-
-  padding: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background-color: transparent;
-  color: #222;
-
-  font-weight: bold;
-}
-
-button.close-player-name-button:hover {
-  background-color: #e0e0e0;
-  color: #222;
-}
-
-.player-name-modal.hidden {
-  display: none;
-}
-
 
 /* =========================
    BACK BUTTON
 ========================= */
 
+/* Umriss-Stil, siehe BUTTONS */
+
 button.back-button {
   margin: 0 20px 20px;
-
   padding: 8px 14px;
-
-  background-color: transparent;
-
-  border: 2px solid #222;
-
-  color: #222;
-
   font-size: 14px;
-}
-
-button.back-button:hover {
-  background-color: #222;
-
-  color: white;
 }
 
 /* =========================
@@ -1247,55 +849,31 @@ button.back-button:hover {
 
 .question-section {
   width: min(800px, 95%);
-
   margin: 0 auto 30px;
-
   padding: 20px;
-
   border-radius: 10px;
-
   background-color: white;
-
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .question-section h3 {
   margin-top: 0;
-
   text-align: center;
 }
 
+/* Die Frage-Buttons selber sind im Umriss-Stil, siehe BUTTONS */
+
 .question-buttons {
   display: flex;
-
   flex-wrap: wrap;
-
   justify-content: center;
-
   gap: 10px;
-}
-
-button.question-button {
-  background-color: white;
-
-  border: 2px solid #222;
-
-  color: #222;
-}
-
-button.question-button:hover {
-  background-color: #222;
-
-  color: white;
 }
 
 .computer-answer {
   min-height: 30px;
-
   margin-bottom: 0;
-
   text-align: center;
-
   font-size: 24px;
   font-weight: bold;
 }

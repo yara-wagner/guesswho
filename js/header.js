@@ -19,7 +19,9 @@ class GameHeader extends HTMLElement {
 
     this.innerHTML = `
       <header class="game-header">
-        <h1 class="game-logo">Guess Who?</h1>
+        <h1 class="game-logo">
+          <img src="src/guesswho_logo.png" alt="Guess Who?" />
+        </h1>
         ${
           showCancelButton
             ? '<button class="cancel-game-button" type="button">Back to start</button>'
