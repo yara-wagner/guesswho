@@ -45,6 +45,30 @@ function updateSetTitle() {
 }
 
 // =============================
+// FINAL GUESS
+// =============================
+
+function makeFinalGuess(character) {
+  if (gameState.player2Secret === null) {
+    return;
+  }
+
+  const isCorrect = character.id === gameState.player2Secret.id;
+
+  gameState.winner = isCorrect ? 1 : 2;
+
+  gameState.phase = "finished";
+
+  saveGameState(gameState);
+
+  if (isCorrect) {
+    window.location.href = "single_player_win.html";
+  } else {
+    window.location.href = "single_player_result.html";
+  }
+}
+
+// =============================
 // RENDER CHARACTERS
 // =============================
 
@@ -57,24 +81,10 @@ function renderSinglePlayerCharacters() {
     const card = createCharacterCard(character, function () {
       if (finalGuessMode === true) {
         makeFinalGuess(character);
+
         return;
       }
 
-      // =============================
-      // FINAL GUESS
-      // =============================
-
-      function makeFinalGuess(character) {
-        if (gameState.player2Secret === null) {
-          return;
-        }
-
-        if (character.id === gameState.player2Secret.id) {
-          window.location.href = "single_player_win.html";
-        } else {
-          window.location.href = "single_player_result.html";
-        }
-      }
       toggleSinglePlayerCharacter(character.id);
     });
 
@@ -263,6 +273,13 @@ function askQuestion(property) {
     computerAnswer.textContent = "NO";
 
     gameState.questionsLeft = Math.max(0, gameState.questionsLeft - 1);
+
+    if (gameState.questionsLeft === 0) {
+      // Die Fragen sind aufgebraucht, das Spiel ist verloren
+      gameState.winner = 2;
+
+      gameState.phase = "finished";
+    }
 
     saveGameState(gameState);
 

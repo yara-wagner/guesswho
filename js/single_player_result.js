@@ -49,9 +49,22 @@ if (
 // PLAY AGAIN
 // =============================
 
+// Der alte Spielstand muss weg, sonst schicken die Weiterleitungen auf
+// character_sets.html die Seite direkt weiter ins schon gespielte Spiel
 playAgainButton.addEventListener(
   "click",
   function () {
+    const newGameState =
+      createGameState();
+
+    newGameState.gameMode =
+      "single-player";
+
+    newGameState.player1Name =
+      getPlayerName(1);
+
+    saveGameState(newGameState);
+
     window.location.href =
       "character_sets.html";
   }

@@ -186,7 +186,15 @@ function playConfetti() {
 // =============================
 
 function startNewGame() {
-  saveGameState(createGameState());
+  const newGameState = createGameState();
+
+  // Der Modus und die eingegebenen Namen sollen die neue Runde überleben
+  newGameState.gameMode = gameState.gameMode;
+
+  newGameState.player1Name = getPlayerName(1);
+  newGameState.player2Name = getPlayerName(2);
+
+  saveGameState(newGameState);
 
   window.location.href = "character_sets.html";
 }
