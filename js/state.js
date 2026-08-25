@@ -12,11 +12,15 @@ function createGameState() {
   return {
     currentPlayer: 1,
 
-    // id des gewählten Charakter-Sets (siehe characters.js)
+    gameMode: "multi-player",
+
+    questionsLeft: 8,
+
+    player1Name: "Player 1",
+    player2Name: "Player 2",
+
     characterSetId: null,
 
-    // Die selber erstellten Charaktere des Custom-Sets. Sie stehen hier und
-    // nicht in characters.js, weil sie zum Spiel gehören und nicht zur App.
     customCharacters: [],
 
     player1Secret: null,
@@ -25,19 +29,24 @@ function createGameState() {
     player1Eliminated: [],
     player2Eliminated: [],
 
-    // "set-selection" | "custom-set" | "selection" | "pass" | "game" |
-    // "finished" – bestimmt, welcher Screen beim Laden einer Seite angezeigt
-    // wird
     phase: "set-selection",
 
-    // Nummer des Spielers, der das Spiel gewonnen hat (null = noch offen)
     winner: null,
   };
 }
 
-// Aktuell haben die Spieler keine eigenen Namen
 function getPlayerName(playerNumber) {
-  return `Player ${playerNumber}`;
+  const state = loadGameState();
+
+  if (state === null) {
+    return `Player ${playerNumber}`;
+  }
+
+  if (playerNumber === 1) {
+    return state.player1Name || "Player 1";
+  }
+
+  return state.player2Name || "Player 2";
 }
 
 function saveGameState(state) {

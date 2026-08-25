@@ -9,108 +9,216 @@ const disneyCharacters = [
     id: 1,
     name: "Aladdin",
     image: "src/disney/aladdin.avif",
+
+    human: true,
+    female: false,
+    animal: false,
+    hasHair: true,
+    canFly: false,
   },
 
   {
     id: 2,
     name: "Ariel",
     image: "src/disney/ariel.avif",
+
+    human: true,
+    female: true,
+    animal: false,
+    hasHair: true,
+    canFly: false,
   },
 
   {
     id: 3,
     name: "Bambi",
     image: "src/disney/bambi.avif",
+
+    human: false,
+    female: false,
+    animal: true,
+    hasHair: false,
+    canFly: false,
   },
 
   {
     id: 4,
     name: "Cinderella",
     image: "src/disney/cinderella.avif",
+
+    human: true,
+    female: true,
+    animal: false,
+    hasHair: true,
+    canFly: false,
   },
 
   {
     id: 5,
     name: "Donald Duck",
     image: "src/disney/donald_duck.avif",
+
+    human: false,
+    female: false,
+    animal: true,
+    hasHair: false,
+    canFly: true,
   },
 
   {
     id: 6,
     name: "Dumbo",
     image: "src/disney/dumbo.avif",
+
+    human: false,
+    female: false,
+    animal: true,
+    hasHair: false,
+    canFly: true,
   },
 
   {
     id: 7,
     name: "Goofy",
     image: "src/disney/goofy.avif",
+
+    human: false,
+    female: false,
+    animal: true,
+    hasHair: false,
+    canFly: false,
   },
 
   {
     id: 8,
     name: "Hercules",
     image: "src/disney/hercules.avif",
+
+    human: true,
+    female: false,
+    animal: false,
+    hasHair: true,
+    canFly: false,
   },
 
   {
     id: 9,
     name: "Lightning McQueen",
     image: "src/disney/lightning_mcqueen.avif",
+
+    human: false,
+    female: false,
+    animal: false,
+    hasHair: false,
+    canFly: false,
   },
 
   {
     id: 10,
     name: "Merida",
     image: "src/disney/merida.avif",
+
+    human: true,
+    female: true,
+    animal: false,
+    hasHair: true,
+    canFly: false,
   },
 
   {
     id: 11,
     name: "Mickey Mouse",
     image: "src/disney/mickey_mouse.avif",
+
+    human: false,
+    female: false,
+    animal: true,
+    hasHair: false,
+    canFly: false,
   },
 
   {
     id: 12,
     name: "Mike",
     image: "src/disney/mike.avif",
+
+    human: false,
+    female: false,
+    animal: false,
+    hasHair: false,
+    canFly: false,
   },
 
   {
     id: 13,
     name: "Moana",
     image: "src/disney/moana.avif",
+
+    human: true,
+    female: true,
+    animal: false,
+    hasHair: true,
+    canFly: false,
   },
 
   {
     id: 14,
     name: "Olaf",
     image: "src/disney/olaf.avif",
+
+    human: false,
+    female: false,
+    animal: false,
+    hasHair: false,
+    canFly: false,
   },
 
   {
     id: 15,
     name: "Pinocchio",
     image: "src/disney/pinocchio.avif",
+
+    human: false,
+    female: false,
+    animal: false,
+    hasHair: true,
+    canFly: false,
   },
 
   {
     id: 16,
     name: "Stitch",
     image: "src/disney/stitch.avif",
+
+    human: false,
+    female: false,
+    animal: false,
+    hasHair: false,
+    canFly: false,
   },
 
   {
     id: 17,
     name: "Tinker Bell",
     image: "src/disney/tinker_bell.avif",
+
+    human: true,
+    female: true,
+    animal: false,
+    hasHair: true,
+    canFly: true,
   },
 
   {
     id: 18,
     name: "Winnie The Pooh",
     image: "src/disney/winnie_the_pooh.avif",
+
+    human: false,
+    female: false,
+    animal: true,
+    hasHair: false,
+    canFly: false,
   },
 ];
 
@@ -311,7 +419,7 @@ const marioCharacters = [
     image: "src/mario/shy_guy.png",
   },
   {
-    id: 17,
+    id: 18,
     name: "Goomba",
     image: "src/mario/goomba.png",
   },

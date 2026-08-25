@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Guess Who?</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="js/header.js"></script>
+  </head>
+
+  <body>
+    <game-header cancel></game-header>
+
+    <main>
+      <section id="single-player-screen" class="screen">
+        <h2>Disney</h2>
+
+        <p id="question-counter">Questions left: 8</p>
+
+        <section class="question-section">
+          <h3>Ask a question</h3>
+
+          <div class="question-buttons">
+            <button class="question-button" type="button" data-property="human">
+              Is your character human?
+            </button>
+
+            <button
+              class="question-button"
+              type="button"
+              data-property="female"
+            >
+              Is your character female?
+            </button>
+
+            <button
+              class="question-button"
+              type="button"
+              data-property="animal"
+            >
+              Is your character an animal?
+            </button>
+
+            <button
+              class="question-button"
+              type="button"
+              data-property="hasHair"
+            >
+              Does your character have hair?
+            </button>
+
+            <button
+              class="question-button"
+              type="button"
+              data-property="canFly"
+            >
+              Can your character fly?
+            </button>
+          </div>
+
+          <p id="computer-answer" class="computer-answer"></p>
+        </section>
+        <section id="single-player-grid" class="character-grid"></section>
+
+        <section class="game-controls">
+          <button id="single-reset-button" type="button">Reset Board</button>
+        </section>
+      </section>
+    </main>
+
+    <script src="js/character_data.js"></script>
+    <script src="js/characters.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/cancel.js"></script>
+    <script src="js/single_player.js"></script>
+  </body>
+</html>
