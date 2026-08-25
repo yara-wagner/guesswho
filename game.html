@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="css/style.css" />
 
     <script src="js/header.js"></script>
+
+    <!-- Web-Component für die Lottie-Konfetti-Animation im Gewinner-Pop-up -->
+    <script
+      type="module"
+      src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.27/dist/index.js"
+    ></script>
   </head>
 
   <body>
@@ -35,6 +41,14 @@
 
       <!-- WIN POP-UP -->
       <section id="win-overlay" class="overlay hidden">
+        <!-- Konfetti liegt über dem ganzen Overlay, klickt aber nicht mit -->
+        <dotlottie-wc
+          id="win-confetti"
+          class="win-confetti"
+          src="https://lottie.host/7bac9987-1953-40c4-a7de-c141a24e51ee/yTJuAa10iJ.lottie"
+          loop
+        ></dotlottie-wc>
+
         <article class="win-dialog">
           <span class="win-dialog-icon">🎉</span>
 

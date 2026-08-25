@@ -20,6 +20,8 @@ const winText = document.getElementById("win-text");
 
 const winCharacterImage = document.getElementById("win-character-image");
 
+const winConfetti = document.getElementById("win-confetti");
+
 const newGameButton = document.getElementById("new-game-button");
 
 const homeButton = document.getElementById("home-button");
@@ -147,6 +149,20 @@ function showWinDialog() {
   winCharacterImage.alt = secret.name;
 
   winOverlay.classList.remove("hidden");
+
+  playConfetti();
+}
+
+function playConfetti() {
+  // Die Web-Component wird als Modul geladen und ist eventuell noch nicht
+  // bereit – dann startet sie über das autoplay-Attribut, sobald sie da ist
+  if (winConfetti.dotLottie) {
+    winConfetti.dotLottie.setFrame(0);
+
+    winConfetti.dotLottie.play();
+  } else {
+    winConfetti.setAttribute("autoplay", "");
+  }
 }
 
 // =============================

@@ -636,7 +636,20 @@ button.random-selection-button {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
+/* Konfetti-Animation: füllt das ganze Overlay und liegt über dem Dialog,
+   lässt Klicks aber durch (pointer-events: none) */
+.win-confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
 .win-dialog {
+  position: relative;
+  z-index: 1;
   width: min(400px, 100%);
   padding: 30px 24px;
   display: flex;
