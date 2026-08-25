@@ -36,6 +36,22 @@ function createSetTile(characterSet) {
   tile.appendChild(icon);
   tile.appendChild(name);
 
+  if (
+  gameState.gameMode === "single-player" &&
+  characterSet.id === "mario"
+) {
+  tile.disabled = true;
+
+  const badge = document.createElement("span");
+
+  badge.classList.add("tile-badge");
+  badge.textContent = "Coming soon";
+
+  tile.appendChild(badge);
+
+  return tile;
+}
+
   if (characterSet.available === false) {
     tile.disabled = true;
 
@@ -45,15 +61,19 @@ function createSetTile(characterSet) {
     badge.textContent = "Coming soon";
 
     tile.appendChild(badge);
-  } else if (characterSet.custom === true) {
-    const hint = document.createElement("span");
+  } else if (
+  characterSet.custom === true &&
+  gameState.gameMode === "single-player"
+) {
+  tile.disabled = true;
 
-    hint.classList.add("set-tile-count");
-    hint.textContent = "your own characters";
+  const badge = document.createElement("span");
 
-    tile.appendChild(hint);
+  badge.classList.add("tile-badge");
+  badge.textContent = "Multi-Player only";
 
-    tile.addEventListener("click", createCustomSet);
+  tile.appendChild(badge);
+} else if (characterSet.custom === true) {
   } else {
     const count = document.createElement("span");
 
@@ -81,6 +101,29 @@ function renderCharacterSets() {
 function selectCharacterSet(characterSet) {
   gameState.characterSetId = characterSet.id;
 
+  if (gameState.gameMode === "single-player") {
+    const characters = characterSet.characters;
+
+    if (characters.length === 0) {
+      return;
+    }
+
+    const randomIndex = Math.floor(Math.random() * characters.length);
+
+    gameState.player2Secret = characters[randomIndex];
+
+    gameState.questionsLeft = 8;
+
+    gameState.phase = "game";
+
+    saveGameState(gameState);
+
+    window.location.href = "single_player.html";
+
+    return;
+  }
+
+  // Multi-Player
   gameState.phase = "selection";
 
   saveGameState(gameState);

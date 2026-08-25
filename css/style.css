@@ -118,8 +118,7 @@ button:where(:not(.tile, .mode-tile, .card-button)):disabled {
    beim Button selber weiter unten. */
 button.cancel-game-button,
 button.random-selection-button,
-button.back-button,
-button.question-button {
+button.back-button {
   border: 2px solid #222;
   background-color: transparent;
   color: #222;
@@ -127,8 +126,7 @@ button.question-button {
 
 button.cancel-game-button:hover,
 button.random-selection-button:hover,
-button.back-button:hover,
-button.question-button:hover {
+button.back-button:hover {
   background-color: #222;
   color: white;
 }
@@ -848,26 +846,43 @@ button.back-button {
 ========================= */
 
 .question-section {
-  width: min(800px, 95%);
-  margin: 0 auto 30px;
-  padding: 20px;
+  width: min(600px, 95%);
+  margin: 0 auto 20px;
+  padding: 16px;
   border-radius: 10px;
   background-color: white;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-.question-section h3 {
-  margin-top: 0;
-  text-align: center;
+/* Frage aussuchen: Dropdown und "Ask"-Button nebeneinander in einer Zeile */
+
+.question-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* Die Frage-Buttons selber sind im Umriss-Stil, siehe BUTTONS */
+/* Das Dropdown nimmt den freien Platz ein, der Button bleibt so breit,
+   wie seine Beschriftung es braucht */
 
-.question-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
+#question-select {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  color: #222;
+  font-size: 14px;
+}
+
+#question-select:focus {
+  border-color: #222;
+  outline: none;
+}
+
+button#ask-question-button {
+  flex-shrink: 0;
 }
 
 .computer-answer {
