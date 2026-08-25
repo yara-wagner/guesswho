@@ -20,7 +20,7 @@ class GameHeader extends HTMLElement {
 
     const logoImage = `
       <img
-        src="src/guesswho_logo_ohne_bg.svg"
+        src="src/guesswho_logo_black.svg"
         alt="Guess Who?"
       />
     `;
