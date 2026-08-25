@@ -1,4 +1,53 @@
 /* =========================
+   FONT
+========================= */
+
+/* Lato für den Fliesstext. Regular und Bold jeweils normal und kursiv –
+   das sind die Schnitte, die das Spiel verwendet. */
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* BellaFont nur für Überschriften und Titel (siehe h1–h6 weiter unten) */
+
+@font-face {
+  font-family: 'BellaFont';
+  src: url('../fonts/Bella-yw64Z.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Verhindert unsichtbaren Text während des Ladevorgangs */
+}
+
+/* =========================
    GENERAL
 ========================= */
 
@@ -9,11 +58,31 @@
 body {
   margin: 0;
 
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Lato', sans-serif;
 
   background-color: #f4f4f4;
 
   color: #222;
+}
+
+/* Überschriften und Titel in BellaFont */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'BellaFont', sans-serif;
+}
+
+/* Formular-Elemente erben die Schrift nicht von sich aus */
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 /* =========================
@@ -37,7 +106,6 @@ button:where(:not(.tile, .mode-tile, .card-button)) {
   background-color: #222;
   color: white;
 
-  font-family: inherit;
   font-size: inherit;
 
   cursor: pointer;
@@ -163,8 +231,6 @@ button.cancel-game-button:hover {
     background-color: white;
     color: inherit;
 
-    font-family: inherit;
-
     box-shadow:
         0 3px 10px rgba(0, 0, 0, 0.15);
 
@@ -187,7 +253,10 @@ button.cancel-game-button:hover {
     line-height: 1;
 }
 
+/* Der Set-Name ist der Titel der Kachel – deshalb BellaFont */
+
 .tile-name {
+    font-family: 'BellaFont', sans-serif;
     font-size: 20px;
     font-weight: bold;
 }
@@ -246,8 +315,6 @@ button.cancel-game-button:hover {
     background-color: white;
     color: inherit;
 
-    font-family: inherit;
-
     box-shadow:
         0 3px 10px rgba(0, 0, 0, 0.15);
 
@@ -270,7 +337,10 @@ button.cancel-game-button:hover {
     line-height: 1;
 }
 
+/* Der Modus-Name ist der Titel der Kachel – deshalb BellaFont */
+
 .mode-tile-name {
+    font-family: 'BellaFont', sans-serif;
     font-size: 20px;
     font-weight: bold;
 }
@@ -679,8 +749,6 @@ button.random-selection-button:hover {
     background-color: #ececec;
     color: #666;
 
-    font-family: inherit;
-
     cursor: pointer;
 }
 
@@ -719,7 +787,6 @@ button.random-selection-button:hover {
     background-color: white;
     color: inherit;
 
-    font-family: inherit;
     font-size: inherit;
     font-weight: bold;
 
@@ -757,7 +824,6 @@ button.random-selection-button:hover {
     background-color: rgba(0, 0, 0, 0.55);
     color: white;
 
-    font-family: inherit;
     font-size: 14px;
     line-height: 1;
 
@@ -792,8 +858,6 @@ button.random-selection-button:hover {
 
     background-color: transparent;
     color: #666;
-
-    font-family: inherit;
 
     cursor: pointer;
 
@@ -939,7 +1003,6 @@ button.info-button {
   background-color: white;
   color: #222;
 
-  font-family: Georgia, serif;
   font-size: 17px;
   font-weight: bold;
 
@@ -1108,7 +1171,6 @@ button.close-rules-button:hover {
   background-color: white;
   color: #222;
 
-  font-family: inherit;
   font-size: 16px;
 }
 
