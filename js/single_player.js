@@ -2,36 +2,21 @@
 // SINGLE PLAYER
 // =============================
 
-const singlePlayerGrid = document.getElementById(
-  "single-player-grid"
-);
+const singlePlayerGrid = document.getElementById("single-player-grid");
 
-const questionCounter = document.getElementById(
-  "question-counter"
-);
+const questionCounter = document.getElementById("question-counter");
 
-const singleResetButton = document.getElementById(
-  "single-reset-button"
-);
+const singleResetButton = document.getElementById("single-reset-button");
 
-const questionSelect = document.getElementById(
-  "question-select"
-);
+const questionSelect = document.getElementById("question-select");
 
-const askQuestionButton = document.getElementById(
-  "ask-question-button"
-);
+const askQuestionButton = document.getElementById("ask-question-button");
 
-const computerAnswer = document.getElementById(
-  "computer-answer"
-);
+const computerAnswer = document.getElementById("computer-answer");
 
-const singlePlayerSetTitle = document.getElementById(
-  "single-player-set-title"
-);
+const singlePlayerSetTitle = document.getElementById("single-player-set-title");
 
 const gameState = loadGameState();
-
 
 // =============================
 // SET TITLE
@@ -46,18 +31,14 @@ function updateSetTitle() {
     return;
   }
 
-  const characterSet = getCharacterSet(
-    gameState.characterSetId
-  );
+  const characterSet = getCharacterSet(gameState.characterSetId);
 
   if (characterSet === null) {
     return;
   }
 
-  singlePlayerSetTitle.textContent =
-    characterSet.name;
+  singlePlayerSetTitle.textContent = characterSet.name;
 }
-
 
 // =============================
 // RENDER CHARACTERS
@@ -69,16 +50,11 @@ function renderSinglePlayerCharacters() {
   const characters = getSetCharacters(gameState);
 
   characters.forEach(function (character) {
-    const card = createCharacterCard(
-      character,
-      function () {
-        toggleSinglePlayerCharacter(character.id);
-      }
-    );
+    const card = createCharacterCard(character, function () {
+      toggleSinglePlayerCharacter(character.id);
+    });
 
-    if (
-      gameState.player1Eliminated.includes(character.id)
-    ) {
+    if (gameState.player1Eliminated.includes(character.id)) {
       card.classList.add("eliminated");
     }
 
@@ -86,10 +62,7 @@ function renderSinglePlayerCharacters() {
   });
 
   updateQuestionCounter();
-
 }
-
-
 
 // =============================
 // QUESTION SELECTION
@@ -211,10 +184,8 @@ const questionsBySet = {
   ],
 };
 
-
 function loadQuestions() {
-  const questions =
-    questionsBySet[gameState.characterSetId];
+  const questions = questionsBySet[gameState.characterSetId];
 
   if (questions === undefined) {
     return;
@@ -222,18 +193,15 @@ function loadQuestions() {
 
   questionSelect.innerHTML = "";
 
-  const defaultOption =
-    document.createElement("option");
+  const defaultOption = document.createElement("option");
 
   defaultOption.value = "";
-  defaultOption.textContent =
-    "Select a question...";
+  defaultOption.textContent = "Select a question...";
 
   questionSelect.appendChild(defaultOption);
 
   questions.forEach(function (question) {
-    const option =
-      document.createElement("option");
+    const option = document.createElement("option");
 
     option.value = question.property;
     option.textContent = question.text;
@@ -242,7 +210,6 @@ function loadQuestions() {
   });
 }
 
-
 // =============================
 // ASK QUESTION
 // =============================
@@ -250,21 +217,16 @@ function loadQuestions() {
 function askQuestion(property) {
   const characters = getSetCharacters(gameState);
 
-  const secretCharacter =
-    characters.find(function (character) {
-      return (
-        character.id ===
-        gameState.player2Secret.id
-      );
-    });
+  const secretCharacter = characters.find(function (character) {
+    return character.id === gameState.player2Secret.id;
+  });
 
   if (secretCharacter === undefined) {
     return;
   }
 
   if (gameState.questionsLeft <= 0) {
-    computerAnswer.textContent =
-      "No questions left.";
+    computerAnswer.textContent = "No questions left.";
 
     return;
   }
@@ -272,24 +234,22 @@ function askQuestion(property) {
   const answer = secretCharacter[property];
 
   if (answer === true) {
-  computerAnswer.textContent = "YES";
-} else {
-  computerAnswer.textContent = "NO";
+    computerAnswer.textContent = "YES";
+  } else {
+    computerAnswer.textContent = "NO";
 
-  gameState.questionsLeft = Math.max(
-    0,
-    gameState.questionsLeft - 1
-  );
+    gameState.questionsLeft = Math.max(0, gameState.questionsLeft - 1);
 
-  saveGameState(gameState);
+    saveGameState(gameState);
 
-  updateQuestionCounter();
+    updateQuestionCounter();
 
-  if (gameState.questionsLeft === 0) {
-    window.location.href =
-      "single_player_result.html";
+    if (gameState.questionsLeft === 0) {
+      setTimeout(function () {
+        window.location.href = "single_player_result.html";
+      }, 700);
+    }
   }
-}
 }
 
 // =============================
@@ -297,11 +257,9 @@ function askQuestion(property) {
 // =============================
 
 function toggleSinglePlayerCharacter(characterId) {
-  const eliminated =
-    gameState.player1Eliminated;
+  const eliminated = gameState.player1Eliminated;
 
-  const index =
-    eliminated.indexOf(characterId);
+  const index = eliminated.indexOf(characterId);
 
   if (index === -1) {
     eliminated.push(characterId);
@@ -314,16 +272,13 @@ function toggleSinglePlayerCharacter(characterId) {
   renderSinglePlayerCharacters();
 }
 
-
 // =============================
 // QUESTION COUNTER
 // =============================
 
 function updateQuestionCounter() {
-  questionCounter.textContent =
-    `Questions left: ${gameState.questionsLeft}`;
+  questionCounter.textContent = `Questions left: ${gameState.questionsLeft}`;
 }
-
 
 // =============================
 // RESET BOARD
@@ -337,41 +292,30 @@ function resetBoard() {
   renderSinglePlayerCharacters();
 }
 
-
 // =============================
 // PAGE SETUP
 // =============================
 
-if (
-  gameState === null ||
-  gameState.gameMode !== "single-player"
-) {
+if (gameState === null || gameState.gameMode !== "single-player") {
   window.location.replace("index.html");
 } else {
-  singleResetButton.addEventListener(
-    "click",
-    resetBoard
-  );
+  singleResetButton.addEventListener("click", resetBoard);
 
   questionSelect.addEventListener("change", function () {
     computerAnswer.textContent = "";
   });
 
-  askQuestionButton.addEventListener(
-    "click",
-    function () {
-      const property = questionSelect.value;
+  askQuestionButton.addEventListener("click", function () {
+    const property = questionSelect.value;
 
-      if (property === "") {
-        computerAnswer.textContent =
-          "Select a question first.";
+    if (property === "") {
+      computerAnswer.textContent = "Select a question first.";
 
-        return;
-      }
-
-      askQuestion(property);
+      return;
     }
-  );
+
+    askQuestion(property);
+  });
 
   loadQuestions();
 
@@ -379,4 +323,3 @@ if (
 
   renderSinglePlayerCharacters();
 }
-  
