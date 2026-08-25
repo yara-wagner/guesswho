@@ -52,16 +52,17 @@ function createSetTile(characterSet) {
   return tile;
 }
 
-  if (characterSet.available === false) {
-    tile.disabled = true;
+if (characterSet.available === false) {
+  tile.disabled = true;
 
-    const badge = document.createElement("span");
+  const badge = document.createElement("span");
 
-    badge.classList.add("tile-badge");
-    badge.textContent = "Coming soon";
+  badge.classList.add("tile-badge");
+  badge.textContent = "Coming soon";
 
-    tile.appendChild(badge);
-  } else if (
+  tile.appendChild(badge);
+
+} else if (
   characterSet.custom === true &&
   gameState.gameMode === "single-player"
 ) {
@@ -73,19 +74,33 @@ function createSetTile(characterSet) {
   badge.textContent = "Multi-Player only";
 
   tile.appendChild(badge);
+
 } else if (characterSet.custom === true) {
-  } else {
-    const count = document.createElement("span");
+  const badge = document.createElement("span");
 
-    count.classList.add("set-tile-count");
-    count.textContent = `${characterSet.characters.length} characters`;
+  badge.classList.add("set-tile-count");
+  badge.textContent = "Create your own set";
 
-    tile.appendChild(count);
+  tile.appendChild(badge);
 
-    tile.addEventListener("click", () => {
-      selectCharacterSet(characterSet);
-    });
-  }
+  tile.addEventListener("click", function () {
+    createCustomSet();
+  });
+
+} else {
+  const count = document.createElement("span");
+
+  count.classList.add("set-tile-count");
+
+  count.textContent =
+    `${characterSet.characters.length} characters`;
+
+  tile.appendChild(count);
+
+  tile.addEventListener("click", function () {
+    selectCharacterSet(characterSet);
+  });
+}
 
   return tile;
 }
