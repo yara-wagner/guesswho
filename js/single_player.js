@@ -42,6 +42,10 @@ function updateSetTitle() {
     return;
   }
 
+  if (gameState === null) {
+    return;
+  }
+
   const characterSet = getCharacterSet(
     gameState.characterSetId
   );
@@ -82,7 +86,9 @@ function renderSinglePlayerCharacters() {
   });
 
   updateQuestionCounter();
+
 }
+
 
 
 // =============================
@@ -266,21 +272,25 @@ function askQuestion(property) {
   const answer = secretCharacter[property];
 
   if (answer === true) {
-    computerAnswer.textContent = "YES";
-  } else {
-    computerAnswer.textContent = "NO";
+  computerAnswer.textContent = "YES";
+} else {
+  computerAnswer.textContent = "NO";
 
-    gameState.questionsLeft = Math.max(
-      0,
-      gameState.questionsLeft - 1
-    );
+  gameState.questionsLeft = Math.max(
+    0,
+    gameState.questionsLeft - 1
+  );
 
-    saveGameState(gameState);
+  saveGameState(gameState);
 
-    updateQuestionCounter();
+  updateQuestionCounter();
+
+  if (gameState.questionsLeft === 0) {
+    window.location.href =
+      "single_player_result.html";
   }
 }
-
+}
 
 // =============================
 // ELIMINATE CHARACTER

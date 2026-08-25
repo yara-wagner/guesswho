@@ -904,3 +904,66 @@ button#ask-question-button {
   font-size: 24px;
   font-weight: bold;
 }
+
+
+/* =========================
+   SINGLE PLAYER RESULT
+========================= */
+
+.single-result-screen {
+  width: min(500px, 95%);
+
+  margin: 40px auto;
+
+  text-align: center;
+}
+
+.single-result-card {
+  padding: 32px;
+
+  border-radius: 12px;
+
+  background-color: white;
+
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.single-result-card h2 {
+  margin-top: 0;
+
+  font-size: 30px;
+}
+
+.single-result-message {
+  font-size: 18px;
+
+  color: #666;
+}
+
+.result-character-image {
+  width: min(220px, 80%);
+
+  aspect-ratio: 1 / 1;
+
+  object-fit: cover;
+
+  margin-top: 10px;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.single-result-card h3 {
+  margin: 16px 0 8px;
+
+  font-size: 24px;
+}
+
+.single-result-sorry {
+  margin-bottom: 24px;
+
+  color: #666;
+}
