@@ -91,7 +91,7 @@ textarea {
    Die Ausnahmen stehen in :where(), damit sie die Spezifität nicht
    erhöhen – so können einzelne Buttons (z. B. .cancel-game-button)
    weiter unten einfach über ihre Klasse angepasst werden. */
-button:where(:not(.tile, .mode-tile, .card-button)) {
+button:where(:not(.tile, .mode-tile, .card-button, .logo-button)) {
   padding: 10px 18px;
   border: none;
   border-radius: 6px;
@@ -101,13 +101,13 @@ button:where(:not(.tile, .mode-tile, .card-button)) {
   cursor: pointer;
 }
 
-button:where(:not(.tile, .mode-tile, .card-button)):hover {
+button:where(:not(.tile, .mode-tile, .card-button, .logo-button)):hover {
   background-color: #444;
 }
 
 /* Deaktivierter Button – z. B. "Start game", solange das Custom-Set
    noch nicht fertig ist */
-button:where(:not(.tile, .mode-tile, .card-button)):disabled {
+button:where(:not(.tile, .mode-tile, .card-button, .logo-button)):disabled {
   background-color: #bbb;
   cursor: not-allowed;
 }
@@ -151,11 +151,28 @@ game-header {
   padding: 12px 20px;
 }
 
+/* Linke Gruppe: Logo und "← Back" nebeneinander (siehe js/header.js) */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* Der Titel als Logo – Bild oben links.
    Das <h1> bleibt für die Struktur bestehen, sichtbar ist nur das Bild. */
 .game-logo {
   margin: 0;
   line-height: 0;
+}
+
+/* Auf den Spielseiten steckt das Logo in einem Button (siehe js/header.js),
+   der zurück zur Startseite führt. Sichtbar bleibt nur das Bild. */
+button.logo-button {
+  display: block;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 .game-logo img {
