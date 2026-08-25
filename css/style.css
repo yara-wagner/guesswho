@@ -89,7 +89,7 @@ textarea {
    Stile mitbringen.
 
    Die Ausnahmen stehen in :where(), damit sie die Spezifität nicht
-   erhöhen – so können einzelne Buttons (z. B. .leave-game-button)
+   erhöhen. So können einzelne Buttons (z. B. .leave-game-button)
    weiter unten einfach über ihre Klasse angepasst werden. */
 button:where(:not(.tile, .mode-tile, .card-button, .logo-button)) {
   padding: 10px 18px;
@@ -105,7 +105,7 @@ button:where(:not(.tile, .mode-tile, .card-button, .logo-button)):hover {
   background-color: #444;
 }
 
-/* Deaktivierter Button – z. B. "Start game", solange das Custom-Set
+/* Deaktivierter Button (z. B. "Start game"), solange das Custom-Set
    noch nicht fertig ist */
 button:where(:not(.tile, .mode-tile, .card-button, .logo-button)):disabled {
   background-color: #bbb;
@@ -207,7 +207,7 @@ button.leave-game-button {
    TILES
 ========================= */
 
-/* Grosse anklickbare Kachel – für die Charakter-Set-Auswahl (.tile) und
+/* Grosse anklickbare Kachel für die Charakter-Set-Auswahl (.tile) und
    für die Modus-Auswahl (.mode-tile). Beide sehen gleich aus, deshalb
    teilen sie sich die Stile. Die Klassen bleiben getrennt, damit eine
    von beiden bei Bedarf wieder eigene Regeln bekommen kann. */
@@ -245,7 +245,7 @@ button.leave-game-button {
   line-height: 1;
 }
 
-/* Der Set- bzw. Modus-Name ist der Titel der Kachel – deshalb BellaFont */
+/* Der Set- bzw. Modus-Name ist der Titel der Kachel, deshalb BellaFont */
 .tile-name,
 .mode-tile-name {
   font-family: "BellaFont", sans-serif;
@@ -279,6 +279,8 @@ button.leave-game-button {
    Modus-Kachel zusätzlich braucht */
 .mode-tile {
   min-height: 220px;
+  /* füllt den Wrapper, damit beide Kacheln gleich gross sind */
+  height: 100%;
 }
 
 /* Breite und Abstand des Auswahl-Bereichs – gilt für die Modus- und
@@ -297,6 +299,9 @@ button.leave-game-button {
 .mode-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* alle Zeilen gleich hoch – so bleiben die Kacheln auch dann gleich
+     gross, wenn sie untereinander stehen (schmaler Bildschirm) */
+  grid-auto-rows: 1fr;
   gap: 24px;
 }
 
@@ -324,7 +329,7 @@ button.leave-game-button {
   flex: 1;
   margin: 0;
   padding: 0 4px;
-  text-align: center;
+  text-align: left;
   font-size: 14px;
   line-height: 1.5;
   color: #666;
@@ -701,8 +706,11 @@ button.random-selection-button {
    MODE INFO BUTTON
 ========================= */
 
+/* füllt die ganze Karte, damit die Kachel die volle Zeilenhöhe bekommt */
 .mode-tile-wrapper {
   position: relative;
+  flex: 1;
+  display: flex;
 }
 
 button.info-button {
