@@ -18,6 +18,10 @@ const singlePlayerSetTitle = document.getElementById("single-player-set-title");
 
 const gameState = loadGameState();
 
+const finalGuessButton = document.getElementById("final-guess-button");
+
+let finalGuessMode = false;
+
 // =============================
 // SET TITLE
 // =============================
@@ -51,6 +55,26 @@ function renderSinglePlayerCharacters() {
 
   characters.forEach(function (character) {
     const card = createCharacterCard(character, function () {
+      if (finalGuessMode === true) {
+        makeFinalGuess(character);
+        return;
+      }
+
+      // =============================
+      // FINAL GUESS
+      // =============================
+
+      function makeFinalGuess(character) {
+        if (gameState.player2Secret === null) {
+          return;
+        }
+
+        if (character.id === gameState.player2Secret.id) {
+          window.location.href = "single_player_win.html";
+        } else {
+          window.location.href = "single_player_result.html";
+        }
+      }
       toggleSinglePlayerCharacter(character.id);
     });
 
@@ -300,6 +324,26 @@ if (gameState === null || gameState.gameMode !== "single-player") {
   window.location.replace("index.html");
 } else {
   singleResetButton.addEventListener("click", resetBoard);
+
+  finalGuessButton.addEventListener(
+  "click",
+  function () {
+    finalGuessMode = !finalGuessMode;
+
+    if (finalGuessMode === true) {
+      finalGuessButton.textContent =
+        "Cancel Guess";
+
+      computerAnswer.textContent =
+        "Click the character you want to guess.";
+    } else {
+      finalGuessButton.textContent =
+        "Final Guess";
+
+      computerAnswer.textContent = "";
+    }
+  }
+);
 
   questionSelect.addEventListener("change", function () {
     computerAnswer.textContent = "";

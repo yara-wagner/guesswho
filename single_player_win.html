@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Guess Who?</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="js/header.js"></script>
+  </head>
+
+  <body>
+    <game-header></game-header>
+
+    <main>
+      <section class="single-result-screen">
+        <div class="single-result-card">
+
+          <h2>You got it!</h2>
+
+          <p class="single-result-message">
+            You guessed the correct character.
+          </p>
+
+          <img
+            id="win-character-image"
+            class="result-character-image"
+            src=""
+            alt=""
+          />
+
+          <h3 id="win-character-name"></h3>
+
+          <p class="single-result-sorry">
+            Nice work!
+          </p>
+
+          <button
+            id="play-again-button"
+            type="button"
+          >
+            Play again
+          </button>
+
+        </div>
+      </section>
+    </main>
+
+    <script src="js/state.js"></script>
+    <script src="js/single_player_win.js"></script>
+  </body>
+</html>

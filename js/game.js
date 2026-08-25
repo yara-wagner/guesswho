@@ -24,6 +24,13 @@ const newGameButton = document.getElementById("new-game-button");
 
 const homeButton = document.getElementById("home-button");
 
+const finalGuessButton =
+  document.getElementById(
+    "final-guess-button"
+  );
+
+let finalGuessMode = false;
+
 // =============================
 // GAME STATE
 // =============================
@@ -40,9 +47,18 @@ function renderCharacters() {
   const eliminatedCharacters = getEliminatedCharacters(gameState);
 
   getSetCharacters(gameState).forEach((character) => {
-    const card = createCharacterCard(character, () => {
-      toggleCharacter(character.id);
-    });
+    const card = createCharacterCard(
+  character,
+  function () {
+
+    if (finalGuessMode === true) {
+      makeFinalGuess(character);
+      return;
+    }
+
+    toggleCharacter(character.id);
+  }
+);
 
     if (eliminatedCharacters.includes(character.id)) {
       card.classList.add("eliminated");
@@ -257,3 +273,48 @@ if (gameState === null) {
 
   startTurn();
 }
+
+
+function makeFinalGuess(character) {
+  const opponentSecret =
+    getOpponentSecret(gameState);
+
+  if (opponentSecret === null) {
+    return;
+  }
+
+  if (
+    character.id === opponentSecret.id
+  ) {
+    gameState.winner =
+      gameState.currentPlayer;
+  } else {
+    gameState.winner =
+      gameState.currentPlayer === 1
+        ? 2
+        : 1;
+  }
+
+  gameState.phase = "finished";
+
+  saveGameState(gameState);
+
+  // Hier kommt gleich deine
+  // Multiplayer-Ergebnisseite hin
+}
+
+
+finalGuessButton.addEventListener(
+  "click",
+  function () {
+    finalGuessMode = !finalGuessMode;
+
+    if (finalGuessMode === true) {
+      finalGuessButton.textContent =
+        "Cancel Guess";
+    } else {
+      finalGuessButton.textContent =
+        "Final Guess";
+    }
+  }
+);
