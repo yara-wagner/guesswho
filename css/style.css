@@ -343,7 +343,7 @@ game-header {
   display: block;
 }
 
-/* Schmale Leiste: Logo links, "Back to start" rechts. So bleibt oben
+/* Schmale Leiste: Logo links, die Buttons rechts. So bleibt oben
    möglichst wenig Platz belegt und der Inhalt ist auch auf kleinen
    Bildschirmen gut sichtbar.
 
@@ -359,11 +359,12 @@ game-header {
   background-color: var(--bg-soft);
 }
 
-/* Linke Gruppe: Logo und "← Back" nebeneinander (siehe js/header.js) */
-.header-left {
+/* Rechte Gruppe: "← Back" und "Back to start" nebeneinander
+   (siehe js/header.js) */
+.header-buttons {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 /* Der Titel als Logo – Bild oben links.
@@ -411,9 +412,14 @@ button.leave-game-button {
     font-size: 13px;
   }
 
-  /* Auf dem Handy reicht der Pfeil – die Beschriftung nimmt nur Platz weg */
+  /* Auf dem Handy reicht der Pfeil – die Beschriftung nimmt nur Platz weg.
+     Senkrecht bleibt das Padding wie beim "Back to start"-Button. */
   button.back-button .back-button-text {
     display: none;
+  }
+
+  button.back-button {
+    padding: 8px 10px;
   }
 }
 
@@ -1267,9 +1273,11 @@ button.continue-button {
    BACK BUTTON
 ========================= */
 
-/* Umriss-Stil, siehe .secondary in BUTTONS */
+/* Umriss-Stil, siehe .secondary in BUTTONS.
+   Die senkrechten Abstände und die Schriftgrösse sind dieselben wie beim
+   "Back to start"-Button, damit die zwei im Header gleich hoch sind. */
 button.back-button {
-  padding: 8px 14px;
+  padding: 11px 16px;
   font-size: 14px;
 }
 

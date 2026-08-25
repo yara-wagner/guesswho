@@ -7,7 +7,8 @@
 // Button – zurück zur Startseite. Auf der Startseite selbst ist das Logo
 // nur ein Bild, dort gibt es nichts abzubrechen.
 //
-// Das Attribut "back" stellt einen "← Back"-Button neben das Logo. Er geht
+// Das Attribut "back" stellt oben rechts einen "← Back"-Button neben den
+// "Back to start"-Button (auf den Ergebnisseiten steht er dort allein). Er geht
 // einen Schritt im Spielablauf zurück (siehe js/back.js), die Seite muss
 // diese Datei also ebenfalls laden. Seiten mitten in einer Runde
 // (Pass-Screen, Board) haben kein "back": Dort gibt es keinen Schritt
@@ -26,54 +27,57 @@ class GameHeader extends HTMLElement {
       />
     `;
 
+    const backButtonMarkup = showBackButton
+      ? `
+        <button
+          class="back-button secondary"
+          type="button"
+          aria-label="Back"
+        >
+          <span data-icon="arrow-left"></span>
+          <span class="back-button-text">Back</span>
+        </button>
+      `
+      : "";
+
+    const leaveButtonMarkup = showLeaveButton
+      ? `
+        <button
+          class="leave-game-button secondary"
+          type="button"
+        >
+          <span data-icon="home"></span>
+          Back to start
+        </button>
+      `
+      : "";
+
     this.innerHTML = `
       <header class="game-header">
 
-        <div class="header-left">
-
-          <h1 class="game-logo">
-            ${
-              showLeaveButton
-                ? `
-                  <button
-                    class="logo-button"
-                    type="button"
-                    aria-label="Back to start"
-                  >
-                    ${logoImage}
-                  </button>
-                `
-                : logoImage
-            }
-          </h1>
-
+        <h1 class="game-logo">
           ${
-            showBackButton
+            showLeaveButton
               ? `
                 <button
-                  class="back-button secondary"
+                  class="logo-button"
                   type="button"
-                  aria-label="Back"
+                  aria-label="Back to start"
                 >
-                  <span data-icon="arrow-left"></span>
-                  <span class="back-button-text">Back</span>
+                  ${logoImage}
                 </button>
               `
-              : ""
+              : logoImage
           }
-
-        </div>
+        </h1>
 
         ${
-          showLeaveButton
+          showBackButton || showLeaveButton
             ? `
-              <button
-                class="leave-game-button secondary"
-                type="button"
-              >
-                <span data-icon="home"></span>
-                Back to start
-              </button>
+              <div class="header-buttons">
+                ${backButtonMarkup}
+                ${leaveButtonMarkup}
+              </div>
             `
             : ""
         }
