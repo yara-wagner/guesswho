@@ -58,9 +58,19 @@ function renderSinglePlayerCharacters() {
 // =============================
 
 function askQuestion(property) {
-  const secretCharacter = gameState.player2Secret;
+  const characters = getSetCharacters(gameState);
 
-  if (secretCharacter === null) {
+  const secretCharacter = characters.find(function (character) {
+    return character.id === gameState.player2Secret.id;
+  });
+
+  if (secretCharacter === undefined) {
+    return;
+  }
+
+  // Keine weiteren Fragen möglich
+  if (gameState.questionsLeft <= 0) {
+    computerAnswer.textContent = "No questions left.";
     return;
   }
 
@@ -68,13 +78,13 @@ function askQuestion(property) {
 
   if (answer === true) {
     computerAnswer.textContent = "YES";
-
-    // Bei YES wird keine Frage abgezogen
   } else {
     computerAnswer.textContent = "NO";
 
-    // Bei NO wird eine Frage abgezogen
-    gameState.questionsLeft -= 1;
+    gameState.questionsLeft = Math.max(
+      0,
+      gameState.questionsLeft - 1
+    );
 
     saveGameState(gameState);
 
@@ -141,13 +151,7 @@ if (
     resetBoard
   );
 
-  questionButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      const property = button.dataset.property;
-
-      askQuestion(property);
-    });
-  });
+  
 
   renderSinglePlayerCharacters();
 }
