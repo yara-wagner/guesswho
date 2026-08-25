@@ -392,6 +392,9 @@ function resetBoard() {
 
 if (gameState === null || gameState.gameMode !== "single-player") {
   window.location.replace("index.html");
+} else if (getCharacterSet(gameState.characterSetId) === null) {
+  // Es fehlt noch ein Charakter-Set
+  window.location.replace("character_sets.html");
 } else {
   singleResetButton.addEventListener("click", resetBoard);
 

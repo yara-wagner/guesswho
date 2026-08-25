@@ -298,6 +298,9 @@ if (gameState === null) {
 } else if (getCharacterSet(gameState.characterSetId) === null) {
   // Es fehlt noch ein Charakter-Set
   window.location.replace("character_sets.html");
+} else if (gameState.gameMode === "single-player") {
+  // Der Single-Player hat sein eigenes Board
+  window.location.replace("single_player.html");
 } else if (gameState.phase === "finished") {
   // Das Spiel ist entschieden – Board anzeigen und gratulieren
   newGameButton.addEventListener("click", startNewGame);

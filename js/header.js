@@ -7,16 +7,17 @@
 // Button – zurück zur Startseite. Auf der Startseite selbst ist das Logo
 // nur ein Bild, dort gibt es nichts abzubrechen.
 //
-// Neben dem Logo steht auf allen Seiten ausser der Startseite ein
-// "← Back"-Button, der einen Schritt zurück in der History geht.
+// Das Attribut "back" stellt einen "← Back"-Button neben das Logo. Er geht
+// einen Schritt im Spielablauf zurück (siehe js/back.js), die Seite muss
+// diese Datei also ebenfalls laden. Seiten mitten in einer Runde
+// (Pass-Screen, Board) haben kein "back": Dort gibt es keinen Schritt
+// zurück, nur den "Back to start"-Button.
 
 class GameHeader extends HTMLElement {
   connectedCallback() {
     const showLeaveButton = this.hasAttribute("leave");
 
-    const isStartPage =
-      window.location.pathname.endsWith("index.html") ||
-      window.location.pathname.endsWith("/");
+    const showBackButton = this.hasAttribute("back");
 
     const logoImage = `
       <img
@@ -47,9 +48,8 @@ class GameHeader extends HTMLElement {
           </h1>
 
           ${
-            isStartPage
-              ? ""
-              : `
+            showBackButton
+              ? `
                 <button
                   class="back-button secondary"
                   type="button"
@@ -59,6 +59,7 @@ class GameHeader extends HTMLElement {
                   <span class="back-button-text">Back</span>
                 </button>
               `
+              : ""
           }
 
         </div>
@@ -88,8 +89,10 @@ class GameHeader extends HTMLElement {
     const backButton = this.querySelector(".back-button");
 
     if (backButton !== null) {
+      // goBack() steht in js/back.js und ist hier noch nicht geladen.
+      // Der Aufruf im Callback wird erst beim Klick aufgelöst, dann ist es da.
       backButton.addEventListener("click", function () {
-        window.history.back();
+        goBack();
       });
     }
 

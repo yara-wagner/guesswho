@@ -163,6 +163,14 @@ function createCustomSet() {
 if (gameState === null) {
   // Ohne laufendes Spiel zurück zur Modus-Auswahl
   window.location.replace("index.html");
+} else if (gameState.gameMode === "single-player") {
+  // Im Single-Player läuft alles auf single_player.html – dort ist auch das
+  // Set schon gewählt
+  if (getCharacterSet(gameState.characterSetId) !== null) {
+    window.location.replace("single_player.html");
+  } else {
+    renderCharacterSets();
+  }
 } else if (getCharacterSet(gameState.characterSetId) !== null) {
   // Das Set ist bereits gewählt (das Spiel läuft schon)
   window.location.replace("character_selection.html");

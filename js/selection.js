@@ -134,6 +134,9 @@ if (gameState === null) {
 } else if (getCharacterSet(gameState.characterSetId) === null) {
   // Es fehlt noch ein Charakter-Set
   window.location.replace("character_sets.html");
+} else if (gameState.gameMode === "single-player") {
+  // Im Single-Player wählt niemand einen geheimen Charakter aus
+  window.location.replace("single_player.html");
 } else if (gameState.phase === "pass") {
   window.location.replace("pass.html");
 } else if (gameState.player2Secret !== null) {

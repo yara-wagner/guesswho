@@ -66,6 +66,9 @@ function continueToBoard() {
 if (gameState === null) {
   // Ohne laufendes Spiel zurück zur Modus-Auswahl
   window.location.replace("index.html");
+} else if (gameState.gameMode === "single-player") {
+  // Im Single-Player wird das Gerät nie übergeben
+  window.location.replace("single_player.html");
 } else if (gameState.phase !== "pass") {
   // Der Pass-Screen ist gerade nicht dran
   if (gameState.phase === "game") {
