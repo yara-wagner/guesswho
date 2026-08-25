@@ -343,6 +343,10 @@ if (
     resetBoard
   );
 
+  questionSelect.addEventListener("change", function () {
+    computerAnswer.textContent = "";
+  });
+
   askQuestionButton.addEventListener(
     "click",
     function () {
@@ -365,3 +369,4 @@ if (
 
   renderSinglePlayerCharacters();
 }
+  

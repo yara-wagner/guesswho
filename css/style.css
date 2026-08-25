@@ -151,6 +151,13 @@ game-header {
   padding: 12px 20px;
 }
 
+/* Linke Gruppe: Logo und "← Back" nebeneinander (siehe js/header.js) */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* Der Titel als Logo – Bild oben links.
    Das <h1> bleibt für die Struktur bestehen, sichtbar ist nur das Bild. */
 .game-logo {
@@ -846,9 +853,21 @@ button.continue-button {
 /* Umriss-Stil, siehe BUTTONS */
 
 button.back-button {
-  margin: 0 20px 20px;
-  padding: 8px 14px;
+  padding: 8px 12px;
+
+  border: 2px solid #222;
+
+  background-color: transparent;
+
+  color: #222;
+
   font-size: 14px;
+}
+
+button.back-button:hover {
+  background-color: #222;
+
+  color: white;
 }
 
 /* =========================

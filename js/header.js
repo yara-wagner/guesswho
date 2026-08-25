@@ -3,6 +3,8 @@
 // =============================
 
 // Der Header ist auf allen Seiten gleich und steht deshalb nur hier.
+// Der Titel wird als kleines Logo oben links angezeigt (siehe .game-logo
+// im CSS), damit für den restlichen Inhalt mehr Platz bleibt.
 //
 // Verwendung in der Seite:
 //
@@ -13,29 +15,84 @@
 // Auf diesen Seiten ist auch das Logo anklickbar und führt – genau wie der
 // Button – zurück zur Startseite. Auf der Startseite selbst ist das Logo
 // nur ein Bild, dort gibt es nichts abzubrechen.
+//
+// Neben dem Logo steht auf allen Seiten ausser der Startseite ein
+// "← Back"-Button, der einen Schritt zurück in der History geht.
 
 class GameHeader extends HTMLElement {
   connectedCallback() {
     const showCancelButton = this.hasAttribute("cancel");
 
-    const logoImage = '<img src="src/guesswho_logo.png" alt="Guess Who?" />';
+    const isStartPage =
+      window.location.pathname.endsWith("index.html") ||
+      window.location.pathname.endsWith("/");
+
+    const logoImage = `
+      <img
+        src="src/guesswho_logo.png"
+        alt="Guess Who?"
+      />
+    `;
 
     this.innerHTML = `
       <header class="game-header">
-        <h1 class="game-logo">
+
+        <div class="header-left">
+
+          <h1 class="game-logo">
+            ${
+              showCancelButton
+                ? `
+                  <button
+                    class="logo-button"
+                    type="button"
+                    aria-label="Back to start"
+                  >
+                    ${logoImage}
+                  </button>
+                `
+                : logoImage
+            }
+          </h1>
+
           ${
-            showCancelButton
-              ? `<button class="logo-button" type="button" aria-label="Back to start">${logoImage}</button>`
-              : logoImage
+            isStartPage
+              ? ""
+              : `
+                <button
+                  class="back-button"
+                  type="button"
+                >
+                  ← Back
+                </button>
+              `
           }
-        </h1>
+
+        </div>
+
         ${
           showCancelButton
-            ? '<button class="cancel-game-button" type="button">Back to start</button>'
+            ? `
+              <button
+                class="cancel-game-button"
+                type="button"
+              >
+                Back to start
+              </button>
+            `
             : ""
         }
+
       </header>
     `;
+
+    const backButton = this.querySelector(".back-button");
+
+    if (backButton !== null) {
+      backButton.addEventListener("click", function () {
+        window.history.back();
+      });
+    }
 
     if (showCancelButton === false) {
       return;
@@ -46,8 +103,13 @@ class GameHeader extends HTMLElement {
 
     // cancelGame() steht in js/cancel.js und ist hier noch nicht geladen.
     // Der Aufruf im Callback wird erst beim Klick aufgelöst, dann ist es da.
-    cancelButton.addEventListener("click", () => cancelGame());
-    logoButton.addEventListener("click", () => cancelGame());
+    cancelButton.addEventListener("click", function () {
+      cancelGame();
+    });
+
+    logoButton.addEventListener("click", function () {
+      cancelGame();
+    });
   }
 }
 
