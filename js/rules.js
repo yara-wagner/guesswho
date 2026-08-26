@@ -2,10 +2,7 @@
 // RULES
 // =============================
 
-const infoButtons =
-  document.querySelectorAll(
-    "[data-rules]"
-  );
+const infoButtons = document.querySelectorAll("[data-rules]");
 
 const rulesModal = document.getElementById("rules-modal");
 
