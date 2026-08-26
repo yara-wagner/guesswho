@@ -38,18 +38,27 @@
         <div class="selection-actions">
           <p id="selection-hint" class="selection-hint"></p>
 
+          <!-- Das Wort "character" blendet die CSS auf schmalen Bildschirmen
+               aus, damit beide Buttons nebeneinander Platz haben. Für
+               Screenreader bleibt die volle Beschriftung im aria-label. -->
           <button
             id="random-selection-button"
             class="random-selection-button secondary"
             type="button"
+            aria-label="Random character"
           >
             <span data-icon="dice"></span>
-            Random character
+            Random<span class="selection-button-text"> character</span>
           </button>
 
-          <button id="confirm-selection-button" type="button" disabled>
+          <button
+            id="confirm-selection-button"
+            type="button"
+            aria-label="Confirm character"
+            disabled
+          >
             <span data-icon="check"></span>
-            Confirm character
+            Confirm<span class="selection-button-text"> character</span>
           </button>
         </div>
       </section>

@@ -95,6 +95,10 @@
   --accent-2-hover: #23a091;
   --accent-2-soft: #d8f2ee;
 
+  /* aktiver Rate-Modus ("Cancel guess") */
+  --accent-2-dark: #1a7c71;
+  --accent-2-dark-hover: #146259;
+
   /* Badges und Zähler */
   --sun: #ffc94d;
   --sun-soft: #fff0cc;
@@ -292,9 +296,12 @@ button.secondary {
   box-shadow: none;
 }
 
+/* Die Schrift nimmt die Farbe der Fläche hinter dem Button an und wirkt
+   dadurch ausgestanzt. Im Header liegt eine hellere Fläche dahinter, dort
+   wird die Farbe überschrieben (siehe HEADER). */
 button.secondary:hover {
   background-color: var(--ink);
-  color: var(--surface);
+  color: var(--bg);
 }
 
 /* --- Sonderaktion: der Final Guess ist der grosse Moment im Spiel und
@@ -309,6 +316,17 @@ button.accent-2 {
 button.accent-2:hover {
   background-color: var(--accent-2-hover);
   color: var(--surface);
+}
+
+/* Läuft der Rate-Modus, wird der Button dunkler – gleiche Farbfamilie,
+   damit er nicht mit der Hauptaktion verwechselt wird (siehe
+   js/game.js). */
+button.accent-2.is-active {
+  background-color: var(--accent-2-dark);
+}
+
+button.accent-2.is-active:hover {
+  background-color: var(--accent-2-dark-hover);
 }
 
 /* --- Runde Icon-Buttons: Schliessen-Kreuz und Info --- */
@@ -359,6 +377,12 @@ game-header {
   background-color: var(--bg-soft);
 }
 
+/* "Back" und "Back to start" invertieren beim Hover (siehe .secondary in
+   BUTTONS). */
+.game-header button.secondary:hover {
+  color: var(--bg-soft);
+}
+
 /* Rechte Gruppe: "← Back" und "Back to start" nebeneinander
    (siehe js/header.js) */
 .header-buttons {
@@ -407,19 +431,13 @@ button.leave-game-button {
     height: 34px;
   }
 
-  button.leave-game-button {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  /* Auf dem Handy reicht der Pfeil – die Beschriftung nimmt nur Platz weg.
-     Senkrecht bleibt das Padding wie beim "Back to start"-Button. */
-  button.back-button .back-button-text {
+  /* Auf dem Handy reichen die Symbole – die Beschriftungen nehmen nur
+     Platz weg. Die kompakten Abstände dazu stehen weiter unten im
+     Abschnitt BACK BUTTON, weil "button.back-button" dort noch einmal
+     ein eigenes Padding setzt und die spätere Regel gewinnt. */
+  button.back-button .back-button-text,
+  button.leave-game-button .leave-game-button-text {
     display: none;
-  }
-
-  button.back-button {
-    padding: 8px 10px;
   }
 }
 
@@ -538,13 +556,17 @@ button.leave-game-button {
 }
 
 /* Jeder Modus hat seine eigene Farbe. Die Attribute stehen schon im HTML
-   (data-mode), es braucht dafür also kein zusätzliches Markup. */
-.mode-tile[data-mode="single-player"] {
+   (data-mode), es braucht dafür also kein zusätzliches Markup.
+
+   Die Farben hängen am Wrapper und nicht an der Kachel selbst: so erbt sie
+   auch der Info-Button, der ein Geschwister-Element der Kachel ist
+   (siehe MODE INFO BUTTON weiter unten). */
+.mode-tile-wrapper:has(.mode-tile[data-mode="single-player"]) {
   --tile-tint: var(--sun-soft);
   --tile-edge: var(--sun);
 }
 
-.mode-tile[data-mode="multi-player"] {
+.mode-tile-wrapper:has(.mode-tile[data-mode="multi-player"]) {
   --tile-tint: var(--accent-2-soft);
   --tile-edge: var(--accent-2);
 }
@@ -755,6 +777,39 @@ button.leave-game-button {
   gap: 18px;
 }
 
+/* Auf schmalen Bildschirmen sind kleinere Karten wichtiger als grosse
+   Bilder: mit 95px passen drei statt zwei Spalten in die Zeile, damit man
+   mehr Charaktere auf einmal sieht und weniger scrollen muss. Der
+   engere Abstand gewinnt zusätzlich Platz. */
+@media (max-width: 500px) {
+  .character-grid {
+    width: min(1000px, 97%);
+    margin-bottom: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+    gap: 10px;
+  }
+
+  /* Der Name darf auf der kleineren Karte nicht mehr Platz brauchen als
+     nötig – sonst schrumpft nur das Bild. */
+  .character-name {
+    padding: 7px 4px;
+    font-size: 14px;
+  }
+
+  /* Kreuz und Häkchen mitskalieren, sonst sprengen sie die Karte */
+  .character-card.eliminated::after {
+    font-size: 48px;
+  }
+
+  .character-card.selected::after {
+    top: 5px;
+    right: 5px;
+    width: 22px;
+    height: 22px;
+    font-size: 13px;
+  }
+}
+
 /* =========================
    CHARACTER CARD
 ========================= */
@@ -914,6 +969,38 @@ button.leave-game-button {
   color: var(--ink-soft);
 }
 
+/* Auf schmalen Bildschirmen passen der Hinweis und die beiden Buttons
+   nicht mehr in eine Zeile. Statt sie einzeln umbrechen zu lassen (drei
+   Zeilen, die von der Karten-Ansicht Platz wegnehmen), bekommt der
+   Hinweis die volle Breite und die Buttons teilen sich die Zeile
+   darunter. */
+@media (max-width: 500px) {
+  .selection-actions {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .selection-hint {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  /* "Random character" und "Confirm character" werden zu "Random" und
+     "Confirm" – nebeneinander bleiben sie so gut treffbar, ohne dass die
+     Beschriftung umbricht. */
+  .selection-button-text {
+    display: none;
+  }
+
+  #random-selection-button,
+  #confirm-selection-button {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 11px 14px;
+    white-space: nowrap;
+  }
+}
+
 /* =========================
    CUSTOM CHARACTER SET
 ========================= */
@@ -958,7 +1045,7 @@ button.leave-game-button {
   padding: 12px;
   border: none;
   border-top: 2px solid var(--line);
-  background-color: var(--surface);
+  background-color: var(--bg);
   color: inherit;
   font-size: inherit;
   font-weight: bold;
@@ -1031,6 +1118,16 @@ button.leave-game-button {
   height: 40px;
 }
 
+/* Die Karten der Spiel-Ansichten werden auf schmalen Bildschirmen kleiner
+   (siehe CHARACTER GRID). Hier nicht: in diese Karten wird getippt, ein
+   95px breites Namensfeld ist zu eng. */
+@media (max-width: 500px) {
+  #custom-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 18px;
+  }
+}
+
 /* =========================
    WIN POP-UP
 ========================= */
@@ -1070,7 +1167,7 @@ button.leave-game-button {
   align-items: center;
   gap: 12px;
   border-radius: var(--radius);
-  background-color: var(--surface);
+  background-color: var(--bg);
   box-shadow: var(--shadow-lg);
   text-align: center;
 
@@ -1146,13 +1243,19 @@ button.leave-game-button {
   top: 12px;
   right: 12px;
   z-index: 10;
+
+  /* Ruhezustand: der Button geht im Kachel-Hintergrund auf (--tile-tint,
+     siehe MODE SELECTION), sichtbar bleiben Rahmen und Icon. */
   border-color: var(--ink);
-  background-color: var(--surface);
+  background-color: var(--tile-tint, var(--surface));
+  color: var(--ink);
 }
 
+/* Beim Hover dreht sich das Icon um: dunkle Fläche, das Zeichen selbst
+   nimmt die Kachelfarbe an */
 .mode-tile-wrapper button.info-button:hover {
   background-color: var(--ink);
-  color: var(--surface);
+  color: var(--tile-tint, var(--surface));
 }
 
 /* =========================
@@ -1191,7 +1294,7 @@ button.leave-game-button {
   position: relative;
   padding: 32px;
   border-radius: var(--radius);
-  background-color: var(--surface);
+  background-color: var(--bg);
   box-shadow: var(--shadow-lg);
 
   /* dieselbe Bewegung wie beim Gewinn-Dialog */
@@ -1317,6 +1420,18 @@ button.back-button {
   font-size: 14px;
 }
 
+/* Auf schmalen Bildschirmen zeigen beide nur noch ihr Symbol (die
+   Beschriftungen blendet der Abschnitt HEADER aus). Mit 8px Innenabstand
+   werden sie 40 × 40 gross – dieselbe Grösse wie die runden Buttons für
+   Regeln und Musik: 20px Icon + 2 × 8px Innenabstand + 2 × 2px Rahmen. */
+@media (max-width: 500px) {
+  button.back-button,
+  button.leave-game-button {
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+
 /* =========================
    PASS SCREEN
 ========================= */
@@ -1336,7 +1451,7 @@ button.back-button {
   align-items: center;
   gap: 8px;
   border-radius: var(--radius);
-  background-color: var(--surface);
+  background-color: var(--bg);
   box-shadow: var(--shadow);
 }
 
@@ -1524,7 +1639,7 @@ button#ask-question-button {
 .single-result-card {
   padding: 32px;
   border-radius: var(--radius);
-  background-color: var(--surface);
+  background-color: var(--bg);
   box-shadow: var(--shadow);
   animation: dialog-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -1620,9 +1735,11 @@ button.header-icon-button {
     transform 0.1s;
 }
 
+/* Wie beim Info-Button auf der Modus-Kachel: das Zeichen nimmt die Farbe
+   des Header-Bands an und wirkt dadurch ausgestanzt */
 button.header-icon-button:hover {
   background-color: var(--ink);
-  color: var(--surface);
+  color: var(--bg-soft);
 }
 
 button.header-icon-button:active {
@@ -1641,5 +1758,120 @@ button.header-icon-button .icon {
     width: 40px;
     height: 40px;
   }
+}
+
+/* =========================
+   CREDITS
+========================= */
+
+/* Aufklappbarer Block auf der Startseite mit den Quellen für Musik und
+   Bilder. */
+.credits {
+  width: min(460px, 95%);
+  margin: 0 auto 40px;
+
+  border-radius: var(--radius);
+
+  background-color: var(--bg);
+  box-shadow: var(--shadow);
+
+  text-align: left;
+}
+
+/* Die Zeile zum Anklicken. Das native Dreieck ist aus, den Zustand zeigt
+   der Chevron rechts (siehe weiter unten). */
+.credits-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 13px 20px;
+
+  list-style: none;
+
+  font-family: "BellaFont", sans-serif;
+  font-size: 18px;
+
+  cursor: pointer;
+}
+
+/* Safari zeigt das Dreieck über ein eigenes Pseudo-Element */
+.credits-summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Der Titel bleibt in der Textfarbe. Dass die Zeile anklickbar ist,
+   zeigen der Zeiger und der Chevron, der beim Hover dunkler wird. */
+.credits-summary:hover .credits-summary-icon {
+  color: var(--ink);
+}
+
+/* Der Fokus-Ring soll die ganze Zeile umfassen und nicht in der Ecke
+   des Blocks abgeschnitten werden */
+.credits-summary:focus-visible {
+  border-radius: var(--radius);
+  outline-offset: -3px;
+}
+
+.credits-summary-icon {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--ink-soft);
+  transition: transform 0.2s;
+}
+
+.credits-summary-icon .icon {
+  width: 17px;
+  height: 17px;
+}
+
+/* Aufgeklappt zeigt der Pfeil nach oben */
+.credits[open] .credits-summary-icon {
+  transform: rotate(180deg);
+}
+
+.credits-list {
+  margin: 0;
+  padding: 2px 20px 18px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.credits-entry + .credits-entry {
+  margin-top: 10px;
+}
+
+.credits-entry dt {
+  font-weight: bold;
+  color: var(--ink);
+}
+
+.credits-entry dd {
+  margin: 1px 0 0;
+  color: var(--ink-soft);
+}
+
+.credits-entry a {
+  /* lange Links dürfen umbrechen statt den Block zu sprengen */
+  overflow-wrap: anywhere;
+  color: var(--ink-soft);
+  text-underline-offset: 2px;
+}
+
+/* Der Rechtehinweis bei Disney und Mario. Steht auf einer eigenen Zeile
+   und tritt einen Schritt zurück – er ist Kleingedrucktes, keine Quelle. */
+.credits-note {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  opacity: 0.8;
+}
+
+.credits-entry a:hover {
+  color: var(--accent);
 }
 

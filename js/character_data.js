@@ -813,7 +813,7 @@ const animalsCharacters = [
     smallAnimal: true,
 
     hasStripes: false,
-    hasSpots: false,
+    hasSpots: true,
     hasLongEars: true,
     hasLongNeck: false,
 
@@ -938,7 +938,7 @@ const animalsCharacters = [
     largeAnimal: false,
     smallAnimal: true,
 
-    hasStripes: false,
+    hasStripes: true,
     hasSpots: false,
     hasLongEars: false,
     hasLongNeck: false,
@@ -1158,7 +1158,7 @@ const animalsCharacters = [
     hasBeak: false,
     hasFins: false,
 
-    mostlyBrown: false,
+    mostlyBrown: true,
     mostlyGrey: false,
     mostlyWhite: false,
     mostlyBlack: false,
@@ -1200,11 +1200,11 @@ const animalsCharacters = [
     hasBeak: false,
     hasFins: false,
 
-    mostlyBrown: true,
+    mostlyBrown: false,
     mostlyGrey: false,
     mostlyWhite: false,
     mostlyBlack: false,
-    mostlyOrange: false,
+    mostlyOrange: true,
   },
 
   {
