@@ -628,77 +628,83 @@ const animalsCharacters = [
     bird: false,
     reptile: false,
     fish: false,
+
     hasFur: true,
     hasWings: false,
     canFly: false,
     livesInWater: false,
+
     fourLegs: true,
     hasTail: true,
     hasHorns: true,
+
     dangerous: false,
     domestic: false,
 
     largeAnimal: true,
+    smallAnimal: false,
+
     hasStripes: false,
     hasSpots: true,
     hasLongEars: false,
     hasLongNeck: true,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: true,
+    mostlyGrey: false,
+    mostlyWhite: false,
+    mostlyBlack: false,
+    mostlyOrange: false,
   },
 
   {
     id: 2,
-    name: "Lion",
-    image: "src/animals/lion.jpg",
+    name: "Racoon",
+    image: "src/animals/racoon.jpg",
 
     mammal: true,
     bird: false,
     reptile: false,
     fish: false,
+
     hasFur: true,
     hasWings: false,
     canFly: false,
     livesInWater: false,
+
     fourLegs: true,
     hasTail: true,
     hasHorns: false,
-    dangerous: true,
+
+    dangerous: false,
     domestic: false,
 
-    largeAnimal: true,
-    hasStripes: false,
+    largeAnimal: false,
+    smallAnimal: true,
+
+    hasStripes: true,
     hasSpots: false,
     hasLongEars: false,
     hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: false,
+    mostlyGrey: true,
+    mostlyWhite: false,
+    mostlyBlack: true,
+    mostlyOrange: false,
   },
 
   {
     id: 3,
-    name: "Elephant",
-    image: "src/animals/elephant.jpg",
-
-    mammal: true,
-    bird: false,
-    reptile: false,
-    fish: false,
-    hasFur: false,
-    hasWings: false,
-    canFly: false,
-    livesInWater: false,
-    fourLegs: true,
-    hasTail: true,
-    hasHorns: false,
-    dangerous: true,
-    domestic: false,
-
-    largeAnimal: true,
-    hasStripes: false,
-    hasSpots: false,
-    hasLongEars: true,
-    hasLongNeck: false,
-  },
-
-  {
-    id: 4,
     name: "Tiger",
     image: "src/animals/tiger.jpg",
 
@@ -706,99 +712,205 @@ const animalsCharacters = [
     bird: false,
     reptile: false,
     fish: false,
+
     hasFur: true,
     hasWings: false,
     canFly: false,
     livesInWater: false,
+
     fourLegs: true,
     hasTail: true,
     hasHorns: false,
+
     dangerous: true,
     domestic: false,
 
     largeAnimal: true,
+    smallAnimal: false,
+
     hasStripes: true,
     hasSpots: false,
     hasLongEars: false,
     hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: false,
+    mostlyGrey: false,
+    mostlyWhite: false,
+    mostlyBlack: true,
+    mostlyOrange: true,
+  },
+
+  {
+    id: 4,
+    name: "Fox",
+    image: "src/animals/fox.jpg",
+
+    mammal: true,
+    bird: false,
+    reptile: false,
+    fish: false,
+
+    hasFur: true,
+    hasWings: false,
+    canFly: false,
+    livesInWater: false,
+
+    fourLegs: true,
+    hasTail: true,
+    hasHorns: false,
+
+    dangerous: false,
+    domestic: false,
+
+    largeAnimal: false,
+    smallAnimal: true,
+
+    hasStripes: false,
+    hasSpots: false,
+    hasLongEars: false,
+    hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: false,
+    mostlyGrey: false,
+    mostlyWhite: false,
+    mostlyBlack: false,
+    mostlyOrange: true,
   },
 
   {
     id: 5,
-    name: "Zebra",
-    image: "src/animals/zebra.jpg",
+    name: "Rabbit",
+    image: "src/animals/rabbit.jpg",
 
     mammal: true,
     bird: false,
     reptile: false,
     fish: false,
+
     hasFur: true,
     hasWings: false,
     canFly: false,
     livesInWater: false,
+
     fourLegs: true,
     hasTail: true,
     hasHorns: false,
-    dangerous: false,
-    domestic: false,
 
-    largeAnimal: true,
-    hasStripes: true,
-    hasSpots: false,
-    hasLongEars: false,
-    hasLongNeck: false,
-  },
-
-  {
-    id: 6,
-    name: "Monkey",
-    image: "src/animals/monkey.jpg",
-
-    mammal: true,
-    bird: false,
-    reptile: false,
-    fish: false,
-    hasFur: true,
-    hasWings: false,
-    canFly: false,
-    livesInWater: false,
-    fourLegs: false,
-    hasTail: true,
-    hasHorns: false,
-    dangerous: false,
-    domestic: false,
-
-    largeAnimal: false,
-    hasStripes: false,
-    hasSpots: false,
-    hasLongEars: false,
-    hasLongNeck: false,
-  },
-
-  {
-    id: 7,
-    name: "Dog",
-    image: "src/animals/dog.jpg",
-
-    mammal: true,
-    bird: false,
-    reptile: false,
-    fish: false,
-    hasFur: true,
-    hasWings: false,
-    canFly: false,
-    livesInWater: false,
-    fourLegs: true,
-    hasTail: true,
-    hasHorns: false,
     dangerous: false,
     domestic: true,
 
     largeAnimal: false,
+    smallAnimal: true,
+
+    hasStripes: false,
+    hasSpots: false,
+    hasLongEars: true,
+    hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: false,
+    mostlyGrey: false,
+    mostlyWhite: true,
+    mostlyBlack: false,
+    mostlyOrange: false,
+  },
+
+  {
+    id: 6,
+    name: "Wolf",
+    image: "src/animals/wolf.jpg",
+
+    mammal: true,
+    bird: false,
+    reptile: false,
+    fish: false,
+
+    hasFur: true,
+    hasWings: false,
+    canFly: false,
+    livesInWater: false,
+
+    fourLegs: true,
+    hasTail: true,
+    hasHorns: false,
+
+    dangerous: true,
+    domestic: false,
+
+    largeAnimal: true,
+    smallAnimal: false,
+
     hasStripes: false,
     hasSpots: false,
     hasLongEars: false,
     hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: false,
+    mostlyGrey: true,
+    mostlyWhite: false,
+    mostlyBlack: false,
+    mostlyOrange: false,
+  },
+
+  {
+    id: 7,
+    name: "Cow",
+    image: "src/animals/cow.jpg",
+
+    mammal: true,
+    bird: false,
+    reptile: false,
+    fish: false,
+
+    hasFur: true,
+    hasWings: false,
+    canFly: false,
+    livesInWater: false,
+
+    fourLegs: true,
+    hasTail: true,
+    hasHorns: true,
+
+    dangerous: false,
+    domestic: true,
+
+    largeAnimal: true,
+    smallAnimal: false,
+
+    hasStripes: false,
+    hasSpots: true,
+    hasLongEars: false,
+    hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: false,
+    mostlyGrey: false,
+    mostlyWhite: true,
+    mostlyBlack: true,
+    mostlyOrange: false,
   },
 
   {
@@ -810,155 +922,167 @@ const animalsCharacters = [
     bird: false,
     reptile: false,
     fish: false,
+
     hasFur: true,
     hasWings: false,
     canFly: false,
     livesInWater: false,
+
     fourLegs: true,
     hasTail: true,
     hasHorns: false,
+
     dangerous: false,
     domestic: true,
 
     largeAnimal: false,
+    smallAnimal: true,
+
     hasStripes: false,
     hasSpots: false,
     hasLongEars: false,
     hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: false,
+    mostlyGrey: false,
+    mostlyWhite: false,
+    mostlyBlack: false,
+    mostlyOrange: true,
   },
 
   {
     id: 9,
-    name: "Rabbit",
-    image: "src/animals/rabbit.jpg",
+    name: "Dog",
+    image: "src/animals/dog.jpg",
 
     mammal: true,
     bird: false,
     reptile: false,
     fish: false,
+
     hasFur: true,
     hasWings: false,
     canFly: false,
     livesInWater: false,
+
     fourLegs: true,
     hasTail: true,
     hasHorns: false,
+
     dangerous: false,
     domestic: true,
 
     largeAnimal: false,
+    smallAnimal: true,
+
     hasStripes: false,
     hasSpots: false,
-    hasLongEars: true,
+    hasLongEars: false,
     hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: true,
+    mostlyGrey: false,
+    mostlyWhite: false,
+    mostlyBlack: false,
+    mostlyOrange: false,
   },
 
   {
     id: 10,
-    name: "Cow",
-    image: "src/animals/cow.jpg",
+    name: "Elephant",
+    image: "src/animals/elephant.jpg",
 
     mammal: true,
     bird: false,
     reptile: false,
     fish: false,
-    hasFur: true,
+
+    hasFur: false,
     hasWings: false,
     canFly: false,
     livesInWater: false,
+
     fourLegs: true,
     hasTail: true,
-    hasHorns: true,
-    dangerous: false,
-    domestic: true,
+    hasHorns: false,
+
+    dangerous: true,
+    domestic: false,
 
     largeAnimal: true,
+    smallAnimal: false,
+
     hasStripes: false,
-    hasSpots: true,
-    hasLongEars: false,
+    hasSpots: false,
+    hasLongEars: true,
     hasLongNeck: false,
+
+    hasTrunk: true,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: false,
+    mostlyGrey: true,
+    mostlyWhite: false,
+    mostlyBlack: false,
+    mostlyOrange: false,
   },
 
   {
     id: 11,
-    name: "Horse",
-    image: "src/animals/horse.jpg",
+    name: "Fish",
+    image: "src/animals/fish.jpg",
 
-    mammal: true,
+    mammal: false,
     bird: false,
     reptile: false,
-    fish: false,
-    hasFur: true,
+    fish: true,
+
+    hasFur: false,
     hasWings: false,
     canFly: false,
-    livesInWater: false,
-    fourLegs: true,
+    livesInWater: true,
+
+    fourLegs: false,
     hasTail: true,
     hasHorns: false,
-    dangerous: false,
-    domestic: true,
 
-    largeAnimal: true,
+    dangerous: false,
+    domestic: false,
+
+    largeAnimal: false,
+    smallAnimal: true,
+
     hasStripes: false,
     hasSpots: false,
     hasLongEars: false,
     hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: true,
+
+    mostlyBrown: false,
+    mostlyGrey: false,
+    mostlyWhite: false,
+    mostlyBlack: false,
+    mostlyOrange: false,
   },
 
   {
     id: 12,
-    name: "Penguin",
-    image: "src/animals/penguin.jpg",
-
-    mammal: false,
-    bird: true,
-    reptile: false,
-    fish: false,
-    hasFur: false,
-    hasWings: true,
-    canFly: false,
-    livesInWater: true,
-    fourLegs: false,
-    hasTail: true,
-    hasHorns: false,
-    dangerous: false,
-    domestic: false,
-
-    largeAnimal: false,
-    hasStripes: false,
-    hasSpots: false,
-    hasLongEars: false,
-    hasLongNeck: false,
-  },
-
-  {
-    id: 13,
-    name: "Eagle",
-    image: "src/animals/eagle.jpg",
-
-    mammal: false,
-    bird: true,
-    reptile: false,
-    fish: false,
-    hasFur: false,
-    hasWings: true,
-    canFly: true,
-    livesInWater: false,
-    fourLegs: false,
-    hasTail: true,
-    hasHorns: false,
-    dangerous: true,
-    domestic: false,
-
-    largeAnimal: false,
-    hasStripes: false,
-    hasSpots: false,
-    hasLongEars: false,
-    hasLongNeck: false,
-  },
-
-  {
-    id: 14,
     name: "Crocodile",
     image: "src/animals/crocodile.jpg",
 
@@ -966,25 +1090,83 @@ const animalsCharacters = [
     bird: false,
     reptile: true,
     fish: false,
+
     hasFur: false,
     hasWings: false,
     canFly: false,
     livesInWater: true,
+
     fourLegs: true,
     hasTail: true,
     hasHorns: false,
+
     dangerous: true,
     domestic: false,
 
     largeAnimal: true,
+    smallAnimal: false,
+
     hasStripes: false,
     hasSpots: false,
     hasLongEars: false,
     hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: false,
+    mostlyGrey: true,
+    mostlyWhite: false,
+    mostlyBlack: false,
+    mostlyOrange: false,
   },
 
   {
-    id: 15,
+    id: 13,
+    name: "Pig",
+    image: "src/animals/pig.jpg",
+
+    mammal: true,
+    bird: false,
+    reptile: false,
+    fish: false,
+
+    hasFur: false,
+    hasWings: false,
+    canFly: false,
+    livesInWater: false,
+
+    fourLegs: true,
+    hasTail: true,
+    hasHorns: false,
+
+    dangerous: false,
+    domestic: true,
+
+    largeAnimal: false,
+    smallAnimal: true,
+
+    hasStripes: false,
+    hasSpots: false,
+    hasLongEars: false,
+    hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: false,
+    mostlyGrey: false,
+    mostlyWhite: false,
+    mostlyBlack: false,
+    mostlyOrange: false,
+  },
+
+  {
+    id: 14,
     name: "Snake",
     image: "src/animals/snake.jpg",
 
@@ -992,99 +1174,205 @@ const animalsCharacters = [
     bird: false,
     reptile: true,
     fish: false,
+
     hasFur: false,
     hasWings: false,
     canFly: false,
     livesInWater: false,
+
     fourLegs: false,
     hasTail: true,
     hasHorns: false,
+
     dangerous: true,
     domestic: false,
 
     largeAnimal: false,
+    smallAnimal: true,
+
     hasStripes: false,
     hasSpots: false,
     hasLongEars: false,
     hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: true,
+    mostlyGrey: false,
+    mostlyWhite: false,
+    mostlyBlack: false,
+    mostlyOrange: false,
   },
 
   {
-    id: 16,
-    name: "Shark",
-    image: "src/animals/shark.jpg",
-
-    mammal: false,
-    bird: false,
-    reptile: false,
-    fish: true,
-    hasFur: false,
-    hasWings: false,
-    canFly: false,
-    livesInWater: true,
-    fourLegs: false,
-    hasTail: true,
-    hasHorns: false,
-    dangerous: true,
-    domestic: false,
-
-    largeAnimal: true,
-    hasStripes: false,
-    hasSpots: false,
-    hasLongEars: false,
-    hasLongNeck: false,
-  },
-
-  {
-    id: 17,
-    name: "Dolphin",
-    image: "src/animals/dolphin.jpg",
+    id: 15,
+    name: "Sheep",
+    image: "src/animals/sheep.jpg",
 
     mammal: true,
     bird: false,
     reptile: false,
     fish: false,
-    hasFur: false,
+
+    hasFur: true,
     hasWings: false,
     canFly: false,
-    livesInWater: true,
-    fourLegs: false,
+    livesInWater: false,
+
+    fourLegs: true,
     hasTail: true,
     hasHorns: false,
-    dangerous: false,
-    domestic: false,
 
-    largeAnimal: true,
+    dangerous: false,
+    domestic: true,
+
+    largeAnimal: false,
+    smallAnimal: true,
+
     hasStripes: false,
     hasSpots: false,
     hasLongEars: false,
     hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: false,
+    mostlyGrey: false,
+    mostlyWhite: true,
+    mostlyBlack: false,
+    mostlyOrange: false,
   },
 
   {
-    id: 18,
-    name: "Butterfly",
-    image: "src/animals/butterfly.jpg",
+    id: 16,
+    name: "Lion",
+    image: "src/animals/lion.jpg",
 
-    mammal: false,
+    mammal: true,
     bird: false,
     reptile: false,
     fish: false,
+
+    hasFur: true,
+    hasWings: false,
+    canFly: false,
+    livesInWater: false,
+
+    fourLegs: true,
+    hasTail: true,
+    hasHorns: false,
+
+    dangerous: true,
+    domestic: false,
+
+    largeAnimal: true,
+    smallAnimal: false,
+
+    hasStripes: false,
+    hasSpots: false,
+    hasLongEars: false,
+    hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: true,
+    hasBeak: false,
+    hasFins: false,
+
+    mostlyBrown: true,
+    mostlyGrey: false,
+    mostlyWhite: false,
+    mostlyBlack: false,
+    mostlyOrange: false,
+  },
+
+  {
+    id: 17,
+    name: "Penguin",
+    image: "src/animals/penguin.jpg",
+
+    mammal: false,
+    bird: true,
+    reptile: false,
+    fish: false,
+
     hasFur: false,
     hasWings: true,
-    canFly: true,
-    livesInWater: false,
+    canFly: false,
+    livesInWater: true,
+
     fourLegs: false,
-    hasTail: false,
+    hasTail: true,
     hasHorns: false,
+
     dangerous: false,
     domestic: false,
 
     largeAnimal: false,
+    smallAnimal: true,
+
     hasStripes: false,
-    hasSpots: true,
+    hasSpots: false,
     hasLongEars: false,
     hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: true,
+    hasFins: false,
+
+    mostlyBrown: false,
+    mostlyGrey: false,
+    mostlyWhite: true,
+    mostlyBlack: true,
+    mostlyOrange: false,
+  },
+
+  {
+    id: 18,
+    name: "Seal",
+    image: "src/animals/seal.jpg",
+
+    mammal: true,
+    bird: false,
+    reptile: false,
+    fish: false,
+
+    hasFur: true,
+    hasWings: false,
+    canFly: false,
+    livesInWater: true,
+
+    fourLegs: false,
+    hasTail: true,
+    hasHorns: false,
+
+    dangerous: false,
+    domestic: false,
+
+    largeAnimal: false,
+    smallAnimal: true,
+
+    hasStripes: false,
+    hasSpots: false,
+    hasLongEars: false,
+    hasLongNeck: false,
+
+    hasTrunk: false,
+    hasMane: false,
+    hasBeak: false,
+    hasFins: true,
+
+    mostlyBrown: false,
+    mostlyGrey: true,
+    mostlyWhite: false,
+    mostlyBlack: false,
+    mostlyOrange: false,
   },
 ];
 
