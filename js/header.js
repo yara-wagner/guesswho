@@ -3,13 +3,32 @@
 // =============================
 //
 // "leave" zeigt den "Back to start"-Button.
-//
 // "back" zeigt zusätzlich einen Zurück-Button.
-//
 // "rules" zeigt einen Info-Button für die Spielregeln.
 // Mögliche Werte:
 // rules="single-player"
 // rules="multi-player"
+// rules="auto"            -> der Modus kommt aus dem Spielstand
+//
+// Seiten, die es in beiden Modi gibt (z. B. character_sets.html), wissen
+// erst aus dem Spielstand, welche Regeln gerade gelten. Damit das schon
+// beim Aufbau des Headers klar ist, muss js/state.js auf diesen Seiten vor
+// js/header.js geladen werden. Ohne Spielstand zeigen wir die
+// Multi-Player-Regeln – das ist der Standardmodus (siehe js/state.js).
+
+function getRulesTypeFromGameState() {
+  if (typeof loadGameState !== "function") {
+    return "multi-player";
+  }
+
+  const state = loadGameState();
+
+  if (state === null) {
+    return "multi-player";
+  }
+
+  return state.gameMode;
+}
 
 class GameHeader extends HTMLElement {
   connectedCallback() {
@@ -19,11 +38,16 @@ class GameHeader extends HTMLElement {
     const showBackButton =
       this.hasAttribute("back");
 
-    const rulesType =
+    const rulesAttribute =
       this.getAttribute("rules");
 
     const showRulesButton =
-      rulesType !== null;
+      rulesAttribute !== null;
+
+    const rulesType =
+      rulesAttribute === "auto"
+        ? getRulesTypeFromGameState()
+        : rulesAttribute;
 
     const logoImage = `
       <img
@@ -82,7 +106,7 @@ class GameHeader extends HTMLElement {
       showRulesButton
         ? `
           <button
-            class="info-button icon-button header-info-button"
+            class="info-button secondary header-info-button"
             type="button"
             data-rules="${rulesType}"
             aria-label="Show rules"

@@ -1105,7 +1105,10 @@ button.leave-game-button {
   display: flex;
 }
 
-button.info-button {
+/* Nur der Info-Button auf der Kachel sitzt oben rechts in der Ecke.
+   Der Info-Button im Header ist ein normaler Header-Button
+   (siehe GAME TITLE + INFO BUTTON). */
+.mode-tile-wrapper button.info-button {
   position: absolute;
   top: 12px;
   right: 12px;
@@ -1114,7 +1117,7 @@ button.info-button {
   background-color: var(--surface);
 }
 
-button.info-button:hover {
+.mode-tile-wrapper button.info-button:hover {
   background-color: var(--ink);
   color: var(--surface);
 }
@@ -1548,14 +1551,18 @@ button#ask-question-button {
    GAME TITLE + INFO BUTTON
 ========================= */
 
-
-
+/* Der Info-Button im Header ist ein Header-Button wie "Back" und
+   "Back to start": gleicher Umriss-Stil (.secondary) und gleiche Höhe.
+   Weil nur das Icon drin steht, ist das Padding rundum gleich – aus der
+   Pille wird so ein Kreis. */
 .game-header button.header-info-button {
-  position: static;
-  top: auto;
-  right: auto;
-  display: flex;
   flex-shrink: 0;
-  border-color: var(--ink);
-  background-color: var(--surface);
+  padding: 11px;
+  font-size: 14px;
+}
+
+@media (max-width: 500px) {
+  .game-header button.header-info-button {
+    padding: 8px;
+  }
 }
