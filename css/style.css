@@ -1581,21 +1581,62 @@ button#ask-question-button {
 }
 
 /* =========================
-   GAME TITLE + INFO BUTTON
+   HEADER ICON BUTTONS
 ========================= */
 
-/* Der Info-Button im Header ist ein Header-Button wie "Back" und
-   "Back to start": gleicher Umriss-Stil (.secondary) und gleiche Höhe.
-   Weil nur das Icon drin steht, ist das Padding rundum gleich – aus der
-   Pille wird so ein Kreis. */
-.game-header button.header-info-button {
+button.header-icon-button {
+  position: static;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   flex-shrink: 0;
-  padding: 11px;
-  font-size: 14px;
+
+  width: 36px;
+  height: 36px;
+
+  padding: 0;
+
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+
+  background-color: transparent;
+  color: var(--ink);
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s,
+    color 0.15s,
+    transform 0.1s;
 }
 
-@media (max-width: 500px) {
-  .game-header button.header-info-button {
-    padding: 8px;
-  }
+button.header-icon-button:hover {
+  background-color: var(--ink);
+  color: var(--surface);
 }
+
+button.header-icon-button:active {
+  transform: scale(0.94);
+}
+
+button.header-icon-button .icon {
+  width: 20px;
+  height: 20px;
+}
+
+button.header-icon-button:hover {
+  background-color: var(--ink);
+  color: var(--surface);
+}
+
+button.header-icon-button:active {
+  transform: scale(0.94);
+}
+
+button.header-icon-button .icon {
+  width: 20px;
+  height: 20px;
+}
+
