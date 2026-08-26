@@ -296,9 +296,12 @@ button.secondary {
   box-shadow: none;
 }
 
+/* Die Schrift nimmt die Farbe der Fläche hinter dem Button an und wirkt
+   dadurch ausgestanzt. Im Header liegt eine hellere Fläche dahinter, dort
+   wird die Farbe überschrieben (siehe HEADER). */
 button.secondary:hover {
   background-color: var(--ink);
-  color: var(--surface);
+  color: var(--bg);
 }
 
 /* --- Sonderaktion: der Final Guess ist der grosse Moment im Spiel und
