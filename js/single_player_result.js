@@ -2,6 +2,26 @@
 // SINGLE PLAYER RESULT
 // =============================
 
+const resultIcon =
+  document.getElementById(
+    "result-icon"
+  );
+
+const resultTitle =
+  document.getElementById(
+    "result-title"
+  );
+
+const resultMessage =
+  document.getElementById(
+    "result-message"
+  );
+
+const resultFooter =
+  document.getElementById(
+    "result-footer"
+  );
+
 const resultCharacterImage =
   document.getElementById(
     "result-character-image"
@@ -21,6 +41,56 @@ const gameState = loadGameState();
 
 
 // =============================
+// RESULT TEXTS
+// =============================
+
+// Verloren wird auf zwei Wegen: Die Fragen sind aufgebraucht oder der
+// Final Guess war falsch. Beides landet auf dieser Seite.
+function showWrongGuessTexts(state) {
+  resultIcon.textContent = "🙊";
+
+  resultTitle.textContent =
+    "Not quite!";
+
+  if (
+    state.finalGuess === null ||
+    state.finalGuess === undefined
+  ) {
+    resultMessage.textContent =
+      "Your final guess was wrong.";
+  } else {
+    resultMessage.textContent =
+      `Your final guess was ${state.finalGuess.name} – that was not the right character.`;
+  }
+
+  resultFooter.textContent =
+    "Better luck next time!";
+}
+
+function showOutOfQuestionsTexts() {
+  resultIcon.textContent = "🙈";
+
+  resultTitle.textContent = "Oh no!";
+
+  resultMessage.textContent =
+    "You ran out of questions.";
+
+  resultFooter.textContent =
+    "Better luck next time!";
+}
+
+function showResultTexts(state) {
+  if (
+    state.lossReason === "wrong-guess"
+  ) {
+    showWrongGuessTexts(state);
+  } else {
+    showOutOfQuestionsTexts();
+  }
+}
+
+
+// =============================
 // SHOW SECRET CHARACTER
 // =============================
 
@@ -31,6 +101,8 @@ if (
 ) {
   window.location.replace("index.html");
 } else {
+  showResultTexts(gameState);
+
   const secretCharacter =
     gameState.player2Secret;
 

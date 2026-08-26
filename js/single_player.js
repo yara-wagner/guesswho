@@ -108,6 +108,12 @@ function makeFinalGuess(character) {
 
   gameState.phase = "finished";
 
+  if (isCorrect === false) {
+    gameState.lossReason = "wrong-guess";
+
+    gameState.finalGuess = character;
+  }
+
   saveGameState(gameState);
 
   if (isCorrect) {
@@ -279,6 +285,36 @@ const questionsBySet = {
       property: "magicalCreature",
       text:
         "Is your character a magical or fantasy creature?",
+    },
+
+    {
+      property: "backgroundBlue",
+      text:
+        "Does your character have a blue background?",
+    },
+
+    {
+      property: "backgroundRed",
+      text:
+        "Does your character have a red background?",
+    },
+
+    {
+      property: "backgroundGreen",
+      text:
+        "Does your character have a green background?",
+    },
+
+    {
+      property: "backgroundOrange",
+      text:
+        "Does your character have an orange background?",
+    },
+
+    {
+      property: "backgroundYellow",
+      text:
+        "Does your character have a yellow background?",
     },
   ],
 
@@ -649,6 +685,8 @@ function askQuestion(property) {
       gameState.winner = 2;
 
       gameState.phase = "finished";
+
+      gameState.lossReason = "no-questions";
     }
 
     saveGameState(gameState);

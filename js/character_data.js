@@ -32,6 +32,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: false,
     wearsDress: false,
+    backgroundBlue: true,
+    backgroundRed: false,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -61,6 +66,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: true,
     wearsDress: false,
+    backgroundBlue: true,
+    backgroundRed: false,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -90,6 +100,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: false,
     wearsDress: false,
+    backgroundBlue: false,
+    backgroundRed: false,
+    backgroundGreen: false,
+    backgroundOrange: true,
+    backgroundYellow: false,
   },
 
   {
@@ -119,6 +134,11 @@ const disneyCharacters = [
     wearsBlue: true,
     wearsGreen: false,
     wearsDress: true,
+    backgroundBlue: true,
+    backgroundRed: false,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -148,6 +168,11 @@ const disneyCharacters = [
     wearsBlue: true,
     wearsGreen: false,
     wearsDress: false,
+    backgroundBlue: false,
+    backgroundRed: true,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -177,6 +202,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: false,
     wearsDress: false,
+    backgroundBlue: false,
+    backgroundRed: false,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: true,
   },
 
   {
@@ -206,6 +236,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: true,
     wearsDress: false,
+    backgroundBlue: false,
+    backgroundRed: true,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -235,6 +270,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: false,
     wearsDress: false,
+    backgroundBlue: true,
+    backgroundRed: false,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -264,6 +304,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: false,
     wearsDress: false,
+    backgroundBlue: false,
+    backgroundRed: true,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -293,6 +338,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: true,
     wearsDress: true,
+    backgroundBlue: false,
+    backgroundRed: false,
+    backgroundGreen: false,
+    backgroundOrange: true,
+    backgroundYellow: false,
   },
 
   {
@@ -322,6 +372,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: false,
     wearsDress: false,
+    backgroundBlue: false,
+    backgroundRed: true,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -351,6 +406,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: true,
     wearsDress: false,
+    backgroundBlue: false,
+    backgroundRed: false,
+    backgroundGreen: true,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -380,6 +440,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: false,
     wearsDress: true,
+    backgroundBlue: false,
+    backgroundRed: true,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -391,7 +456,7 @@ const disneyCharacters = [
     female: false,
     male: true,
     animal: false,
-    hasHair: false,
+    hasHair: true,
     canFly: false,
     pixar: false,
     royal: false,
@@ -402,13 +467,18 @@ const disneyCharacters = [
     magicalCreature: true,
 
     blackHair: false,
-    brownHair: false,
+    brownHair: true,
     blondeHair: false,
     redHair: false,
     wearsRed: false,
     wearsBlue: false,
     wearsGreen: false,
     wearsDress: false,
+    backgroundBlue: true,
+    backgroundRed: false,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -438,6 +508,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: false,
     wearsDress: false,
+    backgroundBlue: true,
+    backgroundRed: false,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -467,6 +542,11 @@ const disneyCharacters = [
     wearsBlue: true,
     wearsGreen: false,
     wearsDress: false,
+    backgroundBlue: false,
+    backgroundRed: false,
+    backgroundGreen: true,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -496,6 +576,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: true,
     wearsDress: true,
+    backgroundBlue: true,
+    backgroundRed: false,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 
   {
@@ -525,6 +610,11 @@ const disneyCharacters = [
     wearsBlue: false,
     wearsGreen: false,
     wearsDress: false,
+    backgroundBlue: false,
+    backgroundRed: true,
+    backgroundGreen: false,
+    backgroundOrange: false,
+    backgroundYellow: false,
   },
 ];
 
