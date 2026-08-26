@@ -1543,3 +1543,19 @@ button#ask-question-button {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* =========================
+   GAME TITLE + INFO BUTTON
+========================= */
+
+
+
+.game-header button.header-info-button {
+  position: static;
+  top: auto;
+  right: auto;
+  display: flex;
+  flex-shrink: 0;
+  border-color: var(--ink);
+  background-color: var(--surface);
+}
