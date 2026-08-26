@@ -1856,6 +1856,18 @@ button.header-icon-button .icon {
   text-underline-offset: 2px;
 }
 
+/* Der Rechtehinweis bei Disney und Mario. Steht auf einer eigenen Zeile
+   und tritt einen Schritt zurück – er ist Kleingedrucktes, keine Quelle. */
+.credits-note {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  opacity: 0.8;
+}
+
 .credits-entry a:hover {
   color: var(--accent);
 }
