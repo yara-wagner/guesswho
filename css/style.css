@@ -1550,6 +1550,12 @@ button#ask-question-button {
 
 
 
-button.header-info-button {
+.game-header button.header-info-button {
   position: static;
+  top: auto;
+  right: auto;
+  display: flex;
+  flex-shrink: 0;
+  border-color: var(--ink);
+  background-color: var(--surface);
 }
