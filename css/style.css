@@ -774,6 +774,39 @@ button.leave-game-button {
   gap: 18px;
 }
 
+/* Auf schmalen Bildschirmen sind kleinere Karten wichtiger als grosse
+   Bilder: mit 95px passen drei statt zwei Spalten in die Zeile, damit man
+   mehr Charaktere auf einmal sieht und weniger scrollen muss. Der
+   engere Abstand gewinnt zusätzlich Platz. */
+@media (max-width: 500px) {
+  .character-grid {
+    width: min(1000px, 97%);
+    margin-bottom: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+    gap: 10px;
+  }
+
+  /* Der Name darf auf der kleineren Karte nicht mehr Platz brauchen als
+     nötig – sonst schrumpft nur das Bild. */
+  .character-name {
+    padding: 7px 4px;
+    font-size: 14px;
+  }
+
+  /* Kreuz und Häkchen mitskalieren, sonst sprengen sie die Karte */
+  .character-card.eliminated::after {
+    font-size: 48px;
+  }
+
+  .character-card.selected::after {
+    top: 5px;
+    right: 5px;
+    width: 22px;
+    height: 22px;
+    font-size: 13px;
+  }
+}
+
 /* =========================
    CHARACTER CARD
 ========================= */
@@ -1080,6 +1113,16 @@ button.leave-game-button {
 .custom-add-card-icon .icon {
   width: 40px;
   height: 40px;
+}
+
+/* Die Karten der Spiel-Ansichten werden auf schmalen Bildschirmen kleiner
+   (siehe CHARACTER GRID). Hier nicht: in diese Karten wird getippt, ein
+   95px breites Namensfeld ist zu eng. */
+@media (max-width: 500px) {
+  #custom-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 18px;
+  }
 }
 
 /* =========================
