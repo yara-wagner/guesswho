@@ -91,9 +91,10 @@ class GameHeader extends HTMLElement {
           <button
             class="leave-game-button secondary"
             type="button"
+            aria-label="Back to start"
           >
             <span data-icon="home"></span>
-            Back to start
+            <span class="leave-game-button-text">Back to start</span>
           </button>
         `
         : "";

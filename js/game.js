@@ -310,6 +310,11 @@ function makeFinalGuess(character) {
 
 // Nur die Beschriftung wechseln, nicht den ganzen Button-Inhalt – daneben
 // steht das Icon (siehe game.html)
+//
+// Die Farbe bleibt dabei Petrol: Coral ist schon die Farbe der anderen
+// Buttons, ein Wechsel dorthin würde den Final Guess nicht mehr von
+// "End turn" unterscheiden. Im Rate-Modus wird der Button nur dunkler
+// (siehe .accent-2.is-active in css/style.css).
 const finalGuessLabel = finalGuessButton.querySelector(".button-label");
 
 finalGuessButton.addEventListener("click", function () {
@@ -317,13 +322,9 @@ finalGuessButton.addEventListener("click", function () {
 
   if (finalGuessMode === true) {
     finalGuessLabel.textContent = "Cancel guess";
-
-    // Im Rate-Modus wird der Button zur Hauptaktion und wechselt
-    // dafür von Petrol auf Coral
-    finalGuessButton.classList.remove("accent-2");
   } else {
     finalGuessLabel.textContent = "Final Guess";
-
-    finalGuessButton.classList.add("accent-2");
   }
+
+  finalGuessButton.classList.toggle("is-active", finalGuessMode);
 });

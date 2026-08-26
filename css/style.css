@@ -95,6 +95,10 @@
   --accent-2-hover: #23a091;
   --accent-2-soft: #d8f2ee;
 
+  /* aktiver Rate-Modus ("Cancel guess") */
+  --accent-2-dark: #1a7c71;
+  --accent-2-dark-hover: #146259;
+
   /* Badges und Zähler */
   --sun: #ffc94d;
   --sun-soft: #fff0cc;
@@ -311,6 +315,17 @@ button.accent-2:hover {
   color: var(--surface);
 }
 
+/* Läuft der Rate-Modus, wird der Button dunkler – gleiche Farbfamilie,
+   damit er nicht mit der Hauptaktion verwechselt wird (siehe
+   js/game.js). */
+button.accent-2.is-active {
+  background-color: var(--accent-2-dark);
+}
+
+button.accent-2.is-active:hover {
+  background-color: var(--accent-2-dark-hover);
+}
+
 /* --- Runde Icon-Buttons: Schliessen-Kreuz und Info --- */
 
 button.icon-button {
@@ -357,6 +372,12 @@ game-header {
   padding: 12px 20px;
   border-bottom: 2px solid var(--accent-soft);
   background-color: var(--bg-soft);
+}
+
+/* "Back" und "Back to start" invertieren beim Hover (siehe .secondary in
+   BUTTONS). */
+.game-header button.secondary:hover {
+  color: var(--bg-soft);
 }
 
 /* Rechte Gruppe: "← Back" und "Back to start" nebeneinander
@@ -407,19 +428,13 @@ button.leave-game-button {
     height: 34px;
   }
 
-  button.leave-game-button {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  /* Auf dem Handy reicht der Pfeil – die Beschriftung nimmt nur Platz weg.
-     Senkrecht bleibt das Padding wie beim "Back to start"-Button. */
-  button.back-button .back-button-text {
+  /* Auf dem Handy reichen die Symbole – die Beschriftungen nehmen nur
+     Platz weg. Die kompakten Abstände dazu stehen weiter unten im
+     Abschnitt BACK BUTTON, weil "button.back-button" dort noch einmal
+     ein eigenes Padding setzt und die spätere Regel gewinnt. */
+  button.back-button .back-button-text,
+  button.leave-game-button .leave-game-button-text {
     display: none;
-  }
-
-  button.back-button {
-    padding: 8px 10px;
   }
 }
 
@@ -538,13 +553,17 @@ button.leave-game-button {
 }
 
 /* Jeder Modus hat seine eigene Farbe. Die Attribute stehen schon im HTML
-   (data-mode), es braucht dafür also kein zusätzliches Markup. */
-.mode-tile[data-mode="single-player"] {
+   (data-mode), es braucht dafür also kein zusätzliches Markup.
+
+   Die Farben hängen am Wrapper und nicht an der Kachel selbst: so erbt sie
+   auch der Info-Button, der ein Geschwister-Element der Kachel ist
+   (siehe MODE INFO BUTTON weiter unten). */
+.mode-tile-wrapper:has(.mode-tile[data-mode="single-player"]) {
   --tile-tint: var(--sun-soft);
   --tile-edge: var(--sun);
 }
 
-.mode-tile[data-mode="multi-player"] {
+.mode-tile-wrapper:has(.mode-tile[data-mode="multi-player"]) {
   --tile-tint: var(--accent-2-soft);
   --tile-edge: var(--accent-2);
 }
@@ -914,6 +933,38 @@ button.leave-game-button {
   color: var(--ink-soft);
 }
 
+/* Auf schmalen Bildschirmen passen der Hinweis und die beiden Buttons
+   nicht mehr in eine Zeile. Statt sie einzeln umbrechen zu lassen (drei
+   Zeilen, die von der Karten-Ansicht Platz wegnehmen), bekommt der
+   Hinweis die volle Breite und die Buttons teilen sich die Zeile
+   darunter. */
+@media (max-width: 500px) {
+  .selection-actions {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .selection-hint {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  /* "Random character" und "Confirm character" werden zu "Random" und
+     "Confirm" – nebeneinander bleiben sie so gut treffbar, ohne dass die
+     Beschriftung umbricht. */
+  .selection-button-text {
+    display: none;
+  }
+
+  #random-selection-button,
+  #confirm-selection-button {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 11px 14px;
+    white-space: nowrap;
+  }
+}
+
 /* =========================
    CUSTOM CHARACTER SET
 ========================= */
@@ -1146,13 +1197,19 @@ button.leave-game-button {
   top: 12px;
   right: 12px;
   z-index: 10;
+
+  /* Ruhezustand: der Button geht im Kachel-Hintergrund auf (--tile-tint,
+     siehe MODE SELECTION), sichtbar bleiben Rahmen und Icon. */
   border-color: var(--ink);
-  background-color: var(--surface);
+  background-color: var(--tile-tint, var(--surface));
+  color: var(--ink);
 }
 
+/* Beim Hover dreht sich das Icon um: dunkle Fläche, das Zeichen selbst
+   nimmt die Kachelfarbe an */
 .mode-tile-wrapper button.info-button:hover {
   background-color: var(--ink);
-  color: var(--surface);
+  color: var(--tile-tint, var(--surface));
 }
 
 /* =========================
@@ -1315,6 +1372,18 @@ button.continue-button {
 button.back-button {
   padding: 11px 16px;
   font-size: 14px;
+}
+
+/* Auf schmalen Bildschirmen zeigen beide nur noch ihr Symbol (die
+   Beschriftungen blendet der Abschnitt HEADER aus). Mit 8px Innenabstand
+   werden sie 40 × 40 gross – dieselbe Grösse wie die runden Buttons für
+   Regeln und Musik: 20px Icon + 2 × 8px Innenabstand + 2 × 2px Rahmen. */
+@media (max-width: 500px) {
+  button.back-button,
+  button.leave-game-button {
+    padding: 8px;
+    font-size: 13px;
+  }
 }
 
 /* =========================
@@ -1620,9 +1689,11 @@ button.header-icon-button {
     transform 0.1s;
 }
 
+/* Wie beim Info-Button auf der Modus-Kachel: das Zeichen nimmt die Farbe
+   des Header-Bands an und wirkt dadurch ausgestanzt */
 button.header-icon-button:hover {
   background-color: var(--ink);
-  color: var(--surface);
+  color: var(--bg-soft);
 }
 
 button.header-icon-button:active {
