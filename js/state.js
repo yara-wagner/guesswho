@@ -23,6 +23,9 @@ function createGameState() {
 
     customCharacters: [],
 
+    // Die ausgewürfelten Charaktere des Mix-Sets (siehe characters.js)
+    mixCharacters: [],
+
     player1Secret: null,
     player2Secret: null,
 

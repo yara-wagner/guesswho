@@ -49,7 +49,7 @@ if (characterSet.available === false) {
   tile.appendChild(badge);
 
 } else if (
-  characterSet.custom === true &&
+  (characterSet.custom === true || characterSet.mixed === true) &&
   gameState.gameMode === "single-player"
 ) {
   tile.disabled = true;
@@ -60,6 +60,32 @@ if (characterSet.available === false) {
   badge.textContent = "Multi-Player only";
 
   tile.appendChild(badge);
+
+} else if (characterSet.mixed === true) {
+  const meta = document.createElement("span");
+
+  meta.classList.add("set-tile-meta");
+
+  const count = document.createElement("span");
+
+  count.classList.add("set-tile-count");
+
+  count.textContent =
+    `${getMixCharacterCount()} characters`;
+
+  const note = document.createElement("span");
+
+  note.classList.add("set-tile-count");
+  note.textContent = "Random from all sets";
+
+  meta.appendChild(count);
+  meta.appendChild(note);
+
+  tile.appendChild(meta);
+
+  tile.addEventListener("click", function () {
+    selectMixSet(characterSet);
+  });
 
 } else if (characterSet.custom === true) {
   const badge = document.createElement("span");
@@ -74,6 +100,10 @@ if (characterSet.available === false) {
   });
 
 } else {
+  const meta = document.createElement("span");
+
+  meta.classList.add("set-tile-meta");
+
   const count = document.createElement("span");
 
   count.classList.add("set-tile-count");
@@ -81,7 +111,28 @@ if (characterSet.available === false) {
   count.textContent =
     `${characterSet.characters.length} characters`;
 
-  tile.appendChild(count);
+  meta.appendChild(count);
+
+  // Im Single-Player spielt man gegen den Computer – dort hilft es zu
+  // wissen, wie schwer das Set zu erraten ist
+  if (gameState.gameMode === "single-player") {
+    const difficultyLabel =
+      getDifficultyLabel(characterSet.difficulty);
+
+    if (difficultyLabel !== null) {
+      const difficulty = document.createElement("span");
+
+      difficulty.classList.add("set-tile-difficulty");
+
+      difficulty.dataset.difficulty = characterSet.difficulty;
+
+      difficulty.textContent = difficultyLabel;
+
+      meta.appendChild(difficulty);
+    }
+  }
+
+  tile.appendChild(meta);
 
   tile.addEventListener("click", function () {
     selectCharacterSet(characterSet);
@@ -125,6 +176,27 @@ function selectCharacterSet(characterSet) {
   }
 
   // Multi-Player
+  gameState.phase = "selection";
+
+  saveGameState(gameState);
+
+  window.location.href = "character_selection.html";
+}
+
+// Das Mix-Set hat keine feste Charakter-Liste: Die Charaktere werden hier
+// aus den anderen Sets zusammengewürfelt und in den Spielstand geschrieben.
+// Für jede Runde wird neu gewürfelt.
+function selectMixSet(characterSet) {
+  const characters = createMixedCharacters();
+
+  if (characters.length === 0) {
+    return;
+  }
+
+  gameState.characterSetId = characterSet.id;
+
+  gameState.mixCharacters = characters;
+
   gameState.phase = "selection";
 
   saveGameState(gameState);

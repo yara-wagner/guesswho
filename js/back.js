@@ -46,6 +46,9 @@ function goBackToSetSelection(state) {
 
   state.customCharacters = [];
 
+  // Beim nächsten Mix wird neu gewürfelt
+  state.mixCharacters = [];
+
   state.phase = wasCustomSet ? "custom-set" : "set-selection";
 
   saveGameState(state);
