@@ -2,22 +2,28 @@
 // HEADER
 // =============================
 //
-// Das Attribut "leave" setzt voraus, dass js/leave.js geladen ist.
-// Auf diesen Seiten ist auch das Logo anklickbar und führt – genau wie der
-// Button – zurück zur Startseite. Auf der Startseite selbst ist das Logo
-// nur ein Bild, dort gibt es nichts abzubrechen.
+// "leave" zeigt den "Back to start"-Button.
 //
-// Das Attribut "back" stellt oben rechts einen "← Back"-Button neben den
-// "Back to start"-Button. Er geht einen Schritt im Spielablauf zurück 
-// (siehe js/back.js), die Seite muss diese Datei also ebenfalls laden. 
-// Seiten mitten in einer Runde (Pass-Screen, Board) haben kein "back": 
-// Dort gibt es keinen Schritt zurück, nur den "Back to start"-Button.
+// "back" zeigt zusätzlich einen Zurück-Button.
+//
+// "rules" zeigt einen Info-Button für die Spielregeln.
+// Mögliche Werte:
+// rules="single-player"
+// rules="multi-player"
 
 class GameHeader extends HTMLElement {
   connectedCallback() {
-    const showLeaveButton = this.hasAttribute("leave");
+    const showLeaveButton =
+      this.hasAttribute("leave");
 
-    const showBackButton = this.hasAttribute("back");
+    const showBackButton =
+      this.hasAttribute("back");
+
+    const rulesType =
+      this.getAttribute("rules");
+
+    const showRulesButton =
+      rulesType !== null;
 
     const logoImage = `
       <img
@@ -26,30 +32,70 @@ class GameHeader extends HTMLElement {
       />
     `;
 
-    const backButtonMarkup = showBackButton
-      ? `
-        <button
-          class="back-button secondary"
-          type="button"
-          aria-label="Back"
-        >
-          <span data-icon="arrow-left"></span>
-          <span class="back-button-text">Back</span>
-        </button>
-      `
-      : "";
 
-    const leaveButtonMarkup = showLeaveButton
-      ? `
-        <button
-          class="leave-game-button secondary"
-          type="button"
-        >
-          <span data-icon="home"></span>
-          Back to start
-        </button>
-      `
-      : "";
+    // =============================
+    // BACK BUTTON
+    // =============================
+
+    const backButtonMarkup =
+      showBackButton
+        ? `
+          <button
+            class="back-button secondary"
+            type="button"
+            aria-label="Back"
+          >
+            <span data-icon="arrow-left"></span>
+
+            <span class="back-button-text">
+              Back
+            </span>
+          </button>
+        `
+        : "";
+
+
+    // =============================
+    // LEAVE BUTTON
+    // =============================
+
+    const leaveButtonMarkup =
+      showLeaveButton
+        ? `
+          <button
+            class="leave-game-button secondary"
+            type="button"
+          >
+            <span data-icon="home"></span>
+
+            Back to start
+          </button>
+        `
+        : "";
+
+
+    // =============================
+    // INFO BUTTON
+    // =============================
+
+    const infoButtonMarkup =
+      showRulesButton
+        ? `
+          <button
+            class="info-button icon-button header-info-button"
+            type="button"
+            data-rules="${rulesType}"
+            aria-label="Show rules"
+          >
+            <span data-icon="info"></span>
+          </button>
+        `
+        : "";
+
+
+    // =============================
+    // HEADER HTML
+    // =============================
 
     this.innerHTML = `
       <header class="game-header">
@@ -70,12 +116,20 @@ class GameHeader extends HTMLElement {
           }
         </h1>
 
+
         ${
-          showBackButton || showLeaveButton
+          showBackButton ||
+          showLeaveButton ||
+          showRulesButton
             ? `
               <div class="header-buttons">
+
                 ${backButtonMarkup}
+
+                ${infoButtonMarkup}
+
                 ${leaveButtonMarkup}
+
               </div>
             `
             : ""
@@ -84,38 +138,72 @@ class GameHeader extends HTMLElement {
       </header>
     `;
 
-    // Die Platzhalter im Markup oben durch ihre SVGs ersetzen (js/icons.js).
-    // Der Header steht schon, bevor DOMContentLoaded feuert, deshalb macht
-    // er das hier selber.
+
+    // =============================
+    // ICONS
+    // =============================
+
     renderIcons(this);
 
-    const backButton = this.querySelector(".back-button");
+
+    // =============================
+    // BACK
+    // =============================
+
+    const backButton =
+      this.querySelector(
+        ".back-button"
+      );
 
     if (backButton !== null) {
-      // goBack() steht in js/back.js und ist hier noch nicht geladen.
-      // Der Aufruf im Callback wird erst beim Klick aufgelöst, dann ist es da.
-      backButton.addEventListener("click", function () {
-        goBack();
-      });
+      backButton.addEventListener(
+        "click",
+        function () {
+          goBack();
+        }
+      );
     }
+
+
+    // =============================
+    // LEAVE
+    // =============================
 
     if (showLeaveButton === false) {
       return;
     }
 
-    const leaveButton = this.querySelector(".leave-game-button");
-    const logoButton = this.querySelector(".logo-button");
+    const leaveButton =
+      this.querySelector(
+        ".leave-game-button"
+      );
 
-    // leaveGame() steht in js/leave.js und ist hier noch nicht geladen.
-    // Der Aufruf im Callback wird erst beim Klick aufgelöst, dann ist es da.
-    leaveButton.addEventListener("click", function () {
-      leaveGame();
-    });
+    const logoButton =
+      this.querySelector(
+        ".logo-button"
+      );
 
-    logoButton.addEventListener("click", function () {
-      leaveGame();
-    });
+    if (leaveButton !== null) {
+      leaveButton.addEventListener(
+        "click",
+        function () {
+          leaveGame();
+        }
+      );
+    }
+
+    if (logoButton !== null) {
+      logoButton.addEventListener(
+        "click",
+        function () {
+          leaveGame();
+        }
+      );
+    }
   }
 }
 
-customElements.define("game-header", GameHeader);
+customElements.define(
+  "game-header",
+  GameHeader
+);
