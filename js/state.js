@@ -32,6 +32,12 @@ function createGameState() {
     phase: "set-selection",
 
     winner: null,
+
+    // Warum der Single Player verloren hat: "no-questions" oder "wrong-guess"
+    lossReason: null,
+
+    // Der Charakter, auf den der Single Player beim Final Guess getippt hat
+    finalGuess: null,
   };
 }
 

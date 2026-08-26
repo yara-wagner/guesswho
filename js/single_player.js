@@ -108,6 +108,12 @@ function makeFinalGuess(character) {
 
   gameState.phase = "finished";
 
+  if (isCorrect === false) {
+    gameState.lossReason = "wrong-guess";
+
+    gameState.finalGuess = character;
+  }
+
   saveGameState(gameState);
 
   if (isCorrect) {
@@ -679,6 +685,8 @@ function askQuestion(property) {
       gameState.winner = 2;
 
       gameState.phase = "finished";
+
+      gameState.lossReason = "no-questions";
     }
 
     saveGameState(gameState);
