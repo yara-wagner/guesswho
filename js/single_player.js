@@ -376,94 +376,170 @@ const questionsBySet = {
   ],
 
   mario: [
-    {
-      property: "human",
-      text: "Is your character human?",
-    },
+  // =============================
+  // BASIC
+  // =============================
 
-    {
-      property: "female",
-      text: "Is your character female?",
-    },
+  {
+    property: "human",
+    text: "Is your character human?",
+  },
 
-    {
-      property: "male",
-      text: "Is your character male?",
-    },
+  {
+    property: "male",
+    text: "Is your character male?",
+  },
 
-    {
-      property: "royal",
-      text: "Is your character royal?",
-    },
+  {
+    property: "female",
+    text: "Is your character female?",
+  },
 
-    {
-      property: "wearsHat",
-      text: "Does your character wear a hat?",
-    },
+  {
+    property: "royal",
+    text: "Is your character royal?",
+  },
 
-    {
-      property: "hasMoustache",
-      text:
-        "Does your character have a moustache?",
-    },
+  {
+    property: "villain",
+    text: "Is your character a villain?",
+  },
 
-    {
-      property: "hasHair",
-      text: "Does your character have hair?",
-    },
 
-    {
-      property: "wearsRed",
-      text:
-        "Is your character mainly wearing red?",
-    },
+  // =============================
+  // CLOTHING
+  // =============================
 
-    {
-      property: "wearsGreen",
-      text:
-        "Is your character mainly wearing green?",
-    },
+  {
+    property: "wearsHat",
+    text: "Does your character wear a hat?",
+  },
 
-    {
-      property: "wearsPink",
-      text:
-        "Is your character mainly wearing pink?",
-    },
+  {
+    property: "wearsCrown",
+    text: "Does your character wear a crown?",
+  },
 
-    {
-      property: "wearsBlue",
-      text:
-        "Is your character mainly wearing blue?",
-    },
+  {
+    property: "wearsDress",
+    text: "Does your character wear a dress?",
+  },
 
-    {
-      property: "animalLike",
-      text:
-        "Does your character look like an animal?",
-    },
 
-    {
-      property: "hasShell",
-      text:
-        "Does your character have a shell?",
-    },
+  // =============================
+  // FACE / HAIR
+  // =============================
 
-    {
-      property: "hasHorns",
-      text:
-        "Does your character have horns?",
-    },
+  {
+    property: "hasMoustache",
+    text: "Does your character have a moustache?",
+  },
 
-    {
-      property: "ghost",
-      text: "Is your character a ghost?",
-    },
+  {
+    property: "hasHair",
+    text: "Does your character have visible hair?",
+  },
 
-    {
-      property: "villain",
-      text: "Is your character a villain?",
-    },
-  ],
+  {
+    property: "blondeHair",
+    text: "Does your character have blonde hair?",
+  },
+
+  {
+    property: "brownHair",
+    text: "Does your character have brown hair?",
+  },
+
+  {
+    property: "redHair",
+    text: "Does your character have red hair?",
+  },
+
+  {
+    property: "hasMask",
+    text: "Does your character wear a mask?",
+  },
+
+
+  // =============================
+  // COLOURS
+  // =============================
+
+  {
+    property: "hasRed",
+    text: "Does your character have a lot of red?",
+  },
+
+  {
+    property: "hasGreen",
+    text: "Does your character have a lot of green?",
+  },
+
+  {
+    property: "hasBlue",
+    text: "Does your character have a lot of blue?",
+  },
+
+  {
+    property: "hasPink",
+    text: "Does your character have a lot of pink?",
+  },
+
+  {
+    property: "hasYellow",
+    text: "Does your character have a lot of yellow?",
+  },
+
+  {
+    property: "hasPurple",
+    text: "Does your character have a lot of purple?",
+  },
+
+
+  // =============================
+  // BODY / SPECIES
+  // =============================
+
+  {
+    property: "animalLike",
+    text: "Does your character look like an animal?",
+  },
+
+  {
+    property: "hasShell",
+    text: "Does your character have a shell?",
+  },
+
+  {
+    property: "hasHorns",
+    text: "Does your character have horns?",
+  },
+
+  {
+    property: "hasTail",
+    text: "Does your character have a tail?",
+  },
+
+  {
+    property: "ghost",
+    text: "Is your character a ghost?",
+  },
+
+
+  // =============================
+  // SPECIAL MARIO FEATURES
+  // =============================
+
+  {
+    property: "mushroomLike",
+    text: "Does your character have a mushroom head?",
+  },
+
+  {
+    property: "isKong",
+    text: "Is your character a Kong?",
+  },
+],
 };
 
 

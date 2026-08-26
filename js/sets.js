@@ -36,21 +36,7 @@ function createSetTile(characterSet) {
   tile.appendChild(icon);
   tile.appendChild(name);
 
-  if (
-  gameState.gameMode === "single-player" &&
-  characterSet.id === "mario"
-) {
-  tile.disabled = true;
-
-  const badge = document.createElement("span");
-
-  badge.classList.add("tile-badge");
-  badge.textContent = "Coming soon";
-
-  tile.appendChild(badge);
-
-  return tile;
-}
+  
 
 if (characterSet.available === false) {
   tile.disabled = true;
