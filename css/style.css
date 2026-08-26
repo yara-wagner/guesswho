@@ -1584,6 +1584,13 @@ button#ask-question-button {
    HEADER ICON BUTTONS
 ========================= */
 
+/* Runde Buttons für Regeln und Musik. Farben wie der Umriss-Stil der
+   Nachbarn im Header (siehe .secondary in BUTTONS): heller Grund mit
+   Rahmen, der beim Hover invertiert. Ohne den farbigen Schein, den
+   gefüllte Buttons tragen.
+
+   Die 46px sind dieselbe Höhe wie "Back" und "Back to start":
+   20px Icon + 2 × 11px Innenabstand + 2 × 2px Rahmen. */
 button.header-icon-button {
   position: static;
 
@@ -1593,8 +1600,8 @@ button.header-icon-button {
 
   flex-shrink: 0;
 
-  width: 36px;
-  height: 36px;
+  width: 46px;
+  height: 46px;
 
   padding: 0;
 
@@ -1603,6 +1610,7 @@ button.header-icon-button {
 
   background-color: transparent;
   color: var(--ink);
+  box-shadow: none;
 
   cursor: pointer;
 
@@ -1626,17 +1634,12 @@ button.header-icon-button .icon {
   height: 20px;
 }
 
-button.header-icon-button:hover {
-  background-color: var(--ink);
-  color: var(--surface);
-}
-
-button.header-icon-button:active {
-  transform: scale(0.94);
-}
-
-button.header-icon-button .icon {
-  width: 20px;
-  height: 20px;
+/* Wie die anderen Header-Buttons auf schmalen Bildschirmen:
+   20px Icon + 2 × 8px Innenabstand + 2 × 2px Rahmen. */
+@media (max-width: 500px) {
+  button.header-icon-button {
+    width: 40px;
+    height: 40px;
+  }
 }
 
