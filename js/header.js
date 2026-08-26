@@ -8,11 +8,10 @@
 // nur ein Bild, dort gibt es nichts abzubrechen.
 //
 // Das Attribut "back" stellt oben rechts einen "← Back"-Button neben den
-// "Back to start"-Button (auf den Ergebnisseiten steht er dort allein). Er geht
-// einen Schritt im Spielablauf zurück (siehe js/back.js), die Seite muss
-// diese Datei also ebenfalls laden. Seiten mitten in einer Runde
-// (Pass-Screen, Board) haben kein "back": Dort gibt es keinen Schritt
-// zurück, nur den "Back to start"-Button.
+// "Back to start"-Button. Er geht einen Schritt im Spielablauf zurück 
+// (siehe js/back.js), die Seite muss diese Datei also ebenfalls laden. 
+// Seiten mitten in einer Runde (Pass-Screen, Board) haben kein "back": 
+// Dort gibt es keinen Schritt zurück, nur den "Back to start"-Button.
 
 class GameHeader extends HTMLElement {
   connectedCallback() {
