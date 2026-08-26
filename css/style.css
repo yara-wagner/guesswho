@@ -633,11 +633,44 @@ button.leave-game-button {
   --tile-edge: #f06fa5;
 }
 
-/* Anzahl Charaktere im Set */
+/* Anzahl Charaktere im Set und – nur im Single-Player – darunter die
+   Schwierigkeit. Beide stehen enger beieinander als der Rest der Kachel,
+   weil sie zusammengehören. */
+
+.set-tile-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
 
 .set-tile-count {
   font-size: 13px;
   color: var(--ink-soft);
+}
+
+/* Die Farbe kommt pro Stufe über --difficulty-tint herein (siehe unten) */
+.set-tile-difficulty {
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--difficulty-tint, var(--muted));
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+}
+
+.set-tile-difficulty[data-difficulty="easy"] {
+  --difficulty-tint: var(--accent-2-soft);
+}
+
+.set-tile-difficulty[data-difficulty="medium"] {
+  --difficulty-tint: var(--sun-soft);
+}
+
+.set-tile-difficulty[data-difficulty="hard"] {
+  --difficulty-tint: var(--accent-soft);
 }
 
 .set-tile:disabled .tile-icon,

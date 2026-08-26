@@ -9,9 +9,20 @@
 // available: false -> die Kachel wird ausgegraut und ist nicht anklickbar
 // custom: true     -> die Spieler stellen das Set selber zusammen
 //                     (custom_set.html)
+// difficulty       -> wie schwer das Set im Single-Player zu erraten ist.
+//                     Wird nur dort angezeigt (siehe sets.js), weil man im
+//                     Multi-Player gegeneinander und nicht gegen den
+//                     Computer spielt und somit keine vorgefertigten Fragen hat.
 
 // Das Custom-Set hat keine feste Charakter-Liste
 const CUSTOM_SET_ID = "custom";
+
+// Die möglichen Werte für difficulty und ihre Beschriftung auf der Kachel
+const DIFFICULTY_LABELS = {
+  easy: "Easy",
+  medium: "Medium",
+  hard: "Hard",
+};
 
 const characterSets = [
   {
@@ -31,6 +42,7 @@ const characterSets = [
     name: "Disney",
     icon: "🏰",
     available: true,
+    difficulty: "easy",
     characters: disneyCharacters,
   },
 
@@ -39,6 +51,7 @@ const characterSets = [
     name: "Animals",
     icon: "🐾",
     available: true,
+    difficulty: "medium",
     characters: animalsCharacters,
   },
 
@@ -47,6 +60,7 @@ const characterSets = [
     name: "Super Mario",
     icon: "🍄",
     available: true,
+    difficulty: "hard",
     characters: marioCharacters,
   },
 
@@ -67,6 +81,17 @@ function getCharacterSet(setId) {
   }
 
   return set;
+}
+
+// Die Beschriftung für die Schwierigkeit (null, wenn das Set keine hat)
+function getDifficultyLabel(difficulty) {
+  const label = DIFFICULTY_LABELS[difficulty];
+
+  if (label === undefined) {
+    return null;
+  }
+
+  return label;
 }
 
 // Die Charaktere des gewählten Sets (leer, wenn das Set unbekannt ist).
