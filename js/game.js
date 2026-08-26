@@ -26,10 +26,7 @@ const newGameButton = document.getElementById("new-game-button");
 
 const homeButton = document.getElementById("home-button");
 
-const finalGuessButton =
-  document.getElementById(
-    "final-guess-button"
-  );
+const finalGuessButton = document.getElementById("final-guess-button");
 
 let finalGuessMode = false;
 
@@ -54,18 +51,21 @@ function renderCharacters() {
   const eliminatedCharacters = getEliminatedCharacters(gameState);
 
   getSetCharacters(gameState).forEach((character) => {
-    const card = createCharacterCard(
-  character,
-  function () {
+    const card = createCharacterCard(character, function () {
+      const eliminatedCharacters = getEliminatedCharacters(gameState);
 
-    if (finalGuessMode === true) {
-      makeFinalGuess(character);
-      return;
-    }
+      if (finalGuessMode === true) {
+        if (eliminatedCharacters.includes(character.id)) {
+          return;
+        }
 
-    toggleCharacter(character.id);
-  }
-);
+        makeFinalGuess(character);
+
+        return;
+      }
+
+      toggleCharacter(character.id);
+    });
 
     if (eliminatedCharacters.includes(character.id)) {
       card.classList.add("eliminated");
@@ -106,53 +106,6 @@ function toggleCharacter(characterId) {
   saveGameState(gameState);
 
   renderCharacters();
-
-  checkForWin();
-}
-
-// =============================
-// WIN CONDITION
-// =============================
-
-// Die Charaktere, die der aktuelle Spieler noch nicht ausgeschlossen hat
-function getRemainingCharacters() {
-  const eliminatedCharacters = getEliminatedCharacters(gameState);
-
-  return getSetCharacters(gameState).filter(
-    (character) => eliminatedCharacters.includes(character.id) === false,
-  );
-}
-
-// Gewonnen hat, wer alle Charaktere ausser dem geheimen Charakter
-// des Gegenspielers ausgeschlossen hat
-function hasCurrentPlayerWon() {
-  const remaining = getRemainingCharacters();
-
-  if (remaining.length !== 1) {
-    return false;
-  }
-
-  const secret = getOpponentSecret(gameState);
-
-  if (secret === null) {
-    return false;
-  }
-
-  return remaining[0].id === secret.id;
-}
-
-function checkForWin() {
-  if (hasCurrentPlayerWon() === false) {
-    return;
-  }
-
-  gameState.winner = gameState.currentPlayer;
-
-  gameState.phase = "finished";
-
-  saveGameState(gameState);
-
-  showWinDialog();
 }
 
 function showWinDialog() {
@@ -331,64 +284,46 @@ if (gameState === null) {
   startTurn();
 }
 
-
 function makeFinalGuess(character) {
-  const opponentSecret =
-    getOpponentSecret(gameState);
+  const opponentSecret = getOpponentSecret(gameState);
 
   if (opponentSecret === null) {
     return;
   }
 
-  if (
-    character.id === opponentSecret.id
-  ) {
-    gameState.winner =
-      gameState.currentPlayer;
+  const guessedCorrectly = character.id === opponentSecret.id;
+
+  if (guessedCorrectly === true) {
+    gameState.winner = gameState.currentPlayer;
   } else {
-    gameState.winner =
-      gameState.currentPlayer === 1
-        ? 2
-        : 1;
+    gameState.winner = gameState.currentPlayer === 1 ? 2 : 1;
   }
 
   gameState.phase = "finished";
 
   saveGameState(gameState);
 
-  // Hier kommt gleich deine
-  // Multiplayer-Ergebnisseite hin
-}
+  finalGuessMode = false;
 
+  showWinDialog();
+}
 
 // Nur die Beschriftung wechseln, nicht den ganzen Button-Inhalt – daneben
 // steht das Icon (siehe game.html)
-const finalGuessLabel =
-  finalGuessButton.querySelector(
-    ".button-label"
-  );
+const finalGuessLabel = finalGuessButton.querySelector(".button-label");
 
-finalGuessButton.addEventListener(
-  "click",
-  function () {
-    finalGuessMode = !finalGuessMode;
+finalGuessButton.addEventListener("click", function () {
+  finalGuessMode = !finalGuessMode;
 
-    if (finalGuessMode === true) {
-      finalGuessLabel.textContent =
-        "Cancel guess";
+  if (finalGuessMode === true) {
+    finalGuessLabel.textContent = "Cancel guess";
 
-      // Im Rate-Modus wird der Button zur Hauptaktion und wechselt
-      // dafür von Petrol auf Coral
-      finalGuessButton.classList.remove(
-        "accent-2"
-      );
-    } else {
-      finalGuessLabel.textContent =
-        "Final Guess";
+    // Im Rate-Modus wird der Button zur Hauptaktion und wechselt
+    // dafür von Petrol auf Coral
+    finalGuessButton.classList.remove("accent-2");
+  } else {
+    finalGuessLabel.textContent = "Final Guess";
 
-      finalGuessButton.classList.add(
-        "accent-2"
-      );
-    }
+    finalGuessButton.classList.add("accent-2");
   }
-);
+});
