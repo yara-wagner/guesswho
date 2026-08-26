@@ -1757,3 +1757,106 @@ button.header-icon-button .icon {
   }
 }
 
+/* =========================
+   CREDITS
+========================= */
+
+/* Aufklappbarer Block auf der Startseite mit den Quellen für Musik und
+   Bilder. */
+.credits {
+  width: min(460px, 95%);
+  margin: 0 auto 40px;
+
+  border-radius: var(--radius);
+
+  background-color: var(--bg);
+  box-shadow: var(--shadow);
+
+  text-align: left;
+}
+
+/* Die Zeile zum Anklicken. Das native Dreieck ist aus, den Zustand zeigt
+   der Chevron rechts (siehe weiter unten). */
+.credits-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 13px 20px;
+
+  list-style: none;
+
+  font-family: "BellaFont", sans-serif;
+  font-size: 18px;
+
+  cursor: pointer;
+}
+
+/* Safari zeigt das Dreieck über ein eigenes Pseudo-Element */
+.credits-summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Der Titel bleibt in der Textfarbe. Dass die Zeile anklickbar ist,
+   zeigen der Zeiger und der Chevron, der beim Hover dunkler wird. */
+.credits-summary:hover .credits-summary-icon {
+  color: var(--ink);
+}
+
+/* Der Fokus-Ring soll die ganze Zeile umfassen und nicht in der Ecke
+   des Blocks abgeschnitten werden */
+.credits-summary:focus-visible {
+  border-radius: var(--radius);
+  outline-offset: -3px;
+}
+
+.credits-summary-icon {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--ink-soft);
+  transition: transform 0.2s;
+}
+
+.credits-summary-icon .icon {
+  width: 17px;
+  height: 17px;
+}
+
+/* Aufgeklappt zeigt der Pfeil nach oben */
+.credits[open] .credits-summary-icon {
+  transform: rotate(180deg);
+}
+
+.credits-list {
+  margin: 0;
+  padding: 2px 20px 18px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.credits-entry + .credits-entry {
+  margin-top: 10px;
+}
+
+.credits-entry dt {
+  font-weight: bold;
+  color: var(--ink);
+}
+
+.credits-entry dd {
+  margin: 1px 0 0;
+  color: var(--ink-soft);
+}
+
+.credits-entry a {
+  /* lange Links dürfen umbrechen statt den Block zu sprengen */
+  overflow-wrap: anywhere;
+  color: var(--ink-soft);
+  text-underline-offset: 2px;
+}
+
+.credits-entry a:hover {
+  color: var(--accent);
+}
+
