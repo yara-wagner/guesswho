@@ -45,6 +45,66 @@ let lastToggledId = null;
 
 
 // =============================
+// RESULT POP-UP
+// =============================
+
+const resultOverlay =
+  document.getElementById(
+    "result-overlay"
+  );
+
+const resultConfetti =
+  document.getElementById(
+    "result-confetti"
+  );
+
+const resultIcon =
+  document.getElementById(
+    "result-icon"
+  );
+
+const resultTitle =
+  document.getElementById(
+    "result-title"
+  );
+
+const resultMessage =
+  document.getElementById(
+    "result-message"
+  );
+
+const resultReveal =
+  document.getElementById(
+    "result-reveal"
+  );
+
+const resultCharacterImage =
+  document.getElementById(
+    "result-character-image"
+  );
+
+const resultCharacterName =
+  document.getElementById(
+    "result-character-name"
+  );
+
+const resultFooter =
+  document.getElementById(
+    "result-footer"
+  );
+
+const playAgainButton =
+  document.getElementById(
+    "play-again-button"
+  );
+
+const resultHomeButton =
+  document.getElementById(
+    "result-home-button"
+  );
+
+
+// =============================
 // COMPUTER ANSWER
 // =============================
 
@@ -93,10 +153,161 @@ function updateSetTitle() {
 
 
 // =============================
+// RESULT TEXTS
+// =============================
+
+// Gewonnen wird auf einem Weg (richtiger Final Guess), verloren auf zwei:
+// Die Fragen sind aufgebraucht oder der Final Guess war falsch. Alle drei
+// Fälle zeigen denselben Dialog, nur mit anderen Texten.
+
+function showWinTexts() {
+  resultIcon.textContent = "🎉";
+
+  resultTitle.textContent =
+    "You got it!";
+
+  resultMessage.textContent =
+    "You guessed the correct character.";
+
+  resultFooter.textContent =
+    "Nice work!";
+
+  resultReveal.classList.add(
+    "hidden"
+  );
+}
+
+function showWrongGuessTexts() {
+  resultIcon.textContent = "🙊";
+
+  resultTitle.textContent =
+    "Not quite!";
+
+  if (
+    gameState.finalGuess === null ||
+    gameState.finalGuess === undefined
+  ) {
+    resultMessage.textContent =
+      "Your final guess was wrong.";
+  } else {
+    resultMessage.textContent =
+      `Your final guess was ${gameState.finalGuess.name} – that was not the right character.`;
+  }
+
+  resultFooter.textContent =
+    "Better luck next time!";
+
+  resultReveal.classList.remove(
+    "hidden"
+  );
+}
+
+function showOutOfQuestionsTexts() {
+  resultIcon.textContent = "🙈";
+
+  resultTitle.textContent = "Oh no!";
+
+  resultMessage.textContent =
+    "You ran out of questions.";
+
+  resultFooter.textContent =
+    "Better luck next time!";
+
+  resultReveal.classList.remove(
+    "hidden"
+  );
+}
+
+
+// =============================
+// SHOW RESULT
+// =============================
+
+function showResultOverlay() {
+  if (gameState.winner === 1) {
+    showWinTexts();
+  } else if (
+    gameState.lossReason === "wrong-guess"
+  ) {
+    showWrongGuessTexts();
+  } else {
+    showOutOfQuestionsTexts();
+  }
+
+  const secretCharacter =
+    gameState.player2Secret;
+
+  resultCharacterImage.src =
+    secretCharacter.image;
+
+  resultCharacterImage.alt =
+    secretCharacter.name;
+
+  resultCharacterName.textContent =
+    secretCharacter.name;
+
+  resultOverlay.classList.remove(
+    "hidden"
+  );
+
+  // Anders als im Multi-Player gibt es hier auch Runden ohne Gewinner –
+  // gefeiert wird nur, wenn der Spieler den Charakter gefunden hat
+  if (gameState.winner === 1) {
+    playConfetti(resultConfetti);
+  }
+}
+
+
+// =============================
+// PLAY AGAIN / BACK TO START
+// =============================
+
+// Der alte Spielstand muss weg, sonst schicken die Weiterleitungen auf
+// character_sets.html die Seite direkt weiter ins schon gespielte Spiel
+function startNewSinglePlayerGame() {
+  const newGameState =
+    createGameState();
+
+  newGameState.gameMode =
+    "single-player";
+
+  newGameState.player1Name =
+    getPlayerName(1);
+
+  saveGameState(newGameState);
+
+  window.location.href =
+    "character_sets.html";
+}
+
+function goToStartScreen() {
+  clearGameState();
+
+  window.location.href = "index.html";
+}
+
+function setupResultButtons() {
+  playAgainButton.addEventListener(
+    "click",
+    startNewSinglePlayerGame
+  );
+
+  resultHomeButton.addEventListener(
+    "click",
+    goToStartScreen
+  );
+}
+
+
+// =============================
 // FINAL GUESS
 // =============================
 
 function makeFinalGuess(character) {
+  if (gameState.phase === "finished") {
+    return;
+  }
+
   if (gameState.player2Secret === null) {
     return;
   }
@@ -116,13 +327,9 @@ function makeFinalGuess(character) {
 
   saveGameState(gameState);
 
-  if (isCorrect) {
-    window.location.href =
-      "single_player_win.html";
-  } else {
-    window.location.href =
-      "single_player_result.html";
-  }
+  finalGuessMode = false;
+
+  showResultOverlay();
 }
 
 
@@ -625,6 +832,11 @@ function loadQuestions() {
 // =============================
 
 function askQuestion(property) {
+  if (gameState.phase === "finished") {
+    // Das Spiel ist vorbei, es wird nicht mehr gefragt
+    return;
+  }
+
   const characters = getSetCharacters(
     gameState
   );
@@ -696,10 +908,12 @@ function askQuestion(property) {
     if (
       gameState.questionsLeft === 0
     ) {
-      setTimeout(function () {
-        window.location.href =
-          "single_player_result.html";
-      }, 700);
+      // Kurz warten, damit das "NO" noch gelesen werden kann, bevor
+      // der Dialog darüber geht
+      setTimeout(
+        showResultOverlay,
+        700
+      );
     }
   }
 }
@@ -712,6 +926,11 @@ function askQuestion(property) {
 function toggleSinglePlayerCharacter(
   characterId
 ) {
+  if (gameState.phase === "finished") {
+    // Das Spiel ist vorbei, das Board ist nur noch Anzeige
+    return;
+  }
+
   const eliminated =
     gameState.player1Eliminated;
 
@@ -792,7 +1011,24 @@ if (
   window.location.replace(
     "character_sets.html"
   );
+} else if (
+  gameState.phase === "finished"
+) {
+  // Das Spiel ist entschieden – das Board bleibt als Anzeige stehen und
+  // das Ergebnis liegt darüber. Nach einem Neuladen landen die Spieler
+  // wieder genau hier.
+  setupResultButtons();
+
+  loadQuestions();
+
+  updateSetTitle();
+
+  renderSinglePlayerCharacters();
+
+  showResultOverlay();
 } else {
+  setupResultButtons();
+
   singleResetButton.addEventListener(
     "click",
     resetBoard

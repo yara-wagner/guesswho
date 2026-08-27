@@ -134,19 +134,9 @@ function showWinDialog() {
 
   winOverlay.classList.remove("hidden");
 
-  playConfetti();
-}
-
-function playConfetti() {
-  // Die Web-Component wird als Modul geladen und ist eventuell noch nicht
-  // bereit – dann startet sie über das autoplay-Attribut, sobald sie da ist
-  if (winConfetti.dotLottie) {
-    winConfetti.dotLottie.setFrame(0);
-
-    winConfetti.dotLottie.play();
-  } else {
-    winConfetti.setAttribute("autoplay", "");
-  }
+  // Auch bei einem falschen Tipp: Gewonnen hat dann der Gegenspieler,
+  // gefeiert wird trotzdem (siehe js/confetti.js)
+  playConfetti(winConfetti);
 }
 
 // =============================

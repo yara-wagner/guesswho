@@ -17,6 +17,12 @@
 
     <script src="js/icons.js"></script>
     <script src="js/header.js"></script>
+
+    <!-- Web-Component für die Lottie-Konfetti-Animation im Ergebnis-Pop-up -->
+    <script
+      type="module"
+      src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.27/dist/index.js"
+    ></script>
   </head>
 
   <body>
@@ -71,23 +77,72 @@
           </button>
         </section>
       </section>
-      <!-- RULES POPUP -->
-      <div id="rules-modal" class="rules-modal hidden">
-        <div class="rules-content">
-          <button
-            id="close-rules-button"
-            class="close-rules-button icon-button"
-            type="button"
-            aria-label="Close rules"
-          >
-            <span data-icon="close"></span>
-          </button>
 
-          <h2 id="rules-title"></h2>
+      <!-- RESULT POP-UP -->
 
-          <div id="rules-text"></div>
-        </div>
-      </div>
+      <!-- Gewinn und Niederlage landen beide hier – dasselbe Muster wie
+           beim Multi-Player-Board (siehe game.html). Das Board bleibt
+           dahinter stehen, damit man sein Spiel noch einmal sieht. -->
+      <section id="result-overlay" class="overlay hidden">
+        <!-- Konfetti liegt über dem ganzen Overlay, klickt aber nicht mit.
+             Es läuft nur beim Gewinn (siehe js/single_player.js).
+
+             autoResize ist nötig, weil dieses Overlay beim Laden der Seite
+             noch display: none ist: Die Component misst ihre Zeichenfläche
+             einmal beim Laden der Animation und käme so auf 0 – der Canvas
+             behielte seine Standardgrösse und würde von der CSS
+             auseinandergezogen. Mit autoResize misst sie neu, sobald das
+             Pop-up aufgeht.
+
+             devicePixelRatio: 1, weil die Fläche das ganze Fenster
+             abdeckt. Auf einem Handy mit dreifacher Pixeldichte wäre die
+             gerechnete Fläche sonst neunmal so gross – für herabfallende
+             Konfetti-Schnipsel ist das nicht nötig. -->
+        <dotlottie-wc
+          id="result-confetti"
+          class="win-confetti"
+          src="https://lottie.host/7bac9987-1953-40c4-a7de-c141a24e51ee/yTJuAa10iJ.lottie"
+          renderconfig='{"autoResize": true, "devicePixelRatio": 1}'
+          loop
+        ></dotlottie-wc>
+
+        <article class="win-dialog">
+          <span id="result-icon" class="win-dialog-icon">🎉</span>
+
+          <h2 id="result-title"></h2>
+
+          <p id="result-message"></p>
+
+          <!-- Nur bei einer Niederlage: Beim Gewinn zeigt das Bild den
+               Charakter, auf den gerade richtig getippt wurde. -->
+          <p id="result-reveal">The secret character was:</p>
+
+          <img
+            id="result-character-image"
+            class="win-character-image"
+            src=""
+            alt=""
+          />
+
+          <h3 id="result-character-name"></h3>
+
+          <p id="result-footer"></p>
+
+          <div class="win-dialog-buttons">
+            <button id="result-home-button" class="secondary" type="button">
+              <span data-icon="home"></span>
+              Back to start
+            </button>
+
+            <button id="play-again-button" type="button">
+              <span data-icon="refresh"></span>
+              Play again
+            </button>
+          </div>
+        </article>
+      </section>
+
+      <!-- Das Regeln-Popup hängt js/rules.js selbst ein -->
     </main>
 
     <script src="js/character_data.js"></script>
@@ -95,6 +150,7 @@
     <script src="js/state.js"></script>
     <script src="js/leave.js"></script>
     <script src="js/rules.js"></script>
+    <script src="js/confetti.js"></script>
     <script src="js/single_player.js"></script>
   </body>
 </html>
