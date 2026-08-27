@@ -15,11 +15,11 @@ const disneyCharacters = [
     male: true,
     animal: false,
     hasHair: true,
-    canFly: false,
+    canFly: true,
     pixar: false,
     royal: false,
     hasWings: false,
-    wearsHat: false,
+    wearsHat: true,
     hasFur: false,
     waterRelated: false,
     magicalCreature: false,
@@ -44,7 +44,7 @@ const disneyCharacters = [
     name: "Ariel",
     image: "src/disney/ariel.avif",
 
-    human: true,
+    human: false,
     female: true,
     male: false,
     animal: false,
@@ -151,13 +151,13 @@ const disneyCharacters = [
     male: true,
     animal: true,
     hasHair: false,
-    canFly: true,
+    canFly: false,
     pixar: false,
     royal: false,
     hasWings: true,
     wearsHat: true,
     hasFur: false,
-    waterRelated: true,
+    waterRelated: false,
     magicalCreature: false,
 
     blackHair: false,
@@ -189,7 +189,7 @@ const disneyCharacters = [
     pixar: false,
     royal: false,
     hasWings: false,
-    wearsHat: false,
+    wearsHat: true,
     hasFur: false,
     waterRelated: false,
     magicalCreature: false,
@@ -234,7 +234,7 @@ const disneyCharacters = [
     redHair: false,
     wearsRed: false,
     wearsBlue: false,
-    wearsGreen: true,
+    wearsGreen: false,
     wearsDress: false,
     backgroundBlue: false,
     backgroundRed: true,
@@ -263,8 +263,8 @@ const disneyCharacters = [
     magicalCreature: false,
 
     blackHair: false,
-    brownHair: true,
-    blondeHair: false,
+    brownHair: false,
+    blondeHair: true,
     redHair: false,
     wearsRed: false,
     wearsBlue: false,
@@ -336,7 +336,7 @@ const disneyCharacters = [
     redHair: true,
     wearsRed: false,
     wearsBlue: false,
-    wearsGreen: true,
+    wearsGreen: false,
     wearsDress: true,
     backgroundBlue: false,
     backgroundRed: false,
@@ -432,8 +432,8 @@ const disneyCharacters = [
     waterRelated: true,
     magicalCreature: false,
 
-    blackHair: false,
-    brownHair: true,
+    blackHair: true,
+    brownHair: false,
     blondeHair: false,
     redHair: false,
     wearsRed: true,
@@ -456,14 +456,14 @@ const disneyCharacters = [
     female: false,
     male: true,
     animal: false,
-    hasHair: true,
+    hasHair: false,
     canFly: false,
     pixar: false,
     royal: false,
     hasWings: false,
     wearsHat: false,
     hasFur: false,
-    waterRelated: true,
+    waterRelated: false,
     magicalCreature: true,
 
     blackHair: false,
@@ -504,7 +504,7 @@ const disneyCharacters = [
     brownHair: false,
     blondeHair: false,
     redHair: false,
-    wearsRed: true,
+    wearsRed: false,
     wearsBlue: false,
     wearsGreen: false,
     wearsDress: false,
@@ -554,7 +554,7 @@ const disneyCharacters = [
     name: "Tinker Bell",
     image: "src/disney/tinker_bell.avif",
 
-    human: true,
+    human: false,
     female: true,
     male: false,
     animal: false,
@@ -622,7 +622,7 @@ const animalsCharacters = [
   {
     id: 1,
     name: "Giraffe",
-    image: "src/animals/giraffe.jpg",
+    image: "src/animals/giraffe.avif",
 
     mammal: true,
     bird: false,
@@ -664,7 +664,7 @@ const animalsCharacters = [
   {
     id: 2,
     name: "Racoon",
-    image: "src/animals/racoon.jpg",
+    image: "src/animals/racoon.avif",
 
     mammal: true,
     bird: false,
@@ -699,14 +699,14 @@ const animalsCharacters = [
     mostlyBrown: false,
     mostlyGrey: true,
     mostlyWhite: false,
-    mostlyBlack: true,
+    mostlyBlack: false,
     mostlyOrange: false,
   },
 
   {
     id: 3,
     name: "Tiger",
-    image: "src/animals/tiger.jpg",
+    image: "src/animals/tiger.avif",
 
     mammal: true,
     bird: false,
@@ -741,14 +741,14 @@ const animalsCharacters = [
     mostlyBrown: false,
     mostlyGrey: false,
     mostlyWhite: false,
-    mostlyBlack: true,
+    mostlyBlack: false,
     mostlyOrange: true,
   },
 
   {
     id: 4,
     name: "Fox",
-    image: "src/animals/fox.jpg",
+    image: "src/animals/fox.avif",
 
     mammal: true,
     bird: false,
@@ -790,7 +790,7 @@ const animalsCharacters = [
   {
     id: 5,
     name: "Rabbit",
-    image: "src/animals/rabbit.jpg",
+    image: "src/animals/rabbit.avif",
 
     mammal: true,
     bird: false,
@@ -832,7 +832,7 @@ const animalsCharacters = [
   {
     id: 6,
     name: "Wolf",
-    image: "src/animals/wolf.jpg",
+    image: "src/animals/wolf.avif",
 
     mammal: true,
     bird: false,
@@ -874,7 +874,7 @@ const animalsCharacters = [
   {
     id: 7,
     name: "Cow",
-    image: "src/animals/cow.jpg",
+    image: "src/animals/cow.avif",
 
     mammal: true,
     bird: false,
@@ -909,14 +909,14 @@ const animalsCharacters = [
     mostlyBrown: false,
     mostlyGrey: false,
     mostlyWhite: true,
-    mostlyBlack: true,
+    mostlyBlack: false,
     mostlyOrange: false,
   },
 
   {
     id: 8,
     name: "Cat",
-    image: "src/animals/cat.jpg",
+    image: "src/animals/cat.avif",
 
     mammal: true,
     bird: false,
@@ -958,7 +958,7 @@ const animalsCharacters = [
   {
     id: 9,
     name: "Dog",
-    image: "src/animals/dog.jpg",
+    image: "src/animals/dog.avif",
 
     mammal: true,
     bird: false,
@@ -977,8 +977,8 @@ const animalsCharacters = [
     dangerous: false,
     domestic: true,
 
-    largeAnimal: false,
-    smallAnimal: true,
+    largeAnimal: true,
+    smallAnimal: false,
 
     hasStripes: false,
     hasSpots: false,
@@ -1000,7 +1000,7 @@ const animalsCharacters = [
   {
     id: 10,
     name: "Elephant",
-    image: "src/animals/elephant.jpg",
+    image: "src/animals/elephant.avif",
 
     mammal: true,
     bird: false,
@@ -1016,7 +1016,7 @@ const animalsCharacters = [
     hasTail: true,
     hasHorns: false,
 
-    dangerous: true,
+    dangerous: false,
     domestic: false,
 
     largeAnimal: true,
@@ -1042,7 +1042,7 @@ const animalsCharacters = [
   {
     id: 11,
     name: "Fish",
-    image: "src/animals/fish.jpg",
+    image: "src/animals/fish.avif",
 
     mammal: false,
     bird: false,
@@ -1084,7 +1084,7 @@ const animalsCharacters = [
   {
     id: 12,
     name: "Crocodile",
-    image: "src/animals/crocodile.jpg",
+    image: "src/animals/crocodile.avif",
 
     mammal: false,
     bird: false,
@@ -1126,7 +1126,7 @@ const animalsCharacters = [
   {
     id: 13,
     name: "Pig",
-    image: "src/animals/pig.jpg",
+    image: "src/animals/pig.avif",
 
     mammal: true,
     bird: false,
@@ -1145,8 +1145,8 @@ const animalsCharacters = [
     dangerous: false,
     domestic: true,
 
-    largeAnimal: false,
-    smallAnimal: true,
+    largeAnimal: true,
+    smallAnimal: false,
 
     hasStripes: false,
     hasSpots: false,
@@ -1168,7 +1168,7 @@ const animalsCharacters = [
   {
     id: 14,
     name: "Snake",
-    image: "src/animals/snake.jpg",
+    image: "src/animals/snake.avif",
 
     mammal: false,
     bird: false,
@@ -1191,7 +1191,7 @@ const animalsCharacters = [
     smallAnimal: true,
 
     hasStripes: false,
-    hasSpots: false,
+    hasSpots: true,
     hasLongEars: false,
     hasLongNeck: false,
 
@@ -1210,7 +1210,7 @@ const animalsCharacters = [
   {
     id: 15,
     name: "Sheep",
-    image: "src/animals/sheep.jpg",
+    image: "src/animals/sheep.avif",
 
     mammal: true,
     bird: false,
@@ -1229,8 +1229,8 @@ const animalsCharacters = [
     dangerous: false,
     domestic: true,
 
-    largeAnimal: false,
-    smallAnimal: true,
+    largeAnimal: true,
+    smallAnimal: false,
 
     hasStripes: false,
     hasSpots: false,
@@ -1252,7 +1252,7 @@ const animalsCharacters = [
   {
     id: 16,
     name: "Lion",
-    image: "src/animals/lion.jpg",
+    image: "src/animals/lion.avif",
 
     mammal: true,
     bird: false,
@@ -1294,7 +1294,7 @@ const animalsCharacters = [
   {
     id: 17,
     name: "Penguin",
-    image: "src/animals/penguin.jpg",
+    image: "src/animals/penguin.avif",
 
     mammal: false,
     bird: true,
@@ -1304,7 +1304,7 @@ const animalsCharacters = [
     hasFur: false,
     hasWings: true,
     canFly: false,
-    livesInWater: true,
+    livesInWater: false,
 
     fourLegs: false,
     hasTail: true,
@@ -1336,7 +1336,7 @@ const animalsCharacters = [
   {
     id: 18,
     name: "Seal",
-    image: "src/animals/seal.jpg",
+    image: "src/animals/seal.avif",
 
     mammal: true,
     bird: false,
@@ -1346,7 +1346,7 @@ const animalsCharacters = [
     hasFur: true,
     hasWings: false,
     canFly: false,
-    livesInWater: true,
+    livesInWater: false,
 
     fourLegs: false,
     hasTail: true,
@@ -1355,8 +1355,8 @@ const animalsCharacters = [
     dangerous: false,
     domestic: false,
 
-    largeAnimal: false,
-    smallAnimal: true,
+    largeAnimal: true,
+    smallAnimal: false,
 
     hasStripes: false,
     hasSpots: false,
@@ -1398,7 +1398,7 @@ const marioCharacters = [
 
     hasRed: true,
     hasGreen: false,
-    hasBlue: true,
+    hasBlue: false,
     hasPink: false,
     hasYellow: false,
     hasPurple: false,
@@ -1433,8 +1433,8 @@ const marioCharacters = [
     brownHair: false,
     redHair: true,
 
-    hasRed: true,
-    hasGreen: true,
+    hasRed: false,
+    hasGreen: false,
     hasBlue: false,
     hasPink: false,
     hasYellow: true,
@@ -1471,7 +1471,7 @@ const marioCharacters = [
     redHair: true,
 
     hasRed: false,
-    hasGreen: true,
+    hasGreen: false,
     hasBlue: false,
     hasPink: false,
     hasYellow: true,
@@ -1479,7 +1479,7 @@ const marioCharacters = [
 
     animalLike: true,
     hasShell: true,
-    hasHorns: false,
+    hasHorns: true,
     hasTail: true,
     hasMask: false,
     mushroomLike: false,
@@ -1544,11 +1544,11 @@ const marioCharacters = [
     brownHair: true,
     redHair: false,
 
-    hasRed: true,
+    hasRed: false,
     hasGreen: false,
     hasBlue: false,
     hasPink: false,
-    hasYellow: true,
+    hasYellow: false,
     hasPurple: false,
 
     animalLike: true,
@@ -1582,7 +1582,7 @@ const marioCharacters = [
     redHair: false,
 
     hasRed: false,
-    hasGreen: true,
+    hasGreen: false,
     hasBlue: false,
     hasPink: false,
     hasYellow: true,
@@ -1596,7 +1596,7 @@ const marioCharacters = [
     mushroomLike: false,
     isKong: false,
     ghost: false,
-    villain: false,
+    villain: true,
   },
 
   {
@@ -1620,7 +1620,7 @@ const marioCharacters = [
 
     hasRed: false,
     hasGreen: true,
-    hasBlue: true,
+    hasBlue: false,
     hasPink: false,
     hasYellow: false,
     hasPurple: false,
@@ -1655,12 +1655,12 @@ const marioCharacters = [
     brownHair: false,
     redHair: false,
 
-    hasRed: true,
+    hasRed: false,
     hasGreen: false,
     hasBlue: false,
     hasPink: true,
     hasYellow: false,
-    hasPurple: true,
+    hasPurple: false,
 
     animalLike: true,
     hasShell: false,
@@ -1694,7 +1694,7 @@ const marioCharacters = [
 
     hasRed: false,
     hasGreen: false,
-    hasBlue: true,
+    hasBlue: false,
     hasPink: true,
     hasYellow: false,
     hasPurple: false,
@@ -1730,7 +1730,7 @@ const marioCharacters = [
     redHair: false,
 
     hasRed: false,
-    hasGreen: true,
+    hasGreen: false,
     hasBlue: true,
     hasPink: false,
     hasYellow: false,
@@ -1768,7 +1768,7 @@ const marioCharacters = [
 
     hasRed: true,
     hasGreen: false,
-    hasBlue: true,
+    hasBlue: false,
     hasPink: false,
     hasYellow: false,
     hasPurple: false,
@@ -1781,7 +1781,7 @@ const marioCharacters = [
     mushroomLike: false,
     isKong: false,
     ghost: false,
-    villain: false,
+    villain: true,
   },
 
   {
@@ -1803,9 +1803,9 @@ const marioCharacters = [
     brownHair: false,
     redHair: false,
 
-    hasRed: true,
+    hasRed: false,
     hasGreen: false,
-    hasBlue: true,
+    hasBlue: false,
     hasPink: false,
     hasYellow: false,
     hasPurple: false,
@@ -1878,11 +1878,11 @@ const marioCharacters = [
     redHair: false,
 
     hasRed: false,
-    hasGreen: true,
+    hasGreen: false,
     hasBlue: false,
     hasPink: false,
     hasYellow: true,
-    hasPurple: true,
+    hasPurple: false,
 
     animalLike: false,
     hasShell: false,
@@ -1914,7 +1914,7 @@ const marioCharacters = [
     brownHair: false,
     redHair: false,
 
-    hasRed: true,
+    hasRed: false,
     hasGreen: true,
     hasBlue: false,
     hasPink: false,
@@ -1951,7 +1951,7 @@ const marioCharacters = [
     brownHair: false,
     redHair: false,
 
-    hasRed: true,
+    hasRed: false,
     hasGreen: false,
     hasBlue: false,
     hasPink: false,
@@ -1992,7 +1992,7 @@ const marioCharacters = [
     hasGreen: false,
     hasBlue: false,
     hasPink: false,
-    hasYellow: true,
+    hasYellow: false,
     hasPurple: false,
 
     animalLike: true,
@@ -2032,7 +2032,7 @@ const marioCharacters = [
     hasYellow: false,
     hasPurple: false,
 
-    animalLike: true,
+    animalLike: false,
     hasShell: false,
     hasHorns: false,
     hasTail: false,

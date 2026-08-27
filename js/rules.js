@@ -2,15 +2,13 @@
 // RULES
 // =============================
 
-const infoButtons = document.querySelectorAll("[data-rules]");
+// Das Regeln-Popup steht nicht im HTML der einzelnen Seiten, sondern wird
+// hier beim ersten Klick einmalig eingehängt – genau wie das
+// Verlassen-Popup (siehe js/leave.js). So bekommt jede Seite, die diese
+// Datei lädt, das Popup automatisch und das Markup steht nur an einer
+// Stelle.
 
-const rulesModal = document.getElementById("rules-modal");
-
-const closeRulesButton = document.getElementById("close-rules-button");
-
-const rulesTitle = document.getElementById("rules-title");
-
-const rulesText = document.getElementById("rules-text");
+let rulesModal = null;
 
 // =============================
 // RULE TEXTS
@@ -96,39 +94,101 @@ const rules = {
 };
 
 // =============================
-// OPEN RULES
+// POPUP AUFBAUEN
 // =============================
 
-infoButtons.forEach(function (button) {
-  button.addEventListener("click", function () {
-    const gameMode = button.dataset.rules;
+function createRulesModal() {
+  const modal = document.createElement("div");
 
-    rulesTitle.textContent = rules[gameMode].title;
+  modal.className = "rules-modal hidden";
 
-    rulesText.innerHTML = rules[gameMode].text;
+  modal.innerHTML = `
+    <div class="rules-content">
+      <button
+        class="close-rules-button icon-button"
+        type="button"
+        aria-label="Close rules"
+      >
+        <span data-icon="close"></span>
+      </button>
 
-    rulesModal.classList.remove("hidden");
+      <h2 class="rules-title"></h2>
+
+      <div class="rules-text"></div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  // Platzhalter durch die SVGs ersetzen (js/icons.js)
+  renderIcons(modal);
+
+  const closeButton = modal.querySelector(".close-rules-button");
+
+  closeButton.addEventListener("click", closeRules);
+
+  // Klick auf die abgedunkelte Fläche neben der Box schliesst das Popup
+
+  modal.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      closeRules();
+    }
   });
-});
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      closeRules();
+    }
+  });
+
+  return modal;
+}
 
 // =============================
-// CLOSE RULES
+// POPUP ÖFFNEN UND SCHLIESSEN
 // =============================
+
+function openRules(gameMode) {
+  const rulesForMode = rules[gameMode];
+
+  if (rulesForMode === undefined) {
+    return;
+  }
+
+  if (rulesModal === null) {
+    rulesModal = createRulesModal();
+  }
+
+  rulesModal.querySelector(".rules-title").textContent = rulesForMode.title;
+
+  rulesModal.querySelector(".rules-text").innerHTML = rulesForMode.text;
+
+  rulesModal.classList.remove("hidden");
+}
 
 function closeRules() {
+  if (rulesModal === null) {
+    return;
+  }
+
   rulesModal.classList.add("hidden");
 }
 
-closeRulesButton.addEventListener("click", closeRules);
+// =============================
+// INFO-BUTTONS
+// =============================
 
-rulesModal.addEventListener("click", function (event) {
-  if (event.target === rulesModal) {
-    closeRules();
-  }
-});
+// Ein Listener auf dem ganzen Dokument statt einer pro Button: Der
+// Info-Button im Header entsteht erst, wenn das <game-header>-Element
+// aufgebaut wird (siehe js/header.js). Wer die Buttons hier einmalig
+// einsammelt, muss auf diese Reihenfolge achten – die Delegation nicht.
 
-document.addEventListener("keydown", function (event) {
-  if (event.key === "Escape") {
-    closeRules();
+document.addEventListener("click", function (event) {
+  const infoButton = event.target.closest("[data-rules]");
+
+  if (infoButton === null) {
+    return;
   }
+
+  openRules(infoButton.dataset.rules);
 });

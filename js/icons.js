@@ -48,11 +48,11 @@ const iconPaths = {
     '<path d="M18 6 6 18"/>' +
     '<path d="m6 6 12 12"/>',
 
-  // Info
-  info:
-    '<circle cx="12" cy="12" r="9"/>' +
-    '<path d="M12 16.5v-5"/>' +
-    dot(12, 8, 1.15),
+  // Fragezeichen für die Spielregeln: Haken, Strich und Punkt,
+  // bewusst ohne Kreis drumherum
+  question:
+    '<path d="M8.5 8.5a3.5 3.5 0 1 1 5.2 3.05c-1.1 .65-1.7 1.55-1.7 2.75v.9"/>' +
+    dot(12, 19, 1.4),
 
   // Würfel
   dice:

@@ -14,6 +14,8 @@ const endTurnButton = document.getElementById("end-turn-button");
 
 const winOverlay = document.getElementById("win-overlay");
 
+const winIcon = document.getElementById("win-icon");
+
 const winTitle = document.getElementById("win-title");
 
 const winText = document.getElementById("win-text");
@@ -109,39 +111,42 @@ function toggleCharacter(characterId) {
 }
 
 function showWinDialog() {
-  const winner = gameState.winner;
+  // Geraten hat immer der aktuelle Spieler – der Final Guess wechselt ihn
+  // nicht, darum stimmt das auch noch nach einem Neuladen der Seite.
+  //
+  // Nicht vom Gewinner ausgehen: bei einem falschen Tipp gewinnt der
+  // Gegenspieler, aufgedeckt gehört aber trotzdem der Charakter, auf den
+  // geraten wurde.
+  const guesser = gameState.currentPlayer;
 
-  let loser = 1;
+  const guessedPlayer = guesser === 1 ? 2 : 1;
 
-  let secret = gameState.player1Secret;
+  const secret = getOpponentSecret(gameState);
 
-  if (winner === 1) {
-    loser = 2;
+  winTitle.textContent = `${getPlayerName(gameState.winner)} wins!`;
 
-    secret = gameState.player2Secret;
+  // Gefeiert wird nur bei einem richtigen Tipp. War er falsch, zeigt der
+  // Dialog dasselbe Emoji wie eine verlorene Einzelspieler-Runde (siehe
+  // js/single_player.js) und es gibt kein Konfetti.
+  const guessedRight = gameState.winner === guesser;
+
+  if (guessedRight) {
+    winIcon.textContent = "🎉";
+
+    winText.textContent = `Congratulations! You found the character of ${getPlayerName(guessedPlayer)}: ${secret.name}`;
+  } else {
+    winIcon.textContent = "🙊";
+
+    winText.textContent = `${getPlayerName(guesser)} guessed wrong. The character of ${getPlayerName(guessedPlayer)} was: ${secret.name}`;
   }
-
-  winTitle.textContent = `${getPlayerName(winner)} wins!`;
-
-  winText.textContent = `Congratulations! You found the character of ${getPlayerName(loser)}: ${secret.name}`;
 
   winCharacterImage.src = secret.image;
   winCharacterImage.alt = secret.name;
 
   winOverlay.classList.remove("hidden");
 
-  playConfetti();
-}
-
-function playConfetti() {
-  // Die Web-Component wird als Modul geladen und ist eventuell noch nicht
-  // bereit – dann startet sie über das autoplay-Attribut, sobald sie da ist
-  if (winConfetti.dotLottie) {
-    winConfetti.dotLottie.setFrame(0);
-
-    winConfetti.dotLottie.play();
-  } else {
-    winConfetti.setAttribute("autoplay", "");
+  if (guessedRight) {
+    playConfetti(winConfetti);
   }
 }
 
@@ -217,8 +222,15 @@ function resetGame() {
 // START TURN
 // =============================
 
+// Wie auf dem Auswahl-Bildschirm steht neben dem Namen auch, was jetzt zu
+// tun ist. Nach dem letzten Zug ist nichts mehr zu tun – dann bleibt der
+// Titel beim reinen Namen.
 function startTurn() {
-  currentPlayerTitle.textContent = getPlayerName(gameState.currentPlayer);
+  if (gameState.phase === "finished") {
+    currentPlayerTitle.textContent = getPlayerName(gameState.currentPlayer);
+  } else {
+    currentPlayerTitle.textContent = `${getPlayerName(gameState.currentPlayer)}: Ask a question and eliminate characters`;
+  }
 
   renderCharacters();
 }

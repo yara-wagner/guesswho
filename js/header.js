@@ -114,7 +114,7 @@ class GameHeader extends HTMLElement {
             aria-label="Show rules"
             title="Rules"
           >
-            <span data-icon="info"></span>
+            <span data-icon="question"></span>
           </button>
         `
         : "";

@@ -106,7 +106,7 @@ function goBack() {
     return;
   }
 
-  // character_sets.html und die Ergebnisseiten: Von hier führt der einzige
-  // Schritt zurück zur Modus-Auswahl
+  // character_sets.html: Von hier führt der einzige Schritt zurück zur
+  // Modus-Auswahl
   goBackToStart();
 }
