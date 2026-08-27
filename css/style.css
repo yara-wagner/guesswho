@@ -836,6 +836,12 @@ button.leave-game-button {
     box-shadow 0.2s;
 }
 
+/* Die Custom-Karte selber macht nichts, sie gibt aber nach, wenn in ihre
+   Bildfläche getippt wird (siehe CUSTOM CHARACTER SET) */
+.custom-card {
+  transition: transform 0.1s;
+}
+
 .character-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
@@ -1010,7 +1016,9 @@ button.leave-game-button {
    Stile stehen dort. Sie ist aber nicht anklickbar, die Karte selber
    macht nichts, nur ihre Felder. */
 
-/* Bildfläche – öffnet die Dateiauswahl */
+/* Bildfläche – öffnet die Dateiauswahl.
+   Die oberen Ecken sind gerundet wie die Karte, damit die Fokus-Markierung
+   der Rundung folgt statt eckig darin zu stehen. */
 .custom-card-image {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -1019,6 +1027,7 @@ button.leave-game-button {
   align-items: center;
   justify-content: center;
   border: none;
+  border-radius: var(--radius) var(--radius) 0 0;
   background-color: var(--accent-soft);
   color: var(--ink-soft);
   cursor: pointer;
@@ -1032,6 +1041,22 @@ button.leave-game-button {
   color: var(--ink);
 }
 
+/* Der Ring liegt innen, sonst schneidet ihn die Karte an den runden
+   Ecken ab (die Karte hat overflow: hidden) */
+.custom-card-image:focus-visible {
+  outline-offset: -3px;
+}
+
+/* Der Druckpunkt: nachgeben soll die ganze Karte, nicht nur die Fläche
+   darin. Sonst schrumpft ein eckiges Feld im runden Rahmen. */
+.custom-card-image:active {
+  transform: none;
+}
+
+.custom-card:has(.custom-card-image:active) {
+  transform: scale(0.97);
+}
+
 /* Beschriftung der leeren Bildfläche und der "Karte hinzufügen"-Fläche */
 .custom-card-placeholder,
 .custom-add-card-text {
@@ -1039,12 +1064,14 @@ button.leave-game-button {
   font-weight: bold;
 }
 
-/* Namensfeld */
+/* Namensfeld – untere Ecken gerundet wie die Karte, damit die
+   Fokus-Markierung nicht eckig in der runden Ecke sitzt */
 .custom-card-name {
   width: 100%;
   padding: 12px;
   border: none;
   border-top: 2px solid var(--line);
+  border-radius: 0 0 var(--radius) var(--radius);
   background-color: var(--bg);
   color: inherit;
   font-size: inherit;
