@@ -59,8 +59,18 @@
 
   <body>
     <!-- loop, damit das Stück ohne Zutun von vorne beginnt.
-         Die Lautstärke setzt js/music.js (erst 0, dann eingeblendet). -->
-    <audio id="background-music" src="src/sound/happy.mp3" preload="auto" loop>
+         Die Lautstärke setzt js/music.js (erst 0, dann eingeblendet).
+
+         preload="none": Die Datei ist 3,5 MB gross und der Ton ist von
+         Haus aus aus – vorgeladen würde sie also fast immer umsonst.
+         Schlimmer noch: Die Hülle wechselt nie, der Download lief deshalb
+         parallel zu jedem Seitenwechsel im Rahmen weiter und nahm den
+         Spielseiten die Leitung weg. Auf einem langsamen Gerät stand das
+         Board dann zwar schon da, reagierte aber länger nicht.
+
+         Geladen wird jetzt erst beim Einschalten des Tons: play() in
+         js/music.js holt die Datei von selber. -->
+    <audio id="background-music" src="src/sound/happy.mp3" preload="none" loop>
     </audio>
 
     <!-- Das src setzt js/shell.js: Beim Neuladen soll wieder die Seite

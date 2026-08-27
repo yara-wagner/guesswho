@@ -6,6 +6,45 @@
 // siehe game.html und single_player.html). Beide Boards benutzen dieselbe
 // Funktion, damit das Konfetti nur an einer Stelle beschrieben ist.
 
+// =============================
+// KOMPONENTE NACHLADEN
+// =============================
+
+// Die Web-Component wird erst geholt, wenn wirklich jemand gewinnt.
+//
+// Vorher stand das <script type="module"> in den beiden Boards und lud auf
+// jedem Board-Load das Modul, den WASM-Renderer und die Animationsdatei –
+// gut ein Megabyte für etwas, das die meisten Runden nie zu sehen bekommen.
+// Ein altes Gerät war damit beim ersten Laden für lange Zeit beschäftigt und
+// reagierte auf keinen Knopf mehr.
+//
+// Solange das Modul fehlt, ist <dotlottie-wc> ein unbekanntes Element: Der
+// Browser lässt es einfach stehen und lädt nichts nach.
+
+const CONFETTI_COMPONENT_URL =
+  "https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.27/dist/index.js";
+
+let confettiComponentRequested = false;
+
+function loadConfettiComponent() {
+  if (confettiComponentRequested === true) {
+    return;
+  }
+
+  confettiComponentRequested = true;
+
+  const script = document.createElement("script");
+
+  script.type = "module";
+  script.src = CONFETTI_COMPONENT_URL;
+
+  document.head.appendChild(script);
+}
+
+// =============================
+// ABSPIELEN
+// =============================
+
 function playConfetti(element) {
   if (element === null) {
     return;
@@ -23,13 +62,16 @@ function playConfetti(element) {
     return;
   }
 
-  // Die Web-Component wird als Modul geladen und ist eventuell noch nicht
-  // bereit – dann startet sie über das autoplay-Attribut, sobald sie da ist
+  // Beim ersten Sieg ist die Komponente noch nicht da – dann setzen wir
+  // autoplay und holen sie. Sie startet die Animation von selber, sobald
+  // sie das Element übernimmt.
   if (element.dotLottie) {
     element.dotLottie.setFrame(0);
 
     element.dotLottie.play();
   } else {
     element.setAttribute("autoplay", "");
+
+    loadConfettiComponent();
   }
 }
