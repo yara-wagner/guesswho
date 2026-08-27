@@ -13,235 +13,62 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cstyle%3E .bg { fill: %230F0E0E; } .fg { fill: %23FFFFFF; } @media (prefers-color-scheme: dark) { .bg { fill: %23FFFFFF; } .fg { fill: %230F0E0E; } } %3C/style%3E%3Crect class='bg' width='32' height='32' rx='7' /%3E%3Cg class='fg' transform='translate(-62.87 -11.19) scale(0.6227)'%3E%3Cpath d='M122.333 49.92L122.493 41.64H125.333C126.933 41.64 128.319 40.8533 129.493 39.28C129.759 38.9067 129.946 38.4267 130.053 37.84L130.093 37.36C130.093 36.9333 129.986 36.4533 129.773 35.92C128.866 34.4267 127.573 33.68 125.893 33.68C124.373 33.68 123.159 34.3067 122.253 35.56L117.133 32.32C118.066 30.8533 119.306 29.7067 120.853 28.88C122.426 28.0533 124.106 27.6267 125.893 27.6C127.919 27.6 129.773 28.12 131.453 29.16C133.133 30.2 134.399 31.6 135.253 33.36C135.866 34.72 136.173 36.0533 136.173 37.36C136.173 39.12 135.653 40.84 134.613 42.52C133.146 44.76 131.066 46.3333 128.373 47.24V49.76L122.333 49.92Z' /%3E%3Cpath d='M125.133 59.72C124.119 59.72 123.253 59.36 122.533 58.64C121.813 57.92 121.453 57.0533 121.453 56.04C121.453 55.0533 121.813 54.2 122.533 53.48C123.253 52.76 124.119 52.4 125.133 52.4C126.119 52.4 126.973 52.76 127.693 53.48C128.413 54.2 128.773 55.0533 128.773 56.04C128.773 57.0533 128.413 57.92 127.693 58.64C126.973 59.36 126.119 59.72 125.133 59.72Z' /%3E%3C/g%3E%3C/svg%3E"
     />
 
-    <link rel="stylesheet" href="css/style.css" />
+    <!-- =============================
+         DIE HÜLLE
+         =============================
 
-    <script src="js/icons.js"></script>
+         Diese Seite zeigt selber nichts an. Sie hält nur zwei Dinge:
+         die Hintergrundmusik und einen Rahmen, in dem das Spiel läuft.
 
-    <script src="js/header.js"></script>
+         Warum? Jede Spielseite ist ein eigenes Dokument. Bei einem
+         Seitenwechsel wirft der Browser das alte Dokument weg – samt
+         Audio-Objekt. Die Musik konnte deshalb nie wirklich durchlaufen.
+         Mit der Hülle ist das nun möglich.
+
+         Diese Seite wechselt nie. Nur der Rahmen darunter navigiert. Das
+         <audio> hier bleibt dabei stehen und spielt einfach weiter.
+
+         Die Spielseiten greifen über js/frame.js hierher (gleiche
+         Herkunft, der Zugriff ist also erlaubt). Der Spielstand liegt
+         weiter in der sessionStorage: Ein Rahmen derselben Herkunft teilt
+         sie sich mit dieser Seite, an js/state.js ändert sich nichts.
+         ============================= -->
+
+    <style>
+      /* Nur für diese Seite – deshalb hier und nicht in css/style.css,
+         wo html/body-Höhen die Spielseiten stören würden. */
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+
+        /* Die Farbe der Spielseiten, damit beim Laden nichts Weisses
+           aufblitzt (--bg in css/style.css) */
+        background-color: #fff6ec;
+      }
+
+      #game-frame {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+    </style>
   </head>
 
   <body>
-    <game-header></game-header>
+    <!-- loop, damit das Stück ohne Zutun von vorne beginnt.
+         Die Lautstärke setzt js/music.js (erst 0, dann eingeblendet). -->
+    <audio id="background-music" src="src/sound/happy.mp3" preload="auto" loop>
+    </audio>
 
-    <main>
-      <!-- START SCREEN -->
-      <section id="start-screen" class="screen mode-selection">
-        <h2 class="page-title">Choose game mode</h2>
+    <!-- Das src setzt js/shell.js: Beim Neuladen soll wieder die Seite
+         kommen, die zum Spielstand passt – nicht die Modus-Auswahl. -->
+    <iframe id="game-frame" title="Guess Who?"></iframe>
 
-        <div class="mode-grid">
-          <article class="mode-card">
-            <div class="mode-tile-wrapper">
-              <button
-                id="single-player-button"
-                class="mode-tile"
-                type="button"
-                data-mode="single-player"
-              >
-                <span class="mode-tile-icon">👤</span>
-                <span class="mode-tile-name">Single-Player</span>
-                <ul class="mode-description">
-                  <li>1 player</li>
-                  <li>predefined character set</li>
-                </ul>
-              </button>
-
-              <button
-                class="info-button icon-button"
-                type="button"
-                data-rules="single-player"
-                aria-label="Show Single-Player rules"
-              >
-                <span data-icon="question"></span>
-              </button>
-            </div>
-          </article>
-
-          <article class="mode-card">
-            <div class="mode-tile-wrapper">
-              <button
-                id="start-game-button"
-                class="mode-tile"
-                type="button"
-                data-mode="multi-player"
-              >
-                <span class="mode-tile-icon">👥</span>
-                <span class="mode-tile-name">Multi-Player</span>
-                <ul class="mode-description">
-                  <li>2 players</li>
-                  <li>play offline on the same device</li>
-                  <li>predefined or custom character set</li>
-                </ul>
-              </button>
-
-              <button
-                class="info-button icon-button"
-                type="button"
-                data-rules="multi-player"
-                aria-label="Show Multi-Player rules"
-              >
-                <span data-icon="question"></span>
-              </button>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- CREDITS -->
-
-      <!-- <details> klappt von sich aus auf und zu und ist mit der Tastatur
-           bedienbar. Dafür braucht es kein JavaScript. -->
-      <details class="credits">
-        <summary class="credits-summary">
-          Credits
-          <span class="credits-summary-icon" data-icon="chevron-down"></span>
-        </summary>
-
-        <dl class="credits-list">
-          <div class="credits-entry">
-            <dt>Music</dt>
-
-            <!-- CC BY 3.0 verlangt Titel, Urheber und die Lizenz-URI
-                 (siehe Abschnitt 4a und 4c der Lizenz). -->
-            <dd>
-              <a
-                href="https://opengameart.org/content/happy-arcade-tune"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Happy Arcade Tune
-              </a>
-              by rezoner, licensed under
-              <a
-                href="https://creativecommons.org/licenses/by/3.0/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                CC BY 3.0
-              </a>
-            </dd>
-          </div>
-
-          <div class="credits-entry">
-            <dt>Animal images</dt>
-
-            <dd>
-              <a
-                href="https://pixabay.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Pixabay
-              </a>
-               used under the
-              <a
-                href="https://pixabay.com/service/license-summary/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Pixabay Content License
-              </a>
-            </dd>
-          </div>
-
-          <!-- Disney und Nintendo geben ihre Figuren nicht frei. Der
-               Hinweis ist deshalb kein Lizenznachweis wie oben bei Musik
-               und Tierbildern, sondern nur eine Nennung der Rechteinhaber. -->
-          <div class="credits-entry">
-            <dt>Disney images</dt>
-
-            <dd>
-              <a
-                href="https://www.disneystore.co.uk/characters-and-movies/popular-characters"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                disneystore.co.uk
-              </a>
-
-              <span class="credits-note">
-                All Disney characters and images are &copy; Disney. Used for a
-                non-commercial student project. Not affiliated with or endorsed
-                by Disney.
-              </span>
-            </dd>
-          </div>
-
-          <div class="credits-entry">
-            <dt>Mario images</dt>
-
-            <dd>
-              <a
-                href="https://www.eknert.com/mario/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                eknert.com/mario
-              </a>
-
-              <span class="credits-note">
-                Mario and related characters are &copy; Nintendo. Used for a
-                non-commercial student project. Not affiliated with or endorsed
-                by Nintendo.
-              </span>
-            </dd>
-          </div>
-        </dl>
-      </details>
-    </main>
-
-    <!-- Das Regeln-Popup hängt js/rules.js selbst ein -->
-
-    <!-- PLAYER NAME POPUP -->
-    <div id="player-name-modal" class="player-name-modal hidden">
-      <div class="player-name-content">
-        <button
-          id="close-player-name-button"
-          class="close-player-name-button icon-button"
-          type="button"
-          aria-label="Close player name selection"
-        >
-          <span data-icon="close"></span>
-        </button>
-
-        <h2>Enter player names</h2>
-
-        <form id="player-name-form">
-          <div class="player-name-field">
-            <label for="player1-name">Player One</label>
-
-            <input
-              id="player1-name"
-              type="text"
-              placeholder="Jane"
-              maxlength="20"
-              autocomplete="off"
-            />
-          </div>
-
-          <div class="player-name-field">
-            <label for="player2-name">Player Two</label>
-
-            <input
-              id="player2-name"
-              type="text"
-              placeholder="Tarzan"
-              maxlength="20"
-              autocomplete="off"
-            />
-          </div>
-
-          <button class="continue-button" type="submit">
-            Continue
-            <span data-icon="arrow-right"></span>
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <script src="js/character_data.js"></script>
-    <script src="js/characters.js"></script>
     <script src="js/state.js"></script>
-    <script src="js/start.js"></script>
-    <script src="js/rules.js"></script>
+    <script src="js/shell.js"></script>
+    <script src="js/music.js"></script>
   </body>
 </html>

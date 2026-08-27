@@ -220,7 +220,7 @@ function createCustomSet() {
 
 if (gameState === null) {
   // Ohne laufendes Spiel zurück zur Modus-Auswahl
-  window.location.replace("index.html");
+  window.location.replace("start.html");
 } else if (gameState.gameMode === "single-player") {
   // Im Single-Player läuft alles auf single_player.html – dort ist auch das
   // Set schon gewählt

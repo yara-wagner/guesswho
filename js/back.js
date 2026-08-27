@@ -28,11 +28,11 @@ function getCurrentPageName() {
 // =============================
 
 // Zurück zur Modus-Auswahl. Der halb fertige Spielstand wird weggeräumt –
-// auf index.html fängt sowieso ein neues Spiel an.
+// auf start.html fängt sowieso ein neues Spiel an.
 function goBackToStart() {
   clearGameState();
 
-  window.location.href = "index.html";
+  window.location.href = "start.html";
 }
 
 // Zurück zur Set-Auswahl. Das gewählte Set muss aus dem Spielstand raus,
