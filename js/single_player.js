@@ -283,7 +283,7 @@ function startNewSinglePlayerGame() {
 function goToStartScreen() {
   clearGameState();
 
-  window.location.href = "index.html";
+  window.location.href = "start.html";
 }
 
 function setupResultButtons() {
@@ -1026,7 +1026,7 @@ if (
   gameState.gameMode !== "single-player"
 ) {
   window.location.replace(
-    "index.html"
+    "start.html"
   );
 } else if (
   getCharacterSet(

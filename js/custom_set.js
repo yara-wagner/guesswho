@@ -493,7 +493,7 @@ function startCustomGame() {
 
 if (gameState === null) {
   // Ohne laufendes Spiel zurück zur Modus-Auswahl
-  window.location.replace("index.html");
+  window.location.replace("start.html");
 } else if (getCharacterSet(gameState.characterSetId) !== null) {
   // Das Set ist bereits gewählt (das Spiel läuft schon)
   window.location.replace("character_selection.html");

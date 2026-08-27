@@ -3,7 +3,7 @@
 // =============================
 
 // Der Button steckt im Header jeder Spielseite (siehe js/header.js) und
-// bringt die Spieler zurück zur Modus-Auswahl (index.html).
+// bringt die Spieler zurück zur Modus-Auswahl (start.html).
 //
 // Gefragt wird in einem eigenen Popup im Stil der übrigen Popups
 // (Regeln, Spielernamen). Das Popup steht nicht im HTML der einzelnen
@@ -109,5 +109,5 @@ function closeLeaveModal() {
 function confirmLeaveGame() {
   clearGameState();
 
-  window.location.href = "index.html";
+  window.location.href = "start.html";
 }

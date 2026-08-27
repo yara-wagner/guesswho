@@ -2,9 +2,13 @@
 // GAME STATE
 // =============================
 
-// Der Spielstand muss die Seitenwechsel zwischen index.html,
+// Der Spielstand muss die Seitenwechsel zwischen start.html,
 // character_sets.html, character_selection.html und game.html überleben
 // und wird deshalb in der sessionStorage abgelegt.
+//
+// Die Spielseiten laufen in einem Rahmen innerhalb von index.html (siehe
+// dort). Ein Rahmen derselben Herkunft teilt sich die sessionStorage mit
+// der Seite darüber – für diese Datei ändert das nichts.
 
 const STORAGE_KEY = "guessWhoGameState";
 

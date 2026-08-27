@@ -171,7 +171,7 @@ function startNewGame() {
 function goToStart() {
   clearGameState();
 
-  window.location.href = "index.html";
+  window.location.href = "start.html";
 }
 
 // =============================
@@ -259,7 +259,7 @@ function endTurn() {
 
 if (gameState === null) {
   // Ohne laufendes Spiel zurück zur Modus-Auswahl
-  window.location.replace("index.html");
+  window.location.replace("start.html");
 } else if (getCharacterSet(gameState.characterSetId) === null) {
   // Es fehlt noch ein Charakter-Set
   window.location.replace("character_sets.html");
