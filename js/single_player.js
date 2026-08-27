@@ -616,6 +616,31 @@ const questionsBySet = {
       property: "hasLongNeck",
       text: "Does your animal have a long neck?",
     },
+
+    {
+      property: "mostlyBrown",
+      text: "Is your animal mostly brown?",
+    },
+
+    {
+      property: "mostlyGrey",
+      text: "Is your animal mostly grey?",
+    },
+
+        {
+      property: "mostlyWhite",
+      text: "Is your animal mostly white?",
+    },
+
+        {
+      property: "mostlyBlack",
+      text: "Is your animal mostly black?",
+    },
+
+        {
+      property: "mostlyOrange",
+      text: "Is your animal mostly orange?",
+    },
   ],
 
   mario: [
