@@ -211,8 +211,15 @@ function resetGame() {
 // START TURN
 // =============================
 
+// Wie auf dem Auswahl-Bildschirm steht neben dem Namen auch, was jetzt zu
+// tun ist. Nach dem letzten Zug ist nichts mehr zu tun – dann bleibt der
+// Titel beim reinen Namen.
 function startTurn() {
-  currentPlayerTitle.textContent = getPlayerName(gameState.currentPlayer);
+  if (gameState.phase === "finished") {
+    currentPlayerTitle.textContent = getPlayerName(gameState.currentPlayer);
+  } else {
+    currentPlayerTitle.textContent = `${getPlayerName(gameState.currentPlayer)}: Ask a question and eliminate characters`;
+  }
 
   renderCharacters();
 }
