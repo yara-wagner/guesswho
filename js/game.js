@@ -109,21 +109,25 @@ function toggleCharacter(characterId) {
 }
 
 function showWinDialog() {
-  const winner = gameState.winner;
+  // Geraten hat immer der aktuelle Spieler – der Final Guess wechselt ihn
+  // nicht, darum stimmt das auch noch nach einem Neuladen der Seite.
+  //
+  // Nicht vom Gewinner ausgehen: bei einem falschen Tipp gewinnt der
+  // Gegenspieler, aufgedeckt gehört aber trotzdem der Charakter, auf den
+  // geraten wurde.
+  const guesser = gameState.currentPlayer;
 
-  let loser = 1;
+  const guessedPlayer = guesser === 1 ? 2 : 1;
 
-  let secret = gameState.player1Secret;
+  const secret = getOpponentSecret(gameState);
 
-  if (winner === 1) {
-    loser = 2;
+  winTitle.textContent = `${getPlayerName(gameState.winner)} wins!`;
 
-    secret = gameState.player2Secret;
+  if (gameState.winner === guesser) {
+    winText.textContent = `Congratulations! You found the character of ${getPlayerName(guessedPlayer)}: ${secret.name}`;
+  } else {
+    winText.textContent = `${getPlayerName(guesser)} guessed wrong. The character of ${getPlayerName(guessedPlayer)} was: ${secret.name}`;
   }
-
-  winTitle.textContent = `${getPlayerName(winner)} wins!`;
-
-  winText.textContent = `Congratulations! You found the character of ${getPlayerName(loser)}: ${secret.name}`;
 
   winCharacterImage.src = secret.image;
   winCharacterImage.alt = secret.name;

@@ -15,7 +15,7 @@ const disneyCharacters = [
     male: true,
     animal: false,
     hasHair: true,
-    canFly: false,
+    canFly: true,
     pixar: false,
     royal: false,
     hasWings: false,
