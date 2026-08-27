@@ -622,7 +622,7 @@ const animalsCharacters = [
   {
     id: 1,
     name: "Giraffe",
-    image: "src/animals/giraffe.jpg",
+    image: "src/animals/giraffe.avif",
 
     mammal: true,
     bird: false,
@@ -664,7 +664,7 @@ const animalsCharacters = [
   {
     id: 2,
     name: "Racoon",
-    image: "src/animals/racoon.jpg",
+    image: "src/animals/racoon.avif",
 
     mammal: true,
     bird: false,
@@ -706,7 +706,7 @@ const animalsCharacters = [
   {
     id: 3,
     name: "Tiger",
-    image: "src/animals/tiger.jpg",
+    image: "src/animals/tiger.avif",
 
     mammal: true,
     bird: false,
@@ -748,7 +748,7 @@ const animalsCharacters = [
   {
     id: 4,
     name: "Fox",
-    image: "src/animals/fox.jpg",
+    image: "src/animals/fox.avif",
 
     mammal: true,
     bird: false,
@@ -790,7 +790,7 @@ const animalsCharacters = [
   {
     id: 5,
     name: "Rabbit",
-    image: "src/animals/rabbit.jpg",
+    image: "src/animals/rabbit.avif",
 
     mammal: true,
     bird: false,
@@ -832,7 +832,7 @@ const animalsCharacters = [
   {
     id: 6,
     name: "Wolf",
-    image: "src/animals/wolf.jpg",
+    image: "src/animals/wolf.avif",
 
     mammal: true,
     bird: false,
@@ -874,7 +874,7 @@ const animalsCharacters = [
   {
     id: 7,
     name: "Cow",
-    image: "src/animals/cow.jpg",
+    image: "src/animals/cow.avif",
 
     mammal: true,
     bird: false,
@@ -916,7 +916,7 @@ const animalsCharacters = [
   {
     id: 8,
     name: "Cat",
-    image: "src/animals/cat.jpg",
+    image: "src/animals/cat.avif",
 
     mammal: true,
     bird: false,
@@ -958,7 +958,7 @@ const animalsCharacters = [
   {
     id: 9,
     name: "Dog",
-    image: "src/animals/dog.jpg",
+    image: "src/animals/dog.avif",
 
     mammal: true,
     bird: false,
@@ -1000,7 +1000,7 @@ const animalsCharacters = [
   {
     id: 10,
     name: "Elephant",
-    image: "src/animals/elephant.jpg",
+    image: "src/animals/elephant.avif",
 
     mammal: true,
     bird: false,
@@ -1042,7 +1042,7 @@ const animalsCharacters = [
   {
     id: 11,
     name: "Fish",
-    image: "src/animals/fish.jpg",
+    image: "src/animals/fish.avif",
 
     mammal: false,
     bird: false,
@@ -1084,7 +1084,7 @@ const animalsCharacters = [
   {
     id: 12,
     name: "Crocodile",
-    image: "src/animals/crocodile.jpg",
+    image: "src/animals/crocodile.avif",
 
     mammal: false,
     bird: false,
@@ -1126,7 +1126,7 @@ const animalsCharacters = [
   {
     id: 13,
     name: "Pig",
-    image: "src/animals/pig.jpg",
+    image: "src/animals/pig.avif",
 
     mammal: true,
     bird: false,
@@ -1168,7 +1168,7 @@ const animalsCharacters = [
   {
     id: 14,
     name: "Snake",
-    image: "src/animals/snake.jpg",
+    image: "src/animals/snake.avif",
 
     mammal: false,
     bird: false,
@@ -1210,7 +1210,7 @@ const animalsCharacters = [
   {
     id: 15,
     name: "Sheep",
-    image: "src/animals/sheep.jpg",
+    image: "src/animals/sheep.avif",
 
     mammal: true,
     bird: false,
@@ -1252,7 +1252,7 @@ const animalsCharacters = [
   {
     id: 16,
     name: "Lion",
-    image: "src/animals/lion.jpg",
+    image: "src/animals/lion.avif",
 
     mammal: true,
     bird: false,
@@ -1294,7 +1294,7 @@ const animalsCharacters = [
   {
     id: 17,
     name: "Penguin",
-    image: "src/animals/penguin.jpg",
+    image: "src/animals/penguin.avif",
 
     mammal: false,
     bird: true,
@@ -1336,7 +1336,7 @@ const animalsCharacters = [
   {
     id: 18,
     name: "Seal",
-    image: "src/animals/seal.jpg",
+    image: "src/animals/seal.avif",
 
     mammal: true,
     bird: false,
